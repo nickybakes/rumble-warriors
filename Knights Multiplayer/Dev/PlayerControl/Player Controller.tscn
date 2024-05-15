@@ -1,0 +1,108 @@
+[gd_scene load_steps=17 format=3 uid="uid://bw6lm14mw5vy1"]
+
+[ext_resource type="Script" path="res://Dev/PlayerControl/PlayerController.gd" id="1_oth46"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/StateMachine.gd" id="2_ccegm"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Idle.gd" id="3_ejtqn"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Run.gd" id="4_qah8c"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Skid.gd" id="5_bfl8l"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/JumpFall.gd" id="6_57f2a"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/SideFlip.gd" id="7_7ep1v"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Walljump.gd" id="8_vajxa"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Vault.gd" id="9_yg72h"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Climb.gd" id="10_uoad6"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/ClimbFromGround.gd" id="11_8b1ef"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dgtxy"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_7b5d8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aem50"]
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61shg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y38ci"]
+radius = 0.25
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+floor_constant_speed = true
+floor_max_angle = 0.872665
+floor_snap_length = 0.25
+script = ExtResource("1_oth46")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="ModelPitch" type="Node3D" parent="Model"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/ModelPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_dgtxy")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/ModelPitch"]
+transform = Transform3D(0.525227, 0, 0, 0, 6.88752e-08, 0.525227, 0, -0.525227, 6.88752e-08, 0, 1.251, -0.635)
+mesh = SubResource("PrismMesh_7b5d8")
+skeleton = NodePath("")
+
+[node name="AttackDetector" type="Area3D" parent="Model"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/AttackDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+shape = SubResource("SphereShape3D_aem50")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.00346, 0, 0, 0, 1.00346, 0, 0, 0, 1.00346, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_61shg")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_ccegm")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_ejtqn")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("4_qah8c")
+
+[node name="Skid" type="Node" parent="StateMachine"]
+script = ExtResource("5_bfl8l")
+
+[node name="JumpFall" type="Node" parent="StateMachine"]
+script = ExtResource("6_57f2a")
+
+[node name="SideFlip" type="Node" parent="StateMachine"]
+script = ExtResource("7_7ep1v")
+
+[node name="Walljump" type="Node" parent="StateMachine"]
+script = ExtResource("8_vajxa")
+
+[node name="Vault" type="Node" parent="StateMachine"]
+script = ExtResource("9_yg72h")
+
+[node name="Climb" type="Node" parent="StateMachine"]
+script = ExtResource("10_uoad6")
+
+[node name="ClimbFromGround" type="Node" parent="StateMachine"]
+script = ExtResource("11_8b1ef")
+
+[node name="CameraTwist" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64689, 0)
+
+[node name="CameraPitch" type="Node3D" parent="CameraTwist"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraTwist/CameraPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0)
+shape = SubResource("SphereShape3D_y38ci")
+spring_length = 7.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraTwist/CameraPitch/SpringArm3D"]
+
+[connection signal="body_entered" from="Model/AttackDetector" to="." method="_on_attack_detector_body_entered"]
+[connection signal="body_exited" from="Model/AttackDetector" to="." method="_on_attack_detector_body_exited"]
