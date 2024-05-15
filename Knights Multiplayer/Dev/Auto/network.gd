@@ -226,7 +226,6 @@ func begin_game():
 	var spawn_index = 0
 	
 	for peer_id in players:
-		print("PEER ID: ", peer_id)
 		var player : PlayerStatus = player_scene.instantiate()
 		
 		player.set_name("P " + str(peer_id))
