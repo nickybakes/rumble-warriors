@@ -58,6 +58,7 @@ func _ready():
 	multiplayer.connected_to_server.connect(
 		func():
 			print("connect " + Global.instanceId + ": " + str(peer.get_unique_id()));
+			rpc("player_join", Global.displayName);
 			connection_succeeded.emit()	
 	)
 	multiplayer.connection_failed.connect(
@@ -77,8 +78,7 @@ func _ready():
 			var id = Steam.getLobbyOwner(new_lobby_id)
 			if id != Steam.getSteamID():
 				connect_steam_socket(id)
-				rpc("player_join", Global.displayName);
-				#players[multiplayer.get_unique_id()] = Global.displayName
+				#rpc("player_join", Global.displayName);
 		else:
 			# Get the failure reason
 			var FAIL_REASON: String
@@ -162,7 +162,6 @@ func connect_steam_socket(steam_id : int):
 	peer = SteamMultiplayerPeer.new()
 	peer.create_client(steam_id, 0, [])
 	multiplayer.set_multiplayer_peer(peer)
-	rpc("player_join", Global.displayName);
 
 #endregion
 
@@ -180,7 +179,6 @@ func create_enet_client(address : String):
 	(peer as ENetMultiplayerPeer).create_client(address, DEFAULT_PORT)
 	multiplayer.set_multiplayer_peer(peer)
 	await multiplayer.connected_to_server
-	rpc("player_join", Global.displayName);
 
 func leave_lobby():
 	purposefulDisconnect = true;
