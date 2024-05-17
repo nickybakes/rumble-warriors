@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgrdcsb8vydjs"]
+
+[ext_resource type="Script" path="res://Dev/PlayerControl/PlayerDummy.gd" id="1_6ihw4"]
+
+[node name="PlayerDummy" type="Node3D"]
+script = ExtResource("1_6ihw4")

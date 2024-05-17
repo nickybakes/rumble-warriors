@@ -322,9 +322,6 @@ func raycast(start : Vector3, end : Vector3) -> Dictionary:
 	query.collide_with_areas = false
 	query.hit_back_faces = false
 	query.hit_from_inside = true
-	var probe;
-	var pos;
-	var collided = [];
 	return space.intersect_ray(query);
 	
 func getClosestProbeInIslandToPoint(point : Vector3, island : Dictionary, minDistance : float, maxDot : float) -> Dictionary:

@@ -19,10 +19,25 @@ class_name PlayerStatus
 var playerController : PlayerController;
 var playerDummy : PlayerDummy;
 
+var playerControllerScene := preload("res://Dev/PlayerControl/Player Controller.tscn");
+var playerDummyScene := preload("res://Dev/PlayerControl/Player Dummy.tscn");
+
+var id : int;
+
 @rpc("any_peer", "call_local")
-func set_authority(id : int) -> void:
-	print(Global.instanceId + " set auth: " + str(id == multiplayer.get_unique_id()));
+func set_authority(_id : int) -> void:
+	id = _id;
 	set_multiplayer_authority(id)
+	print(Global.instanceId + " player status set auth: " + str(id) + str(is_multiplayer_authority()));
+	if(is_multiplayer_authority()):
+		var player : PlayerController = playerControllerScene.instantiate()
+		playerController = player;
+		add_child(player, true);
+	else:
+		var player : PlayerDummy = playerDummyScene.instantiate()
+		playerDummy = player;
+		add_child(player, true);
+	
 	
 @rpc("any_peer", "call_local")
 func teleport(new_position : Vector3) -> void:
@@ -31,7 +46,6 @@ func teleport(new_position : Vector3) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	#print(is_multiplayer_authority());
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

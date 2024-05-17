@@ -189,7 +189,7 @@ func leave_lobby():
 #endregion
 
 func spawn_gamemanager():
-	var gameManager = load("res://Dev/Managers/GameManager.tscn").instantiate()
+	var gameManager = load(get_spawnable_scene(0)).instantiate()
 	add_child(gameManager)
 
 @rpc("call_local")
