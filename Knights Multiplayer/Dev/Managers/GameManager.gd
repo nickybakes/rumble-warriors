@@ -14,7 +14,6 @@ func spawn_players():
 	var index = 0;
 	for p in Network.players.values():
 		var player : PlayerStatus = playerPrefab.instantiate()
-		#player.set_name("Player " + str(p.id))
 		add_child(player, true);
 		player.set_authority.rpc(p.id)
 		index += 1;

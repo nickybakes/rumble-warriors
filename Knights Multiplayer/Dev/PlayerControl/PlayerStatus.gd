@@ -10,7 +10,7 @@ class_name PlayerStatus
 #of a player on a nother client. We will get data from the network and give it
 #to the dummy so it can do interpolation on position, etc
 
-@export var position : Vector3
+@export var positionNetworked : Vector3
 @export var rotationY : float
 
 @export var health : float
@@ -23,6 +23,8 @@ var playerControllerScene := preload("res://Dev/PlayerControl/Player Controller.
 var playerDummyScene := preload("res://Dev/PlayerControl/Player Dummy.tscn");
 
 var id : int;
+
+var authSet := false;
 
 @rpc("any_peer", "call_local")
 func set_authority(_id : int) -> void:
@@ -37,11 +39,14 @@ func set_authority(_id : int) -> void:
 		var player : PlayerDummy = playerDummyScene.instantiate()
 		playerDummy = player;
 		add_child(player, true);
+		player.header.setName(Network.players[id].displayName);
+		
+	authSet = true;
 	
 	
 @rpc("any_peer", "call_local")
 func teleport(new_position : Vector3) -> void:
-	position = new_position
+	positionNetworked = new_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,4 +55,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if authSet:
+		if(is_multiplayer_authority()):
+			positionNetworked = playerController.position;
+			rotationY = playerController.model.rotation.y;
+		else:
+			playerDummy.positionNetworked = positionNetworked;
+			playerDummy.rotationY = rotationY;
 	pass

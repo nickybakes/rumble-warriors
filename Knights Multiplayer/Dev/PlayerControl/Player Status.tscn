@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" path="res://Dev/PlayerControl/PlayerStatus.gd" id="1_qyqnp"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lcfwd"]
-properties/0/path = NodePath("PlayerStatus:position")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_021rg"]
+properties/0/path = NodePath(".:positionNetworked")
 properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("PlayerStatus:rotationY")
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotationY")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 2
 
-[node name="PlayerStatus" type="MultiplayerSynchronizer"]
-replication_config = SubResource("SceneReplicationConfig_lcfwd")
+[node name="PlayerStatus" type="Node"]
 script = ExtResource("1_qyqnp")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_021rg")
