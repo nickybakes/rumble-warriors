@@ -1,4 +1,4 @@
-extends Node
+extends MultiplayerSpawner
 
 enum NetworkType{
 	ENET,
@@ -51,14 +51,9 @@ func _ready():
 	)
 	multiplayer.peer_disconnected.connect(
 		func(id : int):
-			if is_game_in_progress():
-				if multiplayer.is_server():
-					game_error.emit("Player " + players[id].displayName + " disconnected")
-					end_game()
-			else:
-				# Unregister this player. This doesn't need to be called when the
-				# server quits, because the whole player list is cleared anyway!
-				unregister_player(id)
+			# Unregister this player. This doesn't need to be called when the
+			# server quits, because the whole player list is cleared anyway!
+			unregister_player(id)
 	)
 	multiplayer.connected_to_server.connect(
 		func():
@@ -72,13 +67,7 @@ func _ready():
 	)
 	multiplayer.server_disconnected.connect(
 		func():
-			players.clear();
-			lobby_id = -1;
-			if(!purposefulDisconnect):
-				game_error.emit("Server disconnected")
-			purposefulDisconnect = false;
-			player_list_changed.emit();
-			disconnect.emit();
+			end_connection();
 	)
 	
 	Steam.lobby_joined.connect(
@@ -201,16 +190,24 @@ func leave_lobby():
 
 #endregion
 
+func spawn_gamemanager():
+	var gameManager = load("res://Dev/Managers/GameManager.tscn").instantiate()
+	add_child(gameManager)
+
 @rpc("call_local")
 func load_world():
 	# Change scene.
 	var world = load("res://Scenes/SCENE_Map_01.tscn").instantiate()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").hide()
-
+	
 	get_tree().set_pause(false) # Unpause and unleash the game!
 
 func begin_game():
+	assert(multiplayer.is_server())
+	spawn_gamemanager();
+
+func begin_game2():
 	#Ensure that this is only running on the server; if it isn't, we need
 	#to check our code.
 	assert(multiplayer.is_server())
@@ -268,11 +265,23 @@ func get_player_name() -> String:
 func is_game_in_progress() -> bool:
 	return has_node("/root/Map")
 
-func end_game():
-	if is_game_in_progress():
-		get_node("/root/Map").queue_free()
+func end_connection():
+	#clear player and lobby data
+	players.clear();
+	lobby_id = -1;
 	
-	game_ended.emit()
-	players.clear()
+	#delete spawned gamemanager and any leftovers from the network connection
+	for n in get_children():
+		remove_child(n)
+		n.queue_free()
+	
+	#if the player wanted to disconnect, then we dont give em a error message
+	#if it was NOT a purposeful disconnect, then give em an error message
+	if(!purposefulDisconnect):
+		game_error.emit("Server disconnected")
+	#reset the "purposeful disconnect" status for the next possible disconnect
+	purposefulDisconnect = false;
+	player_list_changed.emit();
+	disconnect.emit();
 
 #endregion

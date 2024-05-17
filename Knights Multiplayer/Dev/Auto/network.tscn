@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1kshb4sw81fh"]
+
+[ext_resource type="Script" path="res://Dev/Auto/network.gd" id="1_a1bvj"]
+
+[node name="Network" type="MultiplayerSpawner"]
+_spawnable_scenes = PackedStringArray("res://Dev/Managers/GameManager.tscn")
+spawn_path = NodePath(".")
+script = ExtResource("1_a1bvj")

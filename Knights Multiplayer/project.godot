@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Dev/Auto/global.gd"
-Network="*res://Dev/Auto/network.gd"
+Network="*res://Dev/Auto/network.tscn"
 InputBuffer="*res://Dev/Auto/inputbuffer.gd"
 
 [debug]

@@ -21,6 +21,7 @@ var playerDummy : PlayerDummy;
 
 @rpc("any_peer", "call_local")
 func set_authority(id : int) -> void:
+	print(Global.instanceId + " set auth: " + str(id == multiplayer.get_unique_id()));
 	set_multiplayer_authority(id)
 	
 @rpc("any_peer", "call_local")
@@ -29,7 +30,8 @@ func teleport(new_position : Vector3) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(is_multiplayer_authority());
+	pass
+	#print(is_multiplayer_authority());
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
