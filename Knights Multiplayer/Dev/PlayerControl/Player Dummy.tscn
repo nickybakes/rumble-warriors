@@ -37,19 +37,21 @@ skeleton = NodePath("")
 transform = Transform3D(1.00346, 0, 0, 0, 1.00346, 0, 0, 0, 1.00346, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_pd1n4")
 
-[node name="Header" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Header" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 422.0
+offset_bottom = 82.0
+size_flags_vertical = 4
 script = ExtResource("2_2f1r2")
 
 [node name="Label" type="Label" parent="Header"]
-layout_mode = 0
-offset_left = -285.0
-offset_top = -19.0
-offset_right = 288.0
-offset_bottom = 15.0
+layout_mode = 2
+offset_left = -211.0
+offset_top = -17.0
+offset_right = 211.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "awdawdawdawdawdawdawter"
 label_settings = SubResource("LabelSettings_litcd")
 horizontal_alignment = 1

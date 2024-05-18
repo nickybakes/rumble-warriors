@@ -1,4 +1,4 @@
-extends Control
+extends Panel
 class_name PlayerHeader
 
 
@@ -23,7 +23,10 @@ func _process(delta):
 		camera = get_viewport().get_camera_3d();
 	else:
 		var dummyPos = playerDummy.global_position + Vector3(0, 2.2, 0);
+		position = Vector2(400, 400);
 		position = camera.unproject_position(dummyPos)
+		var dot = camera.get_global_transform().basis.z.dot((dummyPos - camera.global_position).normalized());
+		modulate.a = clamp((-2.0*dot) - 1.0, 0.0, 1.0);
 		#var scaleVal = clamp( camera.rotation.dot((dummyPos - camera.position).normalized()), 0.0, 1.0)
 		#scale = Vector2(scaleVal, scaleVal)
 	pass
