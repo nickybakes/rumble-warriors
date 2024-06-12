@@ -1,0 +1,43 @@
+[gd_scene load_steps=11 format=3 uid="uid://b33ledva3almy"]
+
+[ext_resource type="Script" path="res://Dev/PlayerStates/StateMachine.gd" id="1_m6w0o"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Idle.gd" id="2_4cfl0"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Run.gd" id="3_p4hnc"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Skid.gd" id="4_yswtj"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/JumpFall.gd" id="5_0exqt"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/SideFlip.gd" id="6_1plsh"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Walljump.gd" id="7_k7cdj"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Vault.gd" id="8_m7pa5"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Climb.gd" id="9_n5t6b"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/ClimbFromGround.gd" id="10_c6ilq"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_m6w0o")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_4cfl0")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("3_p4hnc")
+
+[node name="Skid" type="Node" parent="."]
+script = ExtResource("4_yswtj")
+
+[node name="JumpFall" type="Node" parent="."]
+script = ExtResource("5_0exqt")
+
+[node name="SideFlip" type="Node" parent="."]
+script = ExtResource("6_1plsh")
+
+[node name="Walljump" type="Node" parent="."]
+script = ExtResource("7_k7cdj")
+
+[node name="Vault" type="Node" parent="."]
+script = ExtResource("8_m7pa5")
+
+[node name="Climb" type="Node" parent="."]
+script = ExtResource("9_n5t6b")
+
+[node name="ClimbFromGround" type="Node" parent="."]
+script = ExtResource("10_c6ilq")

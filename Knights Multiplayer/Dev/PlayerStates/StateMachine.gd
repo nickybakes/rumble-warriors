@@ -12,7 +12,7 @@ signal transitioned(state_name)
 @export var initial_state := NodePath()
 
 # The current active state. At the start of the game, we get the `initial_state`.
-@onready var state: BasicState = get_node(initial_state)
+@onready var state: PlayerState = get_node(initial_state)
 
 var time_in_state:= 0.0
 
