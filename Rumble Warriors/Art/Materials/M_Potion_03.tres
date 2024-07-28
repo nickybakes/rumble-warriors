@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dnhmq6ck8wdl"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_Potion_01.gdshader" id="1_i5aj2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_i5aj2")
+shader_parameter/potionColor = Color(1, 0.815686, 0, 1)
+shader_parameter/fillAmount = 0.775
+shader_parameter/radius = 1.0
