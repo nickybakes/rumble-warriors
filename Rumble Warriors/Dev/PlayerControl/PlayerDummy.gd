@@ -3,7 +3,7 @@ class_name PlayerDummy
 
 
 @onready var model = $Model
-@onready var animator = $"Player Animator" as PlayerAnimator
+@onready var animator = $"Model/ModelPitch/Player Animator" as PlayerAnimator
 @onready var header : PlayerHeader = $Header
 
 var positionNetworked : Vector3

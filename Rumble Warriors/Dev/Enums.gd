@@ -14,8 +14,7 @@ enum STATE
 
 enum ANIMATION
 {
-	Idle,
-	Run,
+	IdleRunBlend,
 	Skid,
 	Jump,
 	HighJump,
@@ -25,6 +24,22 @@ enum ANIMATION
 	Vault,
 	Climb,
 	ClimbFromGround
+}
+
+const animationNames = [
+	'Idle-Run-Blend',
+	'Skid',
+	'Jump',
+	'HighJump',
+	'Fall',
+	]
+
+enum ANIM_SM
+{
+	Platforming,
+	Climbing,
+	Combat,
+	Knocked	
 }
 
 enum INPUT

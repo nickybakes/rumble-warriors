@@ -1,12 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw6lm14mw5vy1"]
+[gd_scene load_steps=7 format=3 uid="uid://bw6lm14mw5vy1"]
 
 [ext_resource type="Script" path="res://Dev/PlayerControl/PlayerController.gd" id="1_oth46"]
-[ext_resource type="Script" path="res://Dev/PlayerControl/PlayerAnimator.gd" id="2_8nxwv"]
 [ext_resource type="PackedScene" uid="uid://b33ledva3almy" path="res://Dev/PlayerControl/StateMachine.tscn" id="2_gqlbo"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_dgtxy"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_7b5d8"]
+[ext_resource type="PackedScene" uid="uid://ca3j5ybm487o" path="res://Dev/PlayerControl/Player Animator.tscn" id="2_rqehw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aem50"]
 radius = 1.0
@@ -27,22 +23,12 @@ floor_max_angle = 0.872665
 floor_snap_length = 0.25
 script = ExtResource("1_oth46")
 
-[node name="Player Animator" type="Node" parent="."]
-script = ExtResource("2_8nxwv")
-
 [node name="Model" type="Node3D" parent="."]
 
 [node name="ModelPitch" type="Node3D" parent="Model"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/ModelPitch"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_dgtxy")
-skeleton = NodePath("")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/ModelPitch"]
-transform = Transform3D(0.525227, 0, 0, 0, 6.88752e-08, 0.525227, 0, -0.525227, 6.88752e-08, 0, 1.251, -0.635)
-mesh = SubResource("PrismMesh_7b5d8")
-skeleton = NodePath("")
+[node name="Player Animator" parent="Model/ModelPitch" instance=ExtResource("2_rqehw")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="AttackDetector" type="Area3D" parent="Model"]
 collision_layer = 0

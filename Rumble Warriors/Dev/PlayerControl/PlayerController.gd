@@ -36,7 +36,7 @@ var pitch_input := 0.0
 
 @onready var model = $Model
 @onready var state_machine: StateMachine = $StateMachine
-@onready var animator = $"Player Animator" as PlayerAnimator
+@onready var animator = $"Model/ModelPitch/Player Animator" as PlayerAnimator
 @onready var camera_twist = $CameraTwist
 @onready var camera_pitch = $CameraTwist/CameraPitch
 
@@ -62,7 +62,6 @@ func _process(delta: float) -> void:
 	twist_input = 0.0
 	pitch_input = 0.0
 	
-	
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:	
@@ -82,6 +81,9 @@ func get_requested_move_direction() -> Vector3:
 	var input_dir = get_basic_input_dir();
 	var direction = (camera_twist.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	return direction;
+	
+func get_top_down_speed() -> float:
+	return get_top_down_velocity().length();
 	
 func get_top_down_velocity() -> Vector2:
 	return Vector2(velocity.x, velocity.z)
@@ -206,10 +208,13 @@ func jump_and_gravity(delta: float) -> void:
 			else:
 				velocity.y -= GRAVITY * delta
 				
+var highJump = false;
 func do_jump(skipBoostCheck = false):
+	highJump = false;
 	var jump_multiplier = 1.0
 	if(!skipBoostCheck and time_grounded < .2 and prev_time_in_air > .5):
 		jump_multiplier = 1.6
+		highJump = true;
 	velocity.y = sqrt(JUMP_HEIGHT * jump_multiplier * state_machine.state.jump_multiplier * 2 * GRAVITY)
 	road_runner_jump_available = false
 

@@ -5,6 +5,7 @@ var skid_cooldown := 0.0
 var accel_time := 0.0
 	
 func enter(previousState : Enums.STATE, _msg := {}):
+	player.animator.setAnimation(Enums.ANIMATION.IdleRunBlend);
 	accel_time = 0.0
 	if previousState == Enums.STATE.JumpFall or previousState == Enums.STATE.Skid:
 		accel_time = 0.6
@@ -14,6 +15,8 @@ func physics_update(delta: float) -> void:
 	accel_time += delta
 	speed_multiplier = lerp(0, 1, clamp((accel_time + skid_cooldown)/.6, 0, 1))
 	var player_input = player.get_requested_move_direction()
+	
+	player.animator.setAnimationVar0(player.get_top_down_speed());
 	
 	skid_cooldown = move_toward(skid_cooldown, 0, delta)
 	

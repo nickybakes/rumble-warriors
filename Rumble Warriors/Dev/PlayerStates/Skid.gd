@@ -4,6 +4,7 @@ extends PlayerState
 var direction : Vector3
 	
 func enter(previousState : Enums.STATE, _msg := {}):
+	player.animator.setAnimation(Enums.ANIMATION.Skid);
 	direction = _msg["direction"]
 	speed_multiplier = 0;
 

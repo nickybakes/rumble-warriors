@@ -1,4 +1,10 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=4 format=3 uid="uid://ccw7nkpjotc8c"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=9 format=3 uid="uid://ccw7nkpjotc8c"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxlnj"]
+animation = &"A_Fall_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8p50p"]
+animation = &"A_HighJump_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbsqn"]
 animation = &"A_Idle_01loop"
@@ -15,8 +21,27 @@ min_space = 0.0
 max_space = 11.0
 value_label = "11"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hjf8n"]
+animation = &"A_Jump_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ng6s"]
+animation = &"A_Skid_01"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5y6ty"]
+advance_mode = 2
+
 [resource]
-states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_1taq5")
-states/BlendSpace1D/position = Vector2(290, 116)
-states/Start/position = Vector2(84, 100)
-graph_offset = Vector2(-38, 2)
+allow_transition_to_self = true
+states/Fall/node = SubResource("AnimationNodeAnimation_kxlnj")
+states/Fall/position = Vector2(49.004, 287.8)
+states/HighJump/node = SubResource("AnimationNodeAnimation_8p50p")
+states/HighJump/position = Vector2(198.129, 319)
+states/Idle-Run-Blend/node = SubResource("AnimationNodeBlendSpace1D_1taq5")
+states/Idle-Run-Blend/position = Vector2(213.2, 84.96)
+states/Jump/node = SubResource("AnimationNodeAnimation_hjf8n")
+states/Jump/position = Vector2(196.36, 244.6)
+states/Skid/node = SubResource("AnimationNodeAnimation_4ng6s")
+states/Skid/position = Vector2(197.871, 164.6)
+states/Start/position = Vector2(-6.4, 84.8)
+transitions = ["Start", "Idle-Run-Blend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
+graph_offset = Vector2(-230, 26)

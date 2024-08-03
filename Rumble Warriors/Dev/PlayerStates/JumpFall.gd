@@ -8,10 +8,17 @@ func _init():
 	rotation_mode = Enums.ROTATION_MODE.None
 	
 func enter(previousState : Enums.STATE, _msg := {}):
+	if(player.highJump):
+		player.animator.setAnimation(Enums.ANIMATION.HighJump);
+	else:
+		player.animator.setAnimation(Enums.ANIMATION.Jump);
 	speed_multiplier = 1;
 	startPos = player.position;
 
 func update(delta: float) -> void:
+	
+	if(player.velocity.y < 0):
+		player.animator.setAnimation(Enums.ANIMATION.Fall);
 	
 	var player_input = player.get_requested_move_direction()
 	

@@ -14,6 +14,7 @@ var rotate_weight := 0.5
 var rotation_mode := Enums.ROTATION_MODE.Velocity
 var movement_mode := Enums.MOVEMENT_MODE.Velocity
 var gravity_enabled := true
+var defaultAnimaion := Enums.ANIMATION.IdleRunBlend;
 
 
 # Virtual function. Receives events from the `_unhandled_input()` callback.

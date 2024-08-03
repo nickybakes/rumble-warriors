@@ -6,6 +6,8 @@ func _init():
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(previousState: Enums.STATE, _msg := {}) -> void:
+	player.animator.setAnimation(Enums.ANIMATION.IdleRunBlend);
+	player.animator.setAnimationVar0(0);
 	player.requested_move_direction = Vector3.ZERO
 	# We must declare all the properties we access through `owner` in the `Player.gd` script.
 	# player.velocity = Vector3.ZERO

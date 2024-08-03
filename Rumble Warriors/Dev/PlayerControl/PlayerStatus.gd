@@ -16,7 +16,7 @@ class_name PlayerStatus
 @export var health : float
 @export var stamina : float
 
-@export var animation := Enums.ANIMATION.Idle;
+@export var animation := Enums.ANIMATION.IdleRunBlend;
 @export var animationVar0 := 0.0;
 @export var animationVar1 := 0.0;
 @export var animationVar2 := 0.0;
@@ -64,7 +64,15 @@ func _process(delta):
 		if(is_multiplayer_authority()):
 			positionNetworked = playerController.position;
 			rotationY = playerController.model.rotation.y;
+			animation = playerController.animator.currentAnimation;
+			animationVar0 = playerController.animator.animationVar0;
+			animationVar1 = playerController.animator.animationVar1;
+			animationVar2 = playerController.animator.animationVar2;
 		else:
 			playerDummy.positionNetworked = positionNetworked;
 			playerDummy.rotationY = rotationY;
+			playerDummy.animator.setAnimation(animation);
+			playerDummy.animator.animationVar0 = animationVar0;
+			playerDummy.animator.animationVar1 = animationVar1;
+			playerDummy.animator.animationVar2 = animationVar2;
 	pass
