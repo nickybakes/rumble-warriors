@@ -72,7 +72,7 @@ func _process(delta):
 			playerDummy.positionNetworked = positionNetworked;
 			playerDummy.rotationY = rotationY;
 			playerDummy.animator.setAnimation(animation);
-			playerDummy.animator.animationVar0 = animationVar0;
-			playerDummy.animator.animationVar1 = animationVar1;
-			playerDummy.animator.animationVar2 = animationVar2;
+			playerDummy.animator.setAnimationVar0(animationVar0);
+			playerDummy.animator.setAnimationVar1(animationVar1);
+			playerDummy.animator.setAnimationVar2(animationVar2);
 	pass
