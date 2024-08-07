@@ -8,10 +8,13 @@ func _init():
 	rotation_mode = Enums.ROTATION_MODE.None
 	
 func enter(previousState : Enums.STATE, _msg := {}):
-	if(player.highJump):
-		player.animator.setAnimation(Enums.ANIMATION.HighJump);
+	if(player.velocity.y >= 0):
+		if(player.highJump):
+			player.animator.setAnimation(Enums.ANIMATION.HighJump);
+		else:
+			player.animator.setAnimation(Enums.ANIMATION.Jump);
 	else:
-		player.animator.setAnimation(Enums.ANIMATION.Jump);
+		player.animator.setAnimation(Enums.ANIMATION.Fall);
 	speed_multiplier = 1;
 	startPos = player.position;
 

@@ -27,13 +27,13 @@ func _process(delta):
 func setAnimation(animation : Enums.ANIMATION):
 	if(animation != currentAnimation):
 		currentAnimation = animation;
-		animSM.start(Enums.animationNames[animation], true);
+		animSM.start(Enums.ANIMATION.keys()[animation], true);
 		
 func setAnimationVar0(animVar : float):
 	if(animVar != animationVar0):
 		match(currentAnimation):
 			Enums.ANIMATION.IdleRunBlend:
-				tree.set("parameters/Idle-Run-Blend/blend_position", animVar)
+				tree.set("parameters/IdleRunBlend/blend_position", animVar)
 		animationVar0 = animVar;
 		
 func setAnimationVar1(animVar : float):

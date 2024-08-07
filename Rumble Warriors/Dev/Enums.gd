@@ -26,14 +26,6 @@ enum ANIMATION
 	ClimbFromGround
 }
 
-const animationNames = [
-	'Idle-Run-Blend',
-	'Skid',
-	'Jump',
-	'HighJump',
-	'Fall',
-	]
-
 enum ANIM_SM
 {
 	Platforming,

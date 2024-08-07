@@ -9,6 +9,7 @@ func _init():
 	#control_rotation = false
 	
 func enter(previousState : Enums.STATE, _msg := {}):
+	player.animator.setAnimation(Enums.ANIMATION.SideFlip);
 	direction = _msg["direction"]
 	player.requested_move_direction = direction
 	player.velocity = direction * player.current_speed()
@@ -18,7 +19,7 @@ func enter(previousState : Enums.STATE, _msg := {}):
 
 func update(delta: float) -> void:
 	
-	if(state_machine.time_in_state > .3):
+	if(player.velocity.y < 0):
 		if(!player.grounded):
 			state_machine.transition_to(Enums.STATE.JumpFall)
 			return

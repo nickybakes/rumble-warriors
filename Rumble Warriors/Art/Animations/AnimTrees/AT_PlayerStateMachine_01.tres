@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=9 format=3 uid="uid://ccw7nkpjotc8c"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=12 format=3 uid="uid://ccw7nkpjotc8c"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxlnj"]
 animation = &"A_Fall_01"
@@ -24,8 +24,17 @@ value_label = "11"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hjf8n"]
 animation = &"A_Jump_01"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u0ov7"]
+animation = &"A_SideFlip_01"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ng6s"]
 animation = &"A_Skid_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gtg0d"]
+animation = &"A_Vault_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7xhcl"]
+animation = &"A_Walljump_01"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5y6ty"]
 advance_mode = 2
@@ -36,12 +45,18 @@ states/Fall/node = SubResource("AnimationNodeAnimation_kxlnj")
 states/Fall/position = Vector2(49.004, 287.8)
 states/HighJump/node = SubResource("AnimationNodeAnimation_8p50p")
 states/HighJump/position = Vector2(198.129, 319)
-states/Idle-Run-Blend/node = SubResource("AnimationNodeBlendSpace1D_1taq5")
-states/Idle-Run-Blend/position = Vector2(213.2, 84.96)
+states/IdleRunBlend/node = SubResource("AnimationNodeBlendSpace1D_1taq5")
+states/IdleRunBlend/position = Vector2(213.2, 84.96)
 states/Jump/node = SubResource("AnimationNodeAnimation_hjf8n")
 states/Jump/position = Vector2(196.36, 244.6)
+states/SideFlip/node = SubResource("AnimationNodeAnimation_u0ov7")
+states/SideFlip/position = Vector2(-69.6, 279)
 states/Skid/node = SubResource("AnimationNodeAnimation_4ng6s")
 states/Skid/position = Vector2(197.871, 164.6)
 states/Start/position = Vector2(-6.4, 84.8)
-transitions = ["Start", "Idle-Run-Blend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-230, 26)
+states/Vault/node = SubResource("AnimationNodeAnimation_gtg0d")
+states/Vault/position = Vector2(7.20001, 211.8)
+states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
+states/Walljump/position = Vector2(-64, 159)
+transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
+graph_offset = Vector2(-360, 73)
