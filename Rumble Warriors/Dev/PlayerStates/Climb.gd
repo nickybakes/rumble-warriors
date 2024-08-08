@@ -40,6 +40,8 @@ func enter(previousState : Enums.STATE, _msg := {}):
 	calculateMovementAxis();
 	calculateInitialWallSlide();
 	
+	player.animator.setAnimation(Enums.ANIMATION.ClimbSlide);
+	
 	stickToWall();
 	pass
 	
@@ -72,6 +74,8 @@ func calculateMovementAxis():
 	
 func moveAlongWall(direction: Vector2, speed: float):
 	climbingInput = direction;
+	player.animator.setAnimationVar0(direction.x);
+	player.animator.setAnimationVar1(-direction.y);
 	if(climbingInput != Vector2.ZERO):
 		lastNonZeroClimbingInput = climbingInput;
 	climbingDirection = (direction.x * horizontalMoveAxis + direction.y * verticalMoveAxis).normalized();

@@ -8,6 +8,7 @@ func _init():
 	rotation_mode = Enums.ROTATION_MODE.None
 	
 func enter(previousState : Enums.STATE, _msg := {}):
+	player.animator.setAnimationVar0(0);
 	if(player.velocity.y >= 0):
 		if(player.highJump):
 			player.animator.setAnimation(Enums.ANIMATION.HighJump);

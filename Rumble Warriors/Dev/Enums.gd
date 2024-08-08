@@ -23,7 +23,8 @@ enum ANIMATION
 	Walljump,
 	Vault,
 	Climb,
-	ClimbFromGround
+	ClimbSlide,
+	ClimbJump,
 }
 
 enum ANIM_SM

@@ -6,6 +6,7 @@ var accel_time := 0.0
 	
 func enter(previousState : Enums.STATE, _msg := {}):
 	player.animator.setAnimation(Enums.ANIMATION.IdleRunBlend);
+	player.animator.resetBlends(Enums.ANIMATION.IdleRunBlend);
 	accel_time = 0.0
 	if previousState == Enums.STATE.JumpFall or previousState == Enums.STATE.Skid:
 		accel_time = 0.6
