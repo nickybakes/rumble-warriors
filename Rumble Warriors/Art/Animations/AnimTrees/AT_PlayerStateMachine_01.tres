@@ -1,4 +1,62 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=18 format=3 uid="uid://ccw7nkpjotc8c"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=30 format=3 uid="uid://ccw7nkpjotc8c"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xw3ux"]
+animation = &"A_ClimbSlideUp_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82w72"]
+animation = &"A_ClimbSlideLeft_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rmc7r"]
+animation = &"A_ClimbSlideDown_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vbi3b"]
+animation = &"A_ClimbSlideRight_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5x7g1"]
+animation = &"A_ClimbIdle_01loop"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_rx076"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xw3ux")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_82w72")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_rmc7r")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_vbi3b")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_5x7g1")
+blend_point_4/pos = Vector2(0, 0)
+snap = Vector2(1, 1)
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ulwix"]
+animation = &"A_ClimbSlideUp_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o4ncv"]
+animation = &"A_ClimbSlideLeft_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xlf5w"]
+animation = &"A_ClimbSlideDown_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t8yjg"]
+animation = &"A_ClimbSlideRight_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fuudt"]
+animation = &"A_ClimbIdle_01loop"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_eb2gq"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ulwix")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_o4ncv")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_xlf5w")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_t8yjg")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_fuudt")
+blend_point_4/pos = Vector2(0, 0)
+snap = Vector2(1, 1)
+sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ur08b"]
 animation = &"A_ClimbIdle_01loop"
@@ -26,6 +84,8 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_qqied")
 blend_point_3/pos = Vector2(1, 0)
 blend_point_4/node = SubResource("AnimationNodeAnimation_0if27")
 blend_point_4/pos = Vector2(-1, 0)
+snap = Vector2(1, 1)
+sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxlnj"]
 animation = &"A_Fall_01"
@@ -68,6 +128,10 @@ advance_mode = 2
 
 [resource]
 allow_transition_to_self = true
+states/Climb/node = SubResource("AnimationNodeBlendSpace2D_rx076")
+states/Climb/position = Vector2(-292.64, 261.8)
+states/ClimbJump/node = SubResource("AnimationNodeBlendSpace2D_eb2gq")
+states/ClimbJump/position = Vector2(-292.672, 337.8)
 states/ClimbSlide/node = SubResource("AnimationNodeBlendSpace2D_l8i1v")
 states/ClimbSlide/position = Vector2(-293.4, 185.8)
 states/Fall/node = SubResource("AnimationNodeAnimation_kxlnj")
@@ -88,4 +152,4 @@ states/Vault/position = Vector2(7.20001, 211.8)
 states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
 states/Walljump/position = Vector2(-64, 159)
 transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-418, 55)
+graph_offset = Vector2(-625, 219)

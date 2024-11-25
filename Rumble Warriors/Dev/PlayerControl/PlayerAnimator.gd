@@ -33,6 +33,11 @@ func setAnimation(animation : Enums.ANIMATION):
 		match(currentAnimation):
 			Enums.ANIMATION.ClimbSlide:
 				current2DBlend = tree.get("parameters/ClimbSlide/blend_position");
+			Enums.ANIMATION.Climb:
+				resetBlends(animation);
+				current2DBlend = tree.get("parameters/Climb/blend_position");
+			Enums.ANIMATION.ClimbJump:
+				current2DBlend = tree.get("parameters/ClimbJump/blend_position");
 		
 func setAnimationVar0(animVar : float):
 	if(animVar != animationVar0):
@@ -42,6 +47,14 @@ func setAnimationVar0(animVar : float):
 			Enums.ANIMATION.ClimbSlide:
 				current2DBlend.x = animVar;
 				tree.set("parameters/ClimbSlide/blend_position", current2DBlend)
+			Enums.ANIMATION.Climb:
+				current2DBlend.x = animVar;
+				tree.set("parameters/Climb/blend_position", current2DBlend)
+			Enums.ANIMATION.ClimbJump:
+				current2DBlend.x = animVar;
+				tree.set("parameters/ClimbJump/blend_position", current2DBlend)
+		
+		
 		animationVar0 = animVar;
 		
 func setAnimationVar1(animVar : float):
@@ -50,6 +63,12 @@ func setAnimationVar1(animVar : float):
 			Enums.ANIMATION.ClimbSlide:
 				current2DBlend.y = animVar;
 				tree.set("parameters/ClimbSlide/blend_position", current2DBlend)
+			Enums.ANIMATION.Climb:
+				current2DBlend.y = animVar;
+				tree.set("parameters/Climb/blend_position", current2DBlend)
+			Enums.ANIMATION.ClimbJump:
+				current2DBlend.y = animVar;
+				tree.set("parameters/ClimbJump/blend_position", current2DBlend)
 		animationVar1 = animVar;
 		
 		
@@ -64,3 +83,7 @@ func resetBlends(animation : Enums.ANIMATION):
 			tree.set("parameters/IdleRunBlend/blend_position", 0)
 		Enums.ANIMATION.ClimbSlide:
 			tree.set("parameters/ClimbSlide/blend_position", Vector2.ZERO)
+		Enums.ANIMATION.Climb:
+			tree.set("parameters/Climb/blend_position", Vector2.ZERO)
+		Enums.ANIMATION.ClimbJump:
+			tree.set("parameters/ClimbJump/blend_position", Vector2.ZERO)

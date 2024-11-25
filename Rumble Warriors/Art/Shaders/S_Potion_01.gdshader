@@ -16,7 +16,7 @@ void fragment() {
 	vec3 OFFSET_POS = WORLD_POS - NODE_POSITION_WORLD;
 	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(NORMAL.xyz, 0.0)).xyz;
 	vec3 VIEW_LIGHT_NORMAL = (INV_VIEW_MATRIX * lightDirection).xyz;
-	
+
 	float lightValue = saturate(1.0 - smoothstep(dot(WORLD_NORMAL, VIEW_LIGHT_NORMAL), 0.95, 1.0));
 
 	float fresnel = fresnel(2.0, NORMAL, VIEW);

@@ -95,9 +95,13 @@ func update(delta: float) -> void:
 	elif initialWallDragSpeed > 0:
 		initialWallDragSpeed = initialWallDragSpeed - (delta * 40);
 		moveAlongWall(initialWallDragDirection, initialWallDragSpeed);
+		if(initialWallDragSpeed <= 0):
+			player.animator.setAnimation(Enums.ANIMATION.Climb);
 	elif jumpSpeed > 0:
 		jumpSpeed = jumpSpeed - (delta * 70);		
 		moveAlongWall(jumpDirection, jumpSpeed);
+		if(jumpSpeed <= 0):
+			player.animator.setAnimation(Enums.ANIMATION.Climb);
 	else:
 		player.velocity = Vector3.ZERO;
 		moveAlongWall(player_input, 6);
@@ -113,6 +117,7 @@ func update(delta: float) -> void:
 			jumpSpeed = 30;
 			jumpCooldown = .2;
 			jumpDirection = player_input;
+			player.animator.setAnimation(Enums.ANIMATION.ClimbJump);
 			return
 		
 	if(player.grounded and player_input):
@@ -143,6 +148,7 @@ func physics_update(delta: float) -> void:
 			setWall(outset.normal)
 			if(dot < .3):
 				jumpSpeed = 0;
+				player.animator.setAnimation(Enums.ANIMATION.Climb);
 			else:
 				stickToWall()
 			return
@@ -158,6 +164,7 @@ func physics_update(delta: float) -> void:
 			setWall(inset.normal)
 			if(dot < .5):
 				jumpSpeed = 0;
+				player.animator.setAnimation(Enums.ANIMATION.Climb);
 			else:
 				stickToWall()
 			return
@@ -167,4 +174,3 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to(Enums.STATE.Vault, {"direction": wallNormal})
 		else:
 			state_machine.transition_to(Enums.STATE.JumpFall)
-
