@@ -15,6 +15,7 @@ var forceClimbingInset : bool
 var jumpSpeed : float
 var jumpDirection : Vector2
 var jumpCooldown : float
+var jumpWarmup : float
 var timeClimbing : float
 var previousPosition : Vector3;
 
@@ -72,10 +73,10 @@ func calculateMovementAxis():
 	horizontalMoveAxis = Vector3(wallNormal.z, 0, -wallNormal.x).normalized();
 	verticalMoveAxis = horizontalMoveAxis.cross(wallNormal).normalized();
 	
-func moveAlongWall(direction: Vector2, speed: float):
+func moveAlongWall(direction: Vector2, speed: float, invertAnimationDirection = false):
 	climbingInput = direction;
-	player.animator.setAnimationVar0(direction.x);
-	player.animator.setAnimationVar1(-direction.y);
+	player.animator.setAnimationVar0(direction.x * (-1 if invertAnimationDirection else 1));
+	player.animator.setAnimationVar1(-direction.y * (-1 if invertAnimationDirection else 1));
 	if(climbingInput != Vector2.ZERO):
 		lastNonZeroClimbingInput = climbingInput;
 	climbingDirection = (direction.x * horizontalMoveAxis + direction.y * verticalMoveAxis).normalized();
@@ -98,10 +99,21 @@ func update(delta: float) -> void:
 		if(initialWallDragSpeed <= 0):
 			player.animator.setAnimation(Enums.ANIMATION.Climb);
 	elif jumpSpeed > 0:
-		jumpSpeed = jumpSpeed - (delta * 70);		
-		moveAlongWall(jumpDirection, jumpSpeed);
-		if(jumpSpeed <= 0):
-			player.animator.setAnimation(Enums.ANIMATION.Climb);
+		var invertAnimationDirection = false;	
+		if(jumpWarmup > 0):
+			jumpWarmup -= delta;
+			if(jumpWarmup <= 0):
+				player.animator.setAnimation(Enums.ANIMATION.ClimbJump);
+			moveAlongWall(jumpDirection, 0, true);
+		elif(jumpSpeed > 0):
+			jumpSpeed = max(jumpSpeed - (delta * 70), 0);
+			if(jumpSpeed > 10):
+				moveAlongWall(jumpDirection, jumpSpeed, false);
+			else:
+				player.animator.setAnimation(Enums.ANIMATION.ClimbSlide);
+				moveAlongWall(jumpDirection, jumpSpeed, true);
+				if(jumpSpeed <= 0):
+					player.animator.setAnimation(Enums.ANIMATION.Climb);
 	else:
 		player.velocity = Vector3.ZERO;
 		moveAlongWall(player_input, 6);
@@ -114,10 +126,11 @@ func update(delta: float) -> void:
 		if InputBuffer.is_action_just_pressed(Enums.INPUT.Jump) and timeClimbing > .2 and jumpCooldown <= 0:
 			if(player_input == Vector2.ZERO):
 				player_input = Vector2.UP;
-			jumpSpeed = 30;
+			jumpSpeed = 35;
 			jumpCooldown = .2;
 			jumpDirection = player_input;
-			player.animator.setAnimation(Enums.ANIMATION.ClimbJump);
+			jumpWarmup = .1;
+			player.animator.setAnimation(Enums.ANIMATION.ClimbSlide);
 			return
 		
 	if(player.grounded and player_input):

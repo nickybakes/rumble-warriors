@@ -32,11 +32,13 @@ func setAnimation(animation : Enums.ANIMATION):
 		animSM.start(Enums.ANIMATION.keys()[animation], true);
 		match(currentAnimation):
 			Enums.ANIMATION.ClimbSlide:
+				resetBlends(animation);
 				current2DBlend = tree.get("parameters/ClimbSlide/blend_position");
 			Enums.ANIMATION.Climb:
 				resetBlends(animation);
 				current2DBlend = tree.get("parameters/Climb/blend_position");
 			Enums.ANIMATION.ClimbJump:
+				resetBlends(animation);
 				current2DBlend = tree.get("parameters/ClimbJump/blend_position");
 		
 func setAnimationVar0(animVar : float):

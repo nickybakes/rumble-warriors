@@ -30,16 +30,16 @@ snap = Vector2(1, 1)
 sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ulwix"]
-animation = &"A_ClimbSlideUp_01"
+animation = &"A_ClimbJumpUp_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o4ncv"]
-animation = &"A_ClimbSlideLeft_01"
+animation = &"A_ClimbJumpLeft_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xlf5w"]
-animation = &"A_ClimbSlideDown_01"
+animation = &"A_ClimbJumpDown_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t8yjg"]
-animation = &"A_ClimbSlideRight_01"
+animation = &"A_ClimbJumpRight_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fuudt"]
 animation = &"A_ClimbIdle_01loop"
@@ -55,7 +55,6 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_t8yjg")
 blend_point_3/pos = Vector2(1, 0)
 blend_point_4/node = SubResource("AnimationNodeAnimation_fuudt")
 blend_point_4/pos = Vector2(0, 0)
-snap = Vector2(1, 1)
 sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ur08b"]
@@ -152,4 +151,4 @@ states/Vault/position = Vector2(7.20001, 211.8)
 states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
 states/Walljump/position = Vector2(-64, 159)
 transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-625, 219)
+graph_offset = Vector2(-607, 109)
