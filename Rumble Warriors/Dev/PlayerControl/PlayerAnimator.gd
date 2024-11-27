@@ -26,7 +26,7 @@ func _process(delta):
 	pass
 
 
-func setAnimation(animation : Enums.ANIMATION):
+func setAnimation(animation : Enums.ANIMATION, dontResetBlends = false):
 	if(animation != currentAnimation):
 		currentAnimation = animation;
 		animSM.start(Enums.ANIMATION.keys()[animation], true);
@@ -35,7 +35,8 @@ func setAnimation(animation : Enums.ANIMATION):
 				resetBlends(animation);
 				current2DBlend = tree.get("parameters/ClimbSlide/blend_position");
 			Enums.ANIMATION.Climb:
-				resetBlends(animation);
+				if(!dontResetBlends):
+					resetBlends(animation);
 				current2DBlend = tree.get("parameters/Climb/blend_position");
 			Enums.ANIMATION.ClimbJump:
 				resetBlends(animation);

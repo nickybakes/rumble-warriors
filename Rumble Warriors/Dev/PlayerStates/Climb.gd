@@ -161,7 +161,7 @@ func physics_update(delta: float) -> void:
 			setWall(outset.normal)
 			if(dot < .3):
 				jumpSpeed = 0;
-				player.animator.setAnimation(Enums.ANIMATION.Climb);
+				player.animator.setAnimation(Enums.ANIMATION.Climb, true);
 			else:
 				stickToWall()
 			return
@@ -177,7 +177,7 @@ func physics_update(delta: float) -> void:
 			setWall(inset.normal)
 			if(dot < .5):
 				jumpSpeed = 0;
-				player.animator.setAnimation(Enums.ANIMATION.Climb);
+				player.animator.setAnimation(Enums.ANIMATION.Climb, true);
 			else:
 				stickToWall()
 			return
