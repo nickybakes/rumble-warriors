@@ -33,11 +33,11 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "animations": {
-"A_ClimbJumpDown_01": {
+"A_ClimbingDown_01loop": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://Art/Animations/Player/A_ClimbJumpDown_01.res",
-"settings/loop_mode": 0,
+"save_to_file/path": "res://Art/Animations/Player/A_ClimbingDown_01loop.res",
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -1832,11 +1832,11 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"A_ClimbJumpLeft_01": {
+"A_ClimbingLeft_01loop": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://Art/Animations/Player/A_ClimbJumpLeft_01.res",
-"settings/loop_mode": 0,
+"save_to_file/path": "res://Art/Animations/Player/A_ClimbingLeft_01loop.res",
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -3631,11 +3631,11 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"A_ClimbJumpRight_01": {
+"A_ClimbingRight_01loop": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://Art/Animations/Player/A_ClimbJumpRight_01.res",
-"settings/loop_mode": 0,
+"save_to_file/path": "res://Art/Animations/Player/A_ClimbingRight_01loop.res",
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -5430,11 +5430,11 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"A_ClimbJumpUp_01": {
+"A_ClimbingUp_01loop": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://Art/Animations/Player/A_ClimbJumpUp_01.res",
-"settings/loop_mode": 0,
+"save_to_file/keep_custom_tracks": false,
+"save_to_file/path": "res://Art/Animations/Player/A_ClimbingUp_01loop.res",
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",

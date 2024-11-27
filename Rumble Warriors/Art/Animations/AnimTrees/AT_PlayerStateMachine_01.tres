@@ -1,16 +1,16 @@
 [gd_resource type="AnimationNodeStateMachine" load_steps=30 format=3 uid="uid://ccw7nkpjotc8c"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xw3ux"]
-animation = &"A_ClimbSlideUp_01"
+animation = &"A_ClimbingUp_01loop"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82w72"]
-animation = &"A_ClimbSlideLeft_01"
+animation = &"A_ClimbingLeft_01loop"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rmc7r"]
-animation = &"A_ClimbSlideDown_01"
+animation = &"A_ClimbingDown_01loop"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vbi3b"]
-animation = &"A_ClimbSlideRight_01"
+animation = &"A_ClimbingRight_01loop"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5x7g1"]
 animation = &"A_ClimbIdle_01loop"
@@ -151,4 +151,4 @@ states/Vault/position = Vector2(7.20001, 211.8)
 states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
 states/Walljump/position = Vector2(-64, 159)
 transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-607, 109)
+graph_offset = Vector2(-607, 106)
