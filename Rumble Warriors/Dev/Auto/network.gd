@@ -205,44 +205,44 @@ func begin_game():
 	assert(multiplayer.is_server())
 	spawn_gamemanager();
 
-func begin_game2():
-	#Ensure that this is only running on the server; if it isn't, we need
-	#to check our code.
-	assert(multiplayer.is_server())
-	
-	#call load_world on all clients
-	load_world.rpc()
-	
-	#grab the world node and player scene
-	var world : Node3D = get_tree().get_root().get_node("Map")
-	var player_scene := load("res://Dev/PlayerControl/Player Status.tscn")
-	
-	#Iterate over our connected peer ids
-	var spawn_index = 0
-	
-	for peer_id in players:
-		var player : PlayerStatus = player_scene.instantiate()
-		
-		player.set_name("P " + str(peer_id))
-		# "true" forces a readable name, which is important, as we can't have sibling nodes
-		# with the same name.
-		world.get_node("Players").add_child(player, true)
-		
-		#Set the authorization for the player. This has to be called on all peers to stay in sync.
-		player.set_authority.rpc(peer_id)
-		
-		##Grab our location for the player.
-		##var target : Vector2 = world.get_node("SpawnPoints").get_child(spawn_index).position
-		#var target : Vector3 = Vector3(-6, 0, 0)
-		##The peer has authority over the player's position, so to sync it properly,
-		##we need to set that position from that peer with an RPC.
-		#player.teleport.rpc_id(peer_id, target)
-		
-		spawn_index += 1
-	
-# create_steam_socket and connect_steam_socket both create the multiplayer peer, instead
-# of _ready, for the sake of compatibility with other networking services
-# such as WebSocket, WebRTC, or Steam or Epic.
+#func begin_game2():
+	##Ensure that this is only running on the server; if it isn't, we need
+	##to check our code.
+	#assert(multiplayer.is_server())
+	#
+	##call load_world on all clients
+	#load_world.rpc()
+	#
+	##grab the world node and player scene
+	#var world : Node3D = get_tree().get_root().get_node("Map")
+	#var player_scene := load("res://Dev/PlayerControl/Player Status.tscn")
+	#
+	##Iterate over our connected peer ids
+	#var spawn_index = 0
+	#
+	#for peer_id in players:
+		#var player : PlayerStatus = player_scene.instantiate()
+		#
+		#player.set_name("P " + str(peer_id))
+		## "true" forces a readable name, which is important, as we can't have sibling nodes
+		## with the same name.
+		#world.get_node("Players").add_child(player, true)
+		#
+		##Set the authorization for the player. This has to be called on all peers to stay in sync.
+		#player.set_authority.rpc(peer_id)
+		#
+		###Grab our location for the player.
+		###var target : Vector2 = world.get_node("SpawnPoints").get_child(spawn_index).position
+		##var target : Vector3 = Vector3(-6, 0, 0)
+		###The peer has authority over the player's position, so to sync it properly,
+		###we need to set that position from that peer with an RPC.
+		##player.teleport.rpc_id(peer_id, target)
+		#
+		#spawn_index += 1
+	#
+## create_steam_socket and connect_steam_socket both create the multiplayer peer, instead
+## of _ready, for the sake of compatibility with other networking services
+## such as WebSocket, WebRTC, or Steam or Epic.
 
 
 

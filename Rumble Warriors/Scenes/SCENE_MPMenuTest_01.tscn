@@ -138,6 +138,39 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Leave Lobby"
 
+[node name="Label2" type="Label" parent="Inside Lobby Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 130.0
+offset_top = 33.0
+offset_right = 232.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Player Color:"
+
+[node name="PlayerColorPicker" type="ColorPickerButton" parent="Inside Lobby Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 244.0
+offset_top = 21.0
+offset_right = 295.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+edit_alpha = false
+
 [node name="Outside Lobby Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_top = 54.0
