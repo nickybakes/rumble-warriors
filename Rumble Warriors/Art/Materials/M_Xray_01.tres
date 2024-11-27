@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://by08ndymrt5rn"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_Xray_01.gdshader" id="1_cu2xb"]
+[ext_resource type="Material" uid="uid://hc7kb34mgkqq" path="res://Art/Materials/M_Player_01.tres" id="1_qdh7x"]
+
+[resource]
+render_priority = 0
+next_pass = ExtResource("1_qdh7x")
+shader = ExtResource("1_cu2xb")
+shader_parameter/color = Color(0.215182, 0.215182, 0.215182, 1)
+shader_parameter/fresnelPower = 0.455
+shader_parameter/fresnelMultiply = 0.71

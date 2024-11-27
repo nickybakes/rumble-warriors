@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://hc7kb34mgkqq"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_Player_01.gdshader" id="1_8h231"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_8h231")
+shader_parameter/playerColor = Color(1, 0, 0, 1)

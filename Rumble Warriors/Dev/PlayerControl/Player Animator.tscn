@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://ca3j5ybm487o"]
+[gd_scene load_steps=9 format=4 uid="uid://ca3j5ybm487o"]
 
 [ext_resource type="Script" path="res://Dev/PlayerControl/PlayerAnimator.gd" id="1_ig5x7"]
 [ext_resource type="AnimationLibrary" uid="uid://bedae7cuhqqbo" path="res://Art/Animations/Libraries/LIB_PlayerAnimations_01.res" id="2_2sfq0"]
+[ext_resource type="Material" uid="uid://by08ndymrt5rn" path="res://Art/Materials/M_Xray_01.tres" id="2_47jpl"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://ccw7nkpjotc8c" path="res://Art/Animations/AnimTrees/AT_PlayerStateMachine_01.tres" id="3_gsl1o"]
+[ext_resource type="Material" uid="uid://cfk1xd7xnbbtl" path="res://Art/Materials/M_Outline_01.tres" id="3_nkwkt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcx45"]
 
@@ -769,6 +771,13 @@ bones/72/rotation = Quaternion(2.03431e-14, 0.707107, 0.707107, 7.09783e-15)
 bones/72/scale = Vector3(1, 1, 1)
 
 [node name="SK_PlayerTest_01" type="MeshInstance3D" parent="SK_PlayerTest_01/rig/Skeleton3D"]
+material_override = ExtResource("2_47jpl")
+gi_mode = 0
+mesh = SubResource("ArrayMesh_d85lp")
+skin = SubResource("Skin_mj8jt")
+
+[node name="SK_PlayerTest_02" type="MeshInstance3D" parent="SK_PlayerTest_01/rig/Skeleton3D"]
+material_override = ExtResource("3_nkwkt")
 gi_mode = 0
 mesh = SubResource("ArrayMesh_d85lp")
 skin = SubResource("Skin_mj8jt")
