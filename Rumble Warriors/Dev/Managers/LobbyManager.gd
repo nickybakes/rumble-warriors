@@ -9,6 +9,8 @@ extends Control
 @export var outside_lobby_panel : Panel
 @export var windowInstanceLabel : Label
 
+@onready var colorIcon = load("res://Art/Sprites/SPR_ColorIcon_01.png");
+
 signal game_log(what : String)
 
 func _ready():
@@ -22,6 +24,7 @@ func _ready():
 	Network.disconnect.connect(self._on_disconnect)
 	Network.game_error.connect(self._on_game_error)
 	Network.game_log.connect(self._on_game_log)
+	Network.avatar_loaded.connect(self.refresh_lobby)
 	
 	game_log.connect(self._on_game_log)
 	
@@ -95,15 +98,24 @@ func _on_game_log(logtxt : String):
 
 func refresh_lobby():
 	var playerIDs = Network.players
-	var list = inside_lobby_panel.get_node("List");
-	list.clear()
+	var list = inside_lobby_panel.get_node("List") as ItemList;
+	var colorList = inside_lobby_panel.get_node("ColorsList") as ItemList;
+	list.clear();
+	colorList.clear();
 	for id in playerIDs:
 		var displayName = Network.players[id].displayName;
-		list.add_item(
-			displayName if 
+		var listDisplayName = (displayName if 
 				id != 1 else 
-				(displayName + " (Host)")
-		)
+				(displayName + " (Host)"));
+		var steamId = Network.players[id].steamId;
+		if(Network.playerAvatars.keys().has(steamId)):
+			var avatar = Network.playerAvatars[steamId];
+			list.add_item(listDisplayName, avatar);
+		else:
+			Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, steamId);
+			list.add_item(listDisplayName);
+		colorList.add_icon_item(colorIcon, false);
+		colorList.set_item_icon_modulate(colorList.item_count - 1, Color(1, 1, 1));
 	
 	inside_lobby_panel.get_node("Start").disabled = not multiplayer.is_server()
 	#Ensure we have an actual lobby ID before continuing
@@ -111,6 +123,9 @@ func refresh_lobby():
 	inside_lobby_panel.get_node("LobbyID").text = str(Network.lobby_id)
 	
 	_request_lobby_list()
+	
+func changePlayerColor(color : Color) -> void:
+	pass;
 	
 func _on_start_pressed():
 	Network.begin_game()

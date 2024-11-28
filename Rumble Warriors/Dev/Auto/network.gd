@@ -16,14 +16,17 @@ const DEFAULT_PORT = 10567
 # Max number of players.
 const MAX_PEERS = 12
 
+const PLAYER_COLORS_DEFAULT = [Color("ff2828"), Color("113dff"), Color("fff609"), Color("00bc25"), Color("fa6000"), Color("650e9e"), Color("ff00b3"), Color("02d6dd")];
+
 var isHost : bool = false;
 
 var networkType := NetworkType.ENET;
 
 var peer : MultiplayerPeer = null
 
-# Names for remote players in id:name format.
+# Names for remote players in id:player format.
 var players := {}
+var playerAvatars := {}
 
 var lobby_id := -1
 
@@ -37,7 +40,8 @@ signal disconnect()
 signal game_ended()
 signal game_error(what : String)
 signal game_log(what : String)
-
+signal avatar_loaded()
+signal player_customization_changed()
 
 func _ready():
 	# Keep connections defined locally, if they aren't likely to be used
@@ -47,7 +51,7 @@ func _ready():
 		func(id : int):
 			# Tell the connected peer that we have also joined
 			#print(Global.instanceId + ": " + str(id));
-			rpc_id(id, "player_join", Global.displayName);
+			rpc_id(id, "player_join", Global.displayName, Global.steam_id);
 	)
 	multiplayer.peer_disconnected.connect(
 		func(id : int):
@@ -58,7 +62,7 @@ func _ready():
 	multiplayer.connected_to_server.connect(
 		func():
 			print("connect " + Global.instanceId + ": " + str(peer.get_unique_id()));
-			rpc("player_join", Global.displayName);
+			rpc("player_join", Global.displayName, Global.steam_id);
 			connection_succeeded.emit()	
 	)
 	multiplayer.connection_failed.connect(
@@ -115,14 +119,15 @@ func _ready():
 			else:
 				game_error.emit("Error on create lobby!")
 	)
+	Steam.avatar_loaded.connect(_on_loaded_avatar)
 
 
 
 # Lobby management functions.
 @rpc("call_local", "any_peer")
-func player_join(new_player_name : String):
+func player_join(new_player_name : String, steam_id : int):
 	var id = multiplayer.get_remote_sender_id()
-	players[id] = createPlayerObject(id, new_player_name);
+	players[id] = createPlayerObject(id, new_player_name, steam_id);
 	player_list_changed.emit()
 
 
@@ -130,12 +135,14 @@ func unregister_player(id):
 	players.erase(id)
 	player_list_changed.emit()
 	
-func createPlayerObject(id : int, name : String) -> Dictionary:
+func createPlayerObject(id : int, name : String, steam_id : int) -> Dictionary:
 	#player object is:
 	#id
 	#displayName
 	#readyStatus
-	return {"id": id, "displayName": name, "ready": false};
+	#steamId
+	#chosenColor
+	return {"id": id, "displayName": name, "ready": false, "steamId": steam_id, "color": Color(1, 1, 1)};
 
 #region Lobbies
 
@@ -156,12 +163,26 @@ func create_steam_socket():
 	peer = SteamMultiplayerPeer.new()
 	peer.create_host(0, [])
 	multiplayer.set_multiplayer_peer(peer)
-	rpc("player_join", Global.displayName);
+	rpc("player_join", Global.displayName, Global.steam_id);
 
 func connect_steam_socket(steam_id : int):
 	peer = SteamMultiplayerPeer.new()
 	peer.create_client(steam_id, 0, [])
 	multiplayer.set_multiplayer_peer(peer)
+	
+func _on_loaded_avatar(user_id: int, avatar_size: int, avatar_buffer: PackedByteArray) -> void:
+	# Create the image and texture for loading
+	var avatar_image: Image = Image.create_from_data(avatar_size, avatar_size, false, Image.FORMAT_RGBA8, avatar_buffer)
+
+	# Optionally resize the image if it is too large
+	if avatar_size > 128:
+		avatar_image.resize(128, 128, Image.INTERPOLATE_LANCZOS)
+
+	# Apply the image to a texture
+	var avatar_texture: ImageTexture = ImageTexture.create_from_image(avatar_image)
+	
+	playerAvatars[user_id] = avatar_texture;
+	avatar_loaded.emit();
 
 #endregion
 
@@ -171,7 +192,7 @@ func create_enet_host():
 	peer = ENetMultiplayerPeer.new()
 	(peer as ENetMultiplayerPeer).create_server(DEFAULT_PORT)
 	multiplayer.set_multiplayer_peer(peer)
-	rpc("player_join", Global.displayName);
+	rpc("player_join", Global.displayName, Global.steam_id);
 
 func create_enet_client(address : String):
 	networkType = NetworkType.ENET;
@@ -182,7 +203,8 @@ func create_enet_client(address : String):
 
 func leave_lobby():
 	purposefulDisconnect = true;
-	peer.close();
+	if(peer):
+		peer.close();
 	Steam.leaveLobby(lobby_id);
 	pass
 

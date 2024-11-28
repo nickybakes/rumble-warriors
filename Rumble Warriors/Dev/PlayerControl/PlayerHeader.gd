@@ -3,6 +3,7 @@ class_name PlayerHeader
 
 
 @onready var label = $Label;
+@onready var avatar = $Avatar;
 
 @onready var playerDummy : PlayerDummy = get_parent();
 
@@ -10,6 +11,9 @@ var camera : Camera3D;
 
 func setName(name : String):
 	label.text = name;
+	
+func setAvatar(icon : ImageTexture):
+	avatar.texture = icon;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

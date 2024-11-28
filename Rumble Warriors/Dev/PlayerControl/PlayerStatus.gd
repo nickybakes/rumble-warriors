@@ -45,6 +45,8 @@ func set_authority(_id : int) -> void:
 		playerDummy = player;
 		add_child(player, true);
 		player.header.setName(Network.players[id].displayName);
+		if(Network.playerAvatars.keys().has(Network.players[id].steamId)):
+			player.header.setAvatar(Network.playerAvatars[Network.players[id].steamId]);
 		
 	authSet = true;
 	

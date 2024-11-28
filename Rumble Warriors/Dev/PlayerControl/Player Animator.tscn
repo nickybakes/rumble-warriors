@@ -772,12 +772,20 @@ bones/72/scale = Vector3(1, 1, 1)
 
 [node name="SK_PlayerTest_01" type="MeshInstance3D" parent="SK_PlayerTest_01/rig/Skeleton3D"]
 material_override = ExtResource("2_47jpl")
+cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("ArrayMesh_d85lp")
 skin = SubResource("Skin_mj8jt")
 
 [node name="SK_PlayerTest_02" type="MeshInstance3D" parent="SK_PlayerTest_01/rig/Skeleton3D"]
 material_override = ExtResource("3_nkwkt")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("ArrayMesh_d85lp")
+skin = SubResource("Skin_mj8jt")
+
+[node name="SK_PlayerTest_03" type="MeshInstance3D" parent="SK_PlayerTest_01/rig/Skeleton3D"]
+cast_shadow = 3
 gi_mode = 0
 mesh = SubResource("ArrayMesh_d85lp")
 skin = SubResource("Skin_mj8jt")
