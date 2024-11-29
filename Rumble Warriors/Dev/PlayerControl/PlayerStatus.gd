@@ -40,10 +40,12 @@ func set_authority(_id : int) -> void:
 		var player : PlayerController = playerControllerScene.instantiate()
 		playerController = player;
 		add_child(player, true);
+		player.animator.setPlayerCustomization(Network.players[id].customization);
 	else:
 		var player : PlayerDummy = playerDummyScene.instantiate()
 		playerDummy = player;
 		add_child(player, true);
+		player.animator.setPlayerCustomization(Network.players[id].customization);
 		player.header.setName(Network.players[id].displayName);
 		player.header.setAvatar(id);
 		

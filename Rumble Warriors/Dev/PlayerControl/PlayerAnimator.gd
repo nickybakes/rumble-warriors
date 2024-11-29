@@ -5,6 +5,10 @@ class_name PlayerAnimator
 @onready var animPlayer = $SK_PlayerTest_01/AnimationPlayer as AnimationPlayer
 @onready var animSM = $SK_PlayerTest_01/AnimationTree.get("parameters/playback") as AnimationNodeStateMachinePlayback;
 
+@onready var playerModel = $SK_PlayerTest_01/rig/Skeleton3D/SK_PlayerTest_01 as MeshInstance3D;
+
+var playerModelMaterial : ShaderMaterial;
+
 var currentAnimation := Enums.ANIMATION.IdleRunBlend;
 var previousAnimation := Enums.ANIMATION.IdleRunBlend;
 
@@ -16,7 +20,8 @@ var current2DBlend = Vector2.ZERO;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	playerModelMaterial = playerModel.get_surface_override_material(0).next_pass;
+	playerModelMaterial.get_instance_id()
 	pass # Replace with function body.
 
 
@@ -24,6 +29,9 @@ func _ready():
 func _process(delta):
 	#tree.set("parameters/Idle-Run-Blend/blend_position", 1.0);
 	pass
+	
+func setPlayerCustomization(customization : Dictionary):
+	playerModelMaterial.set_shader_parameter("playerColor", customization.color);
 
 
 func setAnimation(animation : Enums.ANIMATION, dontResetBlends = false):

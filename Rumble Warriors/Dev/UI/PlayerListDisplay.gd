@@ -9,7 +9,7 @@ class_name PlayerListDisplay
 func setupDisplay(playerDescription : Dictionary):
 	nameLabel.text = playerDescription.displayName;
 	Network.insertSteamAvatar(playerDescription.id, avatar);
-	colorDisplay.modulate = playerDescription.color;
+	colorDisplay.modulate = playerDescription.customization.color;
 	hostCrown.visible = playerDescription.id == 1;
 
 func setName(name : String):

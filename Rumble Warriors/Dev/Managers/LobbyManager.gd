@@ -11,6 +11,8 @@ class_name LobbyManager
 @export var windowInstanceLabel : Label
 
 @onready var playerList = $"Inside Lobby Panel/PlayerListScrollable/PlayerListContainer" as PlayerList
+@onready var customizationPanel = $"Inside Lobby Panel/Customization Panel" as PlayerCustomizationPanel
+
 
 signal game_log(what : String)
 
