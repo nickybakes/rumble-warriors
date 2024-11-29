@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://hc7kb34mgkqq" path="res://Art/Materials/M_Player_01.tres" id="1_qdh7x"]
 
 [resource]
-render_priority = 0
+render_priority = -1
 next_pass = ExtResource("1_qdh7x")
 shader = ExtResource("1_cu2xb")
 shader_parameter/color = Color(0.215182, 0.215182, 0.215182, 1)

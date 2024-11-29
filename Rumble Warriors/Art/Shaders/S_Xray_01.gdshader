@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, depth_test_disabled;
+render_mode unshaded, depth_test_disabled, depth_draw_always;
 #include "SI_EffectsInclude_01.gdshaderinc"
 
 uniform vec3 color : source_color = vec3(.25, .25, .25);

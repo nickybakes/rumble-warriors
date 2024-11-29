@@ -31,6 +31,8 @@ func setAnimation(animation : Enums.ANIMATION, dontResetBlends = false):
 		currentAnimation = animation;
 		animSM.start(Enums.ANIMATION.keys()[animation], true);
 		match(currentAnimation):
+			Enums.ANIMATION.IdleRunBlend:
+				resetBlends(animation);
 			Enums.ANIMATION.ClimbSlide:
 				resetBlends(animation);
 				current2DBlend = tree.get("parameters/ClimbSlide/blend_position");

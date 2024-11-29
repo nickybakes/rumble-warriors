@@ -28,6 +28,9 @@ var peer : MultiplayerPeer = null
 var players := {}
 var playerAvatars := {}
 
+#steamId : textureRect
+var textureRectsWaitingForAvatars := {}
+
 var lobby_id := -1
 
 var purposefulDisconnect := false;
@@ -41,6 +44,7 @@ signal game_ended()
 signal game_error(what : String)
 signal game_log(what : String)
 signal avatar_loaded()
+signal avatar_insert_ready(textureRect : TextureRect)
 signal player_customization_changed()
 
 func _ready():
@@ -121,13 +125,29 @@ func _ready():
 	)
 	Steam.avatar_loaded.connect(_on_loaded_avatar)
 
-
+func getSteamAvatar(multiplayerId : int) -> ImageTexture:
+	if(playerAvatars.keys().has(Network.players[multiplayerId].steamId)):
+		return playerAvatars[Network.players[multiplayerId].steamId];
+	return Global.PLACEHOLDER_AVATAR;
+	
+func insertSteamAvatar(multiplayerId : int, textureRect : TextureRect):
+	var steamId = players[multiplayerId].steamId;
+	if(playerAvatars.has(steamId)):
+		textureRect.texture = playerAvatars[steamId];
+	else:
+		if(textureRectsWaitingForAvatars.has(steamId)):
+			textureRectsWaitingForAvatars[steamId].push(textureRect);
+		else:
+			textureRectsWaitingForAvatars[steamId] = [textureRect];
+		textureRect.texture = Global.PLACEHOLDER_AVATAR;
+		
 
 # Lobby management functions.
 @rpc("call_local", "any_peer")
 func player_join(new_player_name : String, steam_id : int):
 	var id = multiplayer.get_remote_sender_id()
 	players[id] = createPlayerObject(id, new_player_name, steam_id);
+	Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM,	steam_id);
 	player_list_changed.emit()
 
 
@@ -142,7 +162,7 @@ func createPlayerObject(id : int, name : String, steam_id : int) -> Dictionary:
 	#readyStatus
 	#steamId
 	#chosenColor
-	return {"id": id, "displayName": name, "ready": false, "steamId": steam_id, "color": Color(1, 1, 1)};
+	return {"id": id, "displayName": name, "ready": false, "steamId": steam_id, "color": Color(1, 1, 0)};
 
 #region Lobbies
 
@@ -182,6 +202,10 @@ func _on_loaded_avatar(user_id: int, avatar_size: int, avatar_buffer: PackedByte
 	var avatar_texture: ImageTexture = ImageTexture.create_from_image(avatar_image)
 	
 	playerAvatars[user_id] = avatar_texture;
+	if(textureRectsWaitingForAvatars.has(user_id)):
+		for textureRect in textureRectsWaitingForAvatars[user_id]:
+			textureRect.texture = avatar_texture;
+		textureRectsWaitingForAvatars.erase(user_id);
 	avatar_loaded.emit();
 
 #endregion

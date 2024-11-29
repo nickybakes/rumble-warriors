@@ -2,6 +2,10 @@ extends Node
 
 #Global will log into Steam, load settings, and handle overall app state
 
+
+@onready var PLACEHOLDER_AVATAR = preload("res://icon.svg") as Texture2D;
+
+
 # Steam variables
 var is_on_steam_deck: bool = false
 var is_online: bool = false
@@ -11,6 +15,7 @@ var steam_id: int = 0
 var displayName: String = "Player"
 
 var instanceId : String;
+
 
 
 func _init() -> void:
