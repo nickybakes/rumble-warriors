@@ -24,8 +24,6 @@ var networkType := NetworkType.ENET;
 
 var peer : MultiplayerPeer = null
 
-var isSecondPlayer = false;
-
 # Names for remote players in id:player format.
 
 #player id: bool (true if fully connected, data sent. false is still connecting BUT connection registered)
@@ -171,7 +169,6 @@ func register_player_connection():
 func accept_player_connection(data : Dictionary):
 	var id = multiplayer.get_remote_sender_id()
 	setupMyCustomization(data.playerCount);
-	isSecondPlayer = data.playerCount == 2;
 	myDescription = createPlayerObject(multiplayer.get_unique_id(), Global.displayName, Global.steam_id, myCustomization);
 	rpc_id(1, "update_player_description", myDescription);
 	

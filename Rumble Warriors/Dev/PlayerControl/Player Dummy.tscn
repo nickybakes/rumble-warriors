@@ -30,9 +30,9 @@ shape = SubResource("CapsuleShape3D_pd1n4")
 
 [node name="Header" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 422.0
-offset_bottom = 82.0
-size_flags_vertical = 4
+custom_minimum_size = Vector2(400, 80)
+offset_right = 400.0
+offset_bottom = 80.0
 mouse_filter = 2
 script = ExtResource("2_2f1r2")
 

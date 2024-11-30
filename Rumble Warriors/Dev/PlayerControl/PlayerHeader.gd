@@ -10,8 +10,6 @@ class_name PlayerHeader
 var camera : Camera3D;
 
 func setName(name : String):
-	if(Network.isSecondPlayer):
-		print(Global.instanceId + " making DUMMY named " + name + " for " + str(multiplayer.get_unique_id()));
 	label.text = name;
 	
 func setAvatar(id : int):
@@ -35,4 +33,12 @@ func _process(delta):
 		modulate.a = clamp((-2.0*dot) - 1.0, 0.0, 1.0);
 		#var scaleVal = clamp( camera.rotation.dot((dummyPos - camera.position).normalized()), 0.0, 1.0)
 		#scale = Vector2(scaleVal, scaleVal)
+		
+	#This is such a stupid fix for a stupid issue.
+	#The issue: on players after P1, the players dummys for the players after them dont have
+	#a nametag on their character. Its because the size somehow is getting set to (NaN, NaN)
+	#and the only fix is to have this in the _process function. It doesnt work if we have it
+	#in _ready or in the setName, setAvatar, etc funcs. 
+	if(is_nan(size.x)):
+		set_size(Vector2.ONE);
 	pass

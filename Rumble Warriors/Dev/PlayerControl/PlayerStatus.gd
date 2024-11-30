@@ -35,8 +35,7 @@ var authSet := false;
 func set_authority(_id : int) -> void:
 	id = _id;
 	set_multiplayer_authority(id)
-	if(Network.isSecondPlayer):
-		print(Global.instanceId + " player status set auth: " + str(id) + str(is_multiplayer_authority()));
+	print(Global.instanceId + " player status set auth: " + str(id) + str(is_multiplayer_authority()));
 	if(is_multiplayer_authority()):
 		#print(Global.instanceId + " making CONTROLLER for " + str(id));
 		var player : PlayerController = playerControllerScene.instantiate()
