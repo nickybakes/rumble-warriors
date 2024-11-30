@@ -6,16 +6,30 @@ class_name PlayerCustomizationPanel
 
 var playerColor : Color;
 
-signal player_customization_changed();
+signal player_customization_applied();
+
+
+func _ready() -> void:
+	updateCustomizationToCurrent();
+	Network.connection_accepted.connect(self.updateCustomizationToCurrent);
+	Network.player_customization_updated.connect(self.updateCustomizationToCurrent);
+	pass;
+
+#forces the customization display to show the current colors we have
+func updateCustomizationToCurrent():
+	setColor(Network.myCustomization.color);
+	applyButton.disabled = true;
+	pass;
 
 func setColor(color : Color):
 	colorPicker.color = color;
-	applyButton.disabled = true;
 
-func onChangeColor(color : Color):
+func _on_color_changed(color: Color) -> void:
 	playerColor = color;
 	applyButton.disabled = false;
 	
 func onApply():
-	player_customization_changed.emit();
+	Network.myCustomization.color = playerColor;
+	Network.update_player_customization();
+	player_customization_applied.emit();
 	

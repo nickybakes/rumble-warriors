@@ -22,7 +22,7 @@ func _ready():
 	
 	# Called every time the node is added to the scene.
 	Network.connection_failed.connect(self._on_connection_failed)
-	Network.connection_succeeded.connect(self._on_connection_success)
+	Network.connection_accepted.connect(self._on_connection_accepted)
 	Network.player_list_changed.connect(self.refresh_lobby)
 	Network.disconnect.connect(self._on_disconnect)
 	Network.game_error.connect(self._on_game_error)
@@ -72,7 +72,7 @@ func _on_host_pressed():
 	Network.host_lobby(Network.NetworkType.STEAM)
 	refresh_lobby()
 
-func _on_connection_success():
+func _on_connection_accepted():
 	outside_lobby_panel.hide()
 	inside_lobby_panel.show()
 

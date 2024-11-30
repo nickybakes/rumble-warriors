@@ -48,13 +48,14 @@ var purposefulDisconnect := false;
 signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
+signal connection_accepted()
 signal disconnect()
 signal game_ended()
 signal game_error(what : String)
 signal game_log(what : String)
 signal avatar_loaded()
 signal avatar_insert_ready(textureRect : TextureRect)
-signal player_customization_changed()
+signal player_customization_updated()
 
 func _ready():
 	# Keep connections defined locally, if they aren't likely to be used
@@ -151,11 +152,9 @@ func insertSteamAvatar(multiplayerId : int, textureRect : TextureRect):
 		textureRect.texture = Global.PLACEHOLDER_AVATAR;
 		Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, steamId);
 		
-@rpc("call_local", "any_peer")
-func update_player_customization(playerCustomization : Dictionary):
-	var id = multiplayer.get_remote_sender_id();
-	myDescription.customization = playerCustomization;
+func update_player_customization():
 	rpc_id(1, "update_player_description", myDescription);
+	player_customization_updated.emit();
 	
 
 # Lobby management functions.
@@ -171,6 +170,7 @@ func accept_player_connection(data : Dictionary):
 	setupMyCustomization(data.playerCount);
 	myDescription = createPlayerObject(multiplayer.get_unique_id(), Global.displayName, Global.steam_id, myCustomization);
 	rpc_id(1, "update_player_description", myDescription);
+	connection_accepted.emit();
 	
 @rpc("call_local", "any_peer")
 func update_player_description(description : Dictionary):
@@ -202,6 +202,7 @@ func createPlayerObject(id : int, name : String, steam_id : int, customization :
 
 func setupMyCustomization(playerCount : int):
 	myCustomization.color = PLAYER_COLORS_DEFAULT[(playerCount - 1) % PLAYER_COLORS_DEFAULT.size()];
+	player_customization_updated.emit();
 
 #region Lobbies
 
