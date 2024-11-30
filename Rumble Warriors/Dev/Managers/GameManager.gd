@@ -12,7 +12,7 @@ func _ready():
 func spawn_players():
 	var playerPrefab = load(get_spawnable_scene(1));
 	var index = 0;
-	for p in Network.players.values():
+	for p in Network.playerDescriptions.values():
 		var player : PlayerStatus = playerPrefab.instantiate()
 		add_child(player, true);
 		player.set_authority.rpc(p.id)

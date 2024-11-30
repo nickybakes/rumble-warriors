@@ -35,18 +35,21 @@ var authSet := false;
 func set_authority(_id : int) -> void:
 	id = _id;
 	set_multiplayer_authority(id)
-	print(Global.instanceId + " player status set auth: " + str(id) + str(is_multiplayer_authority()));
+	if(Network.isSecondPlayer):
+		print(Global.instanceId + " player status set auth: " + str(id) + str(is_multiplayer_authority()));
 	if(is_multiplayer_authority()):
+		#print(Global.instanceId + " making CONTROLLER for " + str(id));
 		var player : PlayerController = playerControllerScene.instantiate()
 		playerController = player;
 		add_child(player, true);
-		player.animator.setPlayerCustomization(Network.players[id].customization);
+		player.animator.setPlayerCustomization(Network.playerDescriptions[id].customization);
 	else:
+		#print(Global.instanceId + " making DUMMY for " + str(id));
 		var player : PlayerDummy = playerDummyScene.instantiate()
 		playerDummy = player;
 		add_child(player, true);
-		player.animator.setPlayerCustomization(Network.players[id].customization);
-		player.header.setName(Network.players[id].displayName);
+		player.animator.setPlayerCustomization(Network.playerDescriptions[id].customization);
+		player.header.setName(Network.playerDescriptions[id].displayName);
 		player.header.setAvatar(id);
 		
 	authSet = true;

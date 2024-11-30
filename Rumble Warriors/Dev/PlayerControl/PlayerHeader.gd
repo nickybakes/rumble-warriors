@@ -10,6 +10,8 @@ class_name PlayerHeader
 var camera : Camera3D;
 
 func setName(name : String):
+	if(Network.isSecondPlayer):
+		print(Global.instanceId + " making DUMMY named " + name + " for " + str(multiplayer.get_unique_id()));
 	label.text = name;
 	
 func setAvatar(id : int):

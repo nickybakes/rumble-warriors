@@ -99,10 +99,10 @@ func _on_game_log(logtxt : String):
 
 
 func refresh_lobby():
-	var playerIDs = Network.players;
+	var playerIDs = Network.playerDescriptions;
 	playerList.clear();
 	for id in playerIDs:
-		playerList.addPlayer(Network.players[id]);
+		playerList.addPlayer(Network.playerDescriptions[id]);
 	
 	inside_lobby_panel.get_node("Start").disabled = not multiplayer.is_server()
 	#Ensure we have an actual lobby ID before continuing

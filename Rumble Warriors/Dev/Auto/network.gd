@@ -24,12 +24,21 @@ var networkType := NetworkType.ENET;
 
 var peer : MultiplayerPeer = null
 
+var isSecondPlayer = false;
+
 # Names for remote players in id:player format.
-var players := {}
+
+#player id: bool (true if fully connected, data sent. false is still connecting BUT connection registered)
+var playerConnections := {}
+#player id : player description (name, customization, steam id, etc);
+var playerDescriptions := {}
+#steam id : ImageTexture
 var playerAvatars := {}
 
 #steamId : textureRect
 var textureRectsWaitingForAvatars := {}
+
+var myDescription := {};
 
 var myCustomization := {"color": PLAYER_COLORS_DEFAULT[0]};
 
@@ -55,9 +64,10 @@ func _ready():
 
 	multiplayer.peer_connected.connect(
 		func(id : int):
+			pass;
 			# Tell the connected peer that we have also joined
-			#print(Global.instanceId + ": " + str(id));
-			rpc_id(id, "player_join", Global.displayName, Global.steam_id, myCustomization);
+			#print(Global.instanceId + ": PEER CONNECTED " + str(id));
+			#rpc_id(id, "player_join", Global.displayName, Global.steam_id, myCustomization);
 	)
 	multiplayer.peer_disconnected.connect(
 		func(id : int):
@@ -67,9 +77,8 @@ func _ready():
 	)
 	multiplayer.connected_to_server.connect(
 		func():
-			setupMyCustomization();
 			print("connect " + Global.instanceId + ": " + str(peer.get_unique_id()));
-			rpc("player_join", Global.displayName, Global.steam_id, myCustomization);
+			rpc_id(1, "register_player_connection");
 			connection_succeeded.emit()	
 	)
 	multiplayer.connection_failed.connect(
@@ -128,38 +137,61 @@ func _ready():
 	Steam.avatar_loaded.connect(_on_loaded_avatar)
 
 func getSteamAvatar(multiplayerId : int) -> ImageTexture:
-	if(playerAvatars.keys().has(Network.players[multiplayerId].steamId)):
-		return playerAvatars[Network.players[multiplayerId].steamId];
+	if(playerAvatars.keys().has(Network.playerDescriptions[multiplayerId].steamId)):
+		return playerAvatars[Network.playerDescriptions[multiplayerId].steamId];
 	return Global.PLACEHOLDER_AVATAR;
 	
 func insertSteamAvatar(multiplayerId : int, textureRect : TextureRect):
-	var steamId = players[multiplayerId].steamId;
+	var steamId = playerDescriptions[multiplayerId].steamId;
 	if(playerAvatars.has(steamId)):
 		textureRect.texture = playerAvatars[steamId];
 	else:
 		if(textureRectsWaitingForAvatars.has(steamId)):
-			textureRectsWaitingForAvatars[steamId].push(textureRect);
+			textureRectsWaitingForAvatars[steamId].push_back(textureRect);
 		else:
 			textureRectsWaitingForAvatars[steamId] = [textureRect];
 		textureRect.texture = Global.PLACEHOLDER_AVATAR;
+		Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM, steamId);
 		
 @rpc("call_local", "any_peer")
 func update_player_customization(playerCustomization : Dictionary):
 	var id = multiplayer.get_remote_sender_id();
+	myDescription.customization = playerCustomization;
+	rpc_id(1, "update_player_description", myDescription);
 	
 
 # Lobby management functions.
 @rpc("call_local", "any_peer")
-func player_join(new_player_name : String, steam_id : int, customization : Dictionary):
+func register_player_connection():
 	var id = multiplayer.get_remote_sender_id()
-	players[id] = createPlayerObject(id, new_player_name, steam_id, customization);
-	Steam.getPlayerAvatar(Steam.AVATAR_MEDIUM,	steam_id);
-	player_list_changed.emit()
-
+	playerConnections[id] = false;
+	rpc_id(id, "accept_player_connection", {"playerCount" : playerConnections.size()});
+	
+@rpc("call_local", "authority")
+func accept_player_connection(data : Dictionary):
+	var id = multiplayer.get_remote_sender_id()
+	setupMyCustomization(data.playerCount);
+	isSecondPlayer = data.playerCount == 2;
+	myDescription = createPlayerObject(multiplayer.get_unique_id(), Global.displayName, Global.steam_id, myCustomization);
+	rpc_id(1, "update_player_description", myDescription);
+	
+@rpc("call_local", "any_peer")
+func update_player_description(description : Dictionary):
+	var id = multiplayer.get_remote_sender_id()
+	playerConnections[id] = true;
+	playerDescriptions[id] = description;
+	rpc("update_all_player_descriptions", playerDescriptions);
+	
+@rpc("call_local", "authority")
+func update_all_player_descriptions(playerDescs : Dictionary):
+	playerDescriptions = playerDescs;
+	player_list_changed.emit();
 
 func unregister_player(id):
-	players.erase(id)
-	player_list_changed.emit()
+	if(multiplayer.is_server()):
+		playerConnections.erase(id)
+		playerDescriptions.erase(id)
+		rpc("update_all_player_descriptions", playerDescriptions);
 	
 func createPlayerObject(id : int, name : String, steam_id : int, customization : Dictionary) -> Dictionary:
 	#player object is:
@@ -171,8 +203,8 @@ func createPlayerObject(id : int, name : String, steam_id : int, customization :
 		#color
 	return {"id": id, "displayName": name, "ready": false, "steamId": steam_id, "customization": customization};
 
-func setupMyCustomization():
-	myCustomization.color = PLAYER_COLORS_DEFAULT[multiplayer.get_peers().size() % PLAYER_COLORS_DEFAULT.size()];
+func setupMyCustomization(playerCount : int):
+	myCustomization.color = PLAYER_COLORS_DEFAULT[(playerCount - 1) % PLAYER_COLORS_DEFAULT.size()];
 
 #region Lobbies
 
@@ -193,8 +225,7 @@ func create_steam_socket():
 	peer = SteamMultiplayerPeer.new()
 	peer.create_host(0, [])
 	multiplayer.set_multiplayer_peer(peer)
-	setupMyCustomization();
-	rpc("player_join", Global.displayName, Global.steam_id, myCustomization);
+	rpc_id(1, "register_player_connection");
 
 func connect_steam_socket(steam_id : int):
 	peer = SteamMultiplayerPeer.new()
@@ -215,7 +246,8 @@ func _on_loaded_avatar(user_id: int, avatar_size: int, avatar_buffer: PackedByte
 	playerAvatars[user_id] = avatar_texture;
 	if(textureRectsWaitingForAvatars.has(user_id)):
 		for textureRect in textureRectsWaitingForAvatars[user_id]:
-			textureRect.texture = avatar_texture;
+			if(textureRect != null):
+				textureRect.texture = avatar_texture;
 		textureRectsWaitingForAvatars.erase(user_id);
 	avatar_loaded.emit();
 
@@ -227,8 +259,7 @@ func create_enet_host():
 	peer = ENetMultiplayerPeer.new()
 	(peer as ENetMultiplayerPeer).create_server(DEFAULT_PORT)
 	multiplayer.set_multiplayer_peer(peer)
-	setupMyCustomization();
-	rpc("player_join", Global.displayName, Global.steam_id, myCustomization);
+	rpc_id(1, "register_player_connection");
 
 func create_enet_client(address : String):
 	networkType = NetworkType.ENET;
@@ -263,67 +294,33 @@ func begin_game():
 	assert(multiplayer.is_server())
 	spawn_gamemanager();
 
-#func begin_game2():
-	##Ensure that this is only running on the server; if it isn't, we need
-	##to check our code.
-	#assert(multiplayer.is_server())
-	#
-	##call load_world on all clients
-	#load_world.rpc()
-	#
-	##grab the world node and player scene
-	#var world : Node3D = get_tree().get_root().get_node("Map")
-	#var player_scene := load("res://Dev/PlayerControl/Player Status.tscn")
-	#
-	##Iterate over our connected peer ids
-	#var spawn_index = 0
-	#
-	#for peer_id in players:
-		#var player : PlayerStatus = player_scene.instantiate()
-		#
-		#player.set_name("P " + str(peer_id))
-		## "true" forces a readable name, which is important, as we can't have sibling nodes
-		## with the same name.
-		#world.get_node("Players").add_child(player, true)
-		#
-		##Set the authorization for the player. This has to be called on all peers to stay in sync.
-		#player.set_authority.rpc(peer_id)
-		#
-		###Grab our location for the player.
-		###var target : Vector2 = world.get_node("SpawnPoints").get_child(spawn_index).position
-		##var target : Vector3 = Vector3(-6, 0, 0)
-		###The peer has authority over the player's position, so to sync it properly,
-		###we need to set that position from that peer with an RPC.
-		##player.teleport.rpc_id(peer_id, target)
-		#
-		#spawn_index += 1
-	#
 ## create_steam_socket and connect_steam_socket both create the multiplayer peer, instead
 ## of _ready, for the sake of compatibility with other networking services
 ## such as WebSocket, WebRTC, or Steam or Epic.
-
-
 
 #region Utility
 
 func _make_string_unique(query : String) -> String:
 	var count := 2
 	var trial := query
-	if Network.players.values().has(trial):
+	if Network.playerDescriptions.values().has(trial):
 		trial = query + ' ' + str(count)
 		count += 1
 	return trial
 
 @rpc("call_local", "any_peer")
 func get_player_name() -> String:
-	return players[multiplayer.get_remote_sender_id()].displayName
+	return playerDescriptions[multiplayer.get_remote_sender_id()].displayName
 
 func is_game_in_progress() -> bool:
 	return has_node("/root/Map")
 
 func end_connection():
 	#clear player and lobby data
-	players.clear();
+	for id in playerDescriptions.keys():
+		textureRectsWaitingForAvatars.erase(playerDescriptions[id].steamId);
+	playerDescriptions.clear();
+	playerConnections.clear();
 	lobby_id = -1;
 	
 	#delete spawned gamemanager and any leftovers from the network connection
