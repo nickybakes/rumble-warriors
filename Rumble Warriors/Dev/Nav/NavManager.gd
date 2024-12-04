@@ -1,5 +1,6 @@
 @tool
 extends Node3D
+class_name NavManager;
 
 const FLOAT_MAX = 1.79769e308;
 const WORLD_COLLISION_MASK = 0b0011;
@@ -111,10 +112,12 @@ func _get_property_list():
 
 	return properties
 
+static var inst;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not Engine.is_editor_hint():
+		inst = self;
 		boundaryMesh.visible = false
 		if(createNavOnPlay):
 			currentStep = 0;

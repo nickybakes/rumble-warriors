@@ -8,7 +8,9 @@ material = ExtResource("2_3veof")
 
 [node name="NavManager" type="Node3D"]
 script = ExtResource("1_423fp")
+probeList = null
 mainOct = {}
+islandList = null
 
 [node name="BoundaryMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
