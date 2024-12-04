@@ -10,7 +10,7 @@ func enter(previousState : Enums.STATE, _msg := {}):
 
 func physics_update(delta: float) -> void:
 	
-	if(InputBuffer.is_action_just_pressed(Enums.INPUT.Jump)):
+	if(player.input_buffer.is_action_just_pressed(Enums.INPUT.Jump)):
 		state_machine.transition_to(Enums.STATE.SideFlip, {"direction": direction})
 		return
 	

@@ -50,7 +50,7 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to(Enums.STATE.Walljump, {"direction": wall_interact[2][1]})
 		return
 	
-	if InputBuffer.is_action_just_pressed(Enums.INPUT.Jump):
+	if player.input_buffer.is_action_just_pressed(Enums.INPUT.Jump):
 		if (player.road_runner_jump_available && player.time_in_air < player.ROAD_RUNNER_TIME_MAX):
 			player.do_jump()
 	pass

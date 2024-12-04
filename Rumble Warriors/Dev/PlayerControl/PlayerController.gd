@@ -4,6 +4,8 @@ class_name PlayerController
 #PlayerController is the object that reacts to player input.
 #It will control player's state, movement, etc.
 
+const botAttachmentPrefab = preload("res://Dev/PlayerControl/Bot Attachment.tscn");
+
 
 const GRAVITY = 45.0
 const SPEED = 11.0
@@ -13,6 +15,8 @@ const AIR_SPEED_CHANGE_AMOUNT = 30.0
 const JUMP_HEIGHT = 3.4
 const FALL_GRAVITY_MULTI = 1.7
 const ROAD_RUNNER_TIME_MAX = 0.12
+
+var input_buffer : InputBuffer;
 
 var requested_move_direction := Vector3(0, 0, 0);
 var last_non_zero_horizontal_velocity := Vector3(0, 0, -1)
@@ -40,32 +44,45 @@ var pitch_input := 0.0
 @onready var camera_twist = $CameraTwist
 @onready var camera_pitch = $CameraTwist/CameraPitch
 
+var isBot := false;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+func createInputBuffer(bot : bool):
+	isBot = bot;
+	if(bot):
+		input_buffer = InputBufferBot.new();
+		$CameraTwist.queue_free();
+		var attachment = botAttachmentPrefab.instantiate();
+		add_child(attachment);
+	else:
+		input_buffer = InputBufferPlayer.new();
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if(Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif(Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if(!isBot):
+		if(Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED):
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		elif(Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE):
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
+		twist_input = twist_input + Input.get_axis("look_right", "look_left") * gamepad_sensitivity
+		pitch_input = pitch_input + Input.get_axis("look_down", "look_up") * gamepad_sensitivity
+			
+		camera_twist.rotate_y(twist_input)
+		camera_pitch.rotate_x(pitch_input)
+		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(-60), deg_to_rad(45))
 		
-	twist_input = twist_input + Input.get_axis("look_right", "look_left") * gamepad_sensitivity
-	pitch_input = pitch_input + Input.get_axis("look_down", "look_up") * gamepad_sensitivity
-		
-	camera_twist.rotate_y(twist_input)
-	camera_pitch.rotate_x(pitch_input)
-	camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(-60), deg_to_rad(45))
-	
-	twist_input = 0.0
-	pitch_input = 0.0
+		twist_input = 0.0
+		pitch_input = 0.0
 	
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:	
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and !isBot:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			twist_input = - event.relative.x * mouse_sensitivity
 			pitch_input = - event.relative.y * mouse_sensitivity
@@ -75,12 +92,15 @@ func current_speed() -> float:
 	return SPEED * state_machine.state.speed_multiplier;
 	
 func get_basic_input_dir() -> Vector2:
-	return Input.get_vector("move_left", "move_right", "move_forward", "move_backward");
+	return input_buffer.get_movement_direction();
 	
 func get_requested_move_direction() -> Vector3:
 	var input_dir = get_basic_input_dir();
-	var direction = (camera_twist.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	return direction;
+	if(isBot):
+		return Vector3(input_dir.x, 0, input_dir.y).normalized();
+	else:
+		var direction = (camera_twist.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		return direction;
 	
 func get_top_down_speed() -> float:
 	return get_top_down_velocity().length();
@@ -94,6 +114,8 @@ func get_horizontal_velocity() -> Vector3:
 
 
 func _physics_process(delta: float) -> void:
+	input_buffer.update(delta);
+	
 	if(get_top_down_velocity()):
 		last_non_zero_horizontal_velocity = get_horizontal_velocity()
 	var player_move_input = get_requested_move_direction()
@@ -276,15 +298,15 @@ func request_wall_interactions() -> Array:
 	#can climb, can vault, can jump
 	var results = [[false, null], [false, null], [false, null]];
 	
-	if InputBuffer.is_action_just_pressed(Enums.INPUT.Interact):
+	if input_buffer.is_action_just_pressed(Enums.INPUT.Interact):
 		if top:
 			results[0] = [true, top.normal.normalized()];
 	
-	if InputBuffer.is_action_just_pressed(Enums.INPUT.Interact):
+	if input_buffer.is_action_just_pressed(Enums.INPUT.Interact):
 		if !top and ((mid and bot) or (!mid and bot) or (mid and !bot)):
 			results[1] = [true, Vector3(normal_to_use.x, 0, normal_to_use.z).normalized()];
 	
-	if InputBuffer.is_action_just_pressed(Enums.INPUT.Jump):
+	if input_buffer.is_action_just_pressed(Enums.INPUT.Jump):
 		if(amount >= 2) and is_on_wall_only():
 			results[2] = [true, Vector3(normal_to_use.x, 0, normal_to_use.z).normalized()];
 	

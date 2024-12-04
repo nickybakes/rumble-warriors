@@ -119,11 +119,11 @@ func update(delta: float) -> void:
 		moveAlongWall(player_input, 6);
 		jumpCooldown -= delta;
 		
-		if InputBuffer.is_action_just_pressed(Enums.INPUT.Interact) and timeClimbing > .5:
+		if player.input_buffer.is_action_just_pressed(Enums.INPUT.Interact) and timeClimbing > .5:
 			state_machine.transition_to(Enums.STATE.JumpFall);
 			return
 		
-		if InputBuffer.is_action_just_pressed(Enums.INPUT.Jump) and timeClimbing > .2 and jumpCooldown <= 0:
+		if player.input_buffer.is_action_just_pressed(Enums.INPUT.Jump) and timeClimbing > .2 and jumpCooldown <= 0:
 			if(player_input == Vector2.ZERO):
 				player_input = Vector2.UP;
 			jumpSpeed = 35;

@@ -31,25 +31,33 @@ var id : int;
 
 var authSet := false;
 
+var isBot := false;
+var botDescription := {};
+
 @rpc("any_peer", "call_local")
-func set_authority(_id : int) -> void:
+func set_authority(_id : int, _isBot : bool, description : Dictionary) -> void:
 	id = _id;
+	isBot = _isBot;
 	set_multiplayer_authority(id)
-	print(Global.instanceId + " player status set auth: " + str(id) + str(is_multiplayer_authority()));
 	if(is_multiplayer_authority()):
 		#print(Global.instanceId + " making CONTROLLER for " + str(id));
 		var player : PlayerController = playerControllerScene.instantiate()
 		playerController = player;
+		playerController.createInputBuffer(isBot);
 		add_child(player, true);
-		player.animator.setPlayerCustomization(Network.playerDescriptions[id].customization);
+		player.animator.setPlayerCustomization(description.customization);
+		if(isBot):
+			var header = player.get_node("Bot Attachment/Header") as PlayerHeader;
+			header.setName(description.displayName)
 	else:
 		#print(Global.instanceId + " making DUMMY for " + str(id));
 		var player : PlayerDummy = playerDummyScene.instantiate()
 		playerDummy = player;
 		add_child(player, true);
-		player.animator.setPlayerCustomization(Network.playerDescriptions[id].customization);
-		player.header.setName(Network.playerDescriptions[id].displayName);
-		player.header.setAvatar(id);
+		player.animator.setPlayerCustomization(description.customization);
+		player.header.setName(description.displayName);
+		if(!isBot):
+			player.header.setAvatar(id);
 		
 	authSet = true;
 	

@@ -6,7 +6,7 @@ vec3 rotateAroundAxis(vec3 vector, vec3 axis, float angle) {
 		vec3( axis.y*axis.x*(1.0-cos(angle))+axis.z*sin(angle), cos(angle)+axis.y*axis.y*(1.0-cos(angle)), axis.y*axis.z*(1.0-cos(angle))-axis.x*sin(angle) ),
 		vec3( axis.z*axis.x*(1.0-cos(angle))-axis.y*sin(angle), axis.z*axis.y*(1.0-cos(angle))+axis.x*sin(angle), cos(angle)+axis.z*axis.z*(1.0-cos(angle)) )
 	);
-	
+
 	return vector * rot_matrix;
 }
 

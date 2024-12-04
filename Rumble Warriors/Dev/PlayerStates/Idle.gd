@@ -22,7 +22,7 @@ func update(delta: float) -> void:
 	if player.get_requested_move_direction():
 		state_machine.transition_to(Enums.STATE.Run)
 		
-	if(InputBuffer.is_action_just_pressed(Enums.INPUT.Jump)):
+	if(player.input_buffer.is_action_just_pressed(Enums.INPUT.Jump)):
 		player.do_jump()
 		state_machine.transition_to(Enums.STATE.JumpFall)
 		return

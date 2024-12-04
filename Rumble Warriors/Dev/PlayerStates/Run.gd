@@ -25,7 +25,7 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to(Enums.STATE.Idle)
 		return
 		
-	if(InputBuffer.is_action_just_pressed(Enums.INPUT.Jump)):
+	if(player.input_buffer.is_action_just_pressed(Enums.INPUT.Jump)):
 		player.do_jump()
 		state_machine.transition_to(Enums.STATE.JumpFall)
 		return
