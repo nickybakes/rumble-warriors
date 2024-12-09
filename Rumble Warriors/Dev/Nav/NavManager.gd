@@ -197,8 +197,13 @@ func createNavMesh():
 			currentStep += 1;
 		9:
 			print("Shrinkwrapping probes...");
+			var offset = 1.0;
 			for probe in probeList:
-				probe.position = lerp(probe.position, probe.collisions[0].position, .5)
+				var finalPosition = probe.collisions[0].position + (probe.collisions[0].normal * offset);
+				for i in range(1, probe.collisions.size()):
+					finalPosition = lerp(finalPosition, probe.collisions[i].position + (probe.collisions[i].normal * offset), .5)
+				
+				probe.position = finalPosition;
 			currentStep += 1;
 		10:
 			for probe in probeList:
@@ -215,10 +220,10 @@ func createNavMesh():
 									probe.probeType = PROBETYPE.VAULT;
 									neighbor.neighbors.erase(probe.index);
 									if(!spawnedDropOff):
-										var dropOffPoition = Vector3(probe.position.x, neighbor.position.y, probe.position.z);
-										probeList.push_back({"index": probeList.size(), "position": dropOffPoition, "collisions": probe.collisions, "probeType": PROBETYPE.DROPOFF, "neighbors": [neighbor.index], "island": -1});
+										var dropOffPosition = Vector3(probe.position.x, neighbor.position.y, probe.position.z);
+										probeList.push_back({"index": probeList.size(), "position": dropOffPosition, "collisions": probe.collisions, "probeType": PROBETYPE.DROPOFF, "neighbors": [neighbor.index], "island": -1});
 										for neighborIndex2 in neighbor.neighbors:
-											if(!probeList[neighborIndex2].neighbors.has(probeList.size() - 1) and probeList[neighborIndex2].position.distance_to(dropOffPoition) < voxelSize):
+											if(!probeList[neighborIndex2].neighbors.has(probeList.size() - 1) and probeList[neighborIndex2].position.distance_to(dropOffPosition) < voxelSize):
 												probeList[neighborIndex2].neighbors.push_back(probeList.size() - 1);
 										neighbor.neighbors.push_back(probeList.size() - 1);
 										spawnedDropOff = true;
@@ -309,6 +314,8 @@ func islandConnectScore(from : Dictionary, to : Dictionary) -> float:
 		score = .1;
 	elif(from.probeType == PROBETYPE.DROPOFF and getIslandTypeFromProbeType(to.probeType) == ISLANDTYPE.WALL):
 		score = .2;
+	elif(from.probeType == PROBETYPE.CLIMBSTART and to.probeType == PROBETYPE.CLIMBSTART):
+		score = 1.0;
 	elif(getIslandTypeFromProbeType(from.probeType) == ISLANDTYPE.GROUND and getIslandTypeFromProbeType(to.probeType) == ISLANDTYPE.GROUND):
 		score = .25;
 	elif(getIslandTypeFromProbeType(from.probeType) == ISLANDTYPE.GROUND and to.probeType == PROBETYPE.VAULT):
@@ -344,15 +351,20 @@ func addNeighborsToIsland(probe : Dictionary):
 		var neighbor = probeList[neighborIndex];
 		if(neighbor.island != -1):
 			continue;
-		if((probe.probeType == PROBETYPE.GROUND or probe.probeType == PROBETYPE.CLIMBSTART  or probe.probeType == PROBETYPE.DROPOFF) and (neighbor.probeType == PROBETYPE.GROUND or neighbor.probeType == PROBETYPE.CLIMBSTART or neighbor.probeType == PROBETYPE.DROPOFF)):
-			neighbor.island = probe.island;
-			islandList[probe.island].probes.push_back(neighbor.index);
+		if((probe.probeType == PROBETYPE.GROUND or probe.probeType == PROBETYPE.CLIMBSTART or probe.probeType == PROBETYPE.DROPOFF) and (neighbor.probeType == PROBETYPE.GROUND or neighbor.probeType == PROBETYPE.CLIMBSTART or neighbor.probeType == PROBETYPE.DROPOFF)):
+			addProbeToIsland(probe.island, neighbor);
 			addNeighborsToIsland(neighbor);
+		#if(probe.probeType == PROBETYPE.CLIMBSTART and neighbor.probeType == PROBETYPE.CLIMBSTART):
+			#addProbeToIsland(probe.island, neighbor);
+			#addNeighborsToIsland(neighbor);
 		if((probe.probeType == PROBETYPE.WALL or probe.probeType == PROBETYPE.VAULT) and (neighbor.probeType == PROBETYPE.WALL or neighbor.probeType == PROBETYPE.VAULT)):
 			if(getBestFitAxis(probe.collisions[0].normal) == getBestFitAxis(neighbor.collisions[0].normal)):
-				neighbor.island = probe.island;
-				islandList[probe.island].probes.push_back(neighbor.index);
+				addProbeToIsland(probe.island, neighbor);
 				addNeighborsToIsland(neighbor);
+
+func addProbeToIsland(islandIndex : int, probe : Dictionary):
+	probe.island = islandIndex;
+	islandList[islandIndex].probes.push_back(probe.index);
 
 enum ISLANDTYPE{
 	GROUND,
