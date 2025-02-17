@@ -35,15 +35,15 @@ var isBot := false;
 var botDescription := {};
 
 @rpc("any_peer", "call_local")
-func set_authority(_id : int, _isBot : bool, description : Dictionary) -> void:
+func set_authority(_id : int, _botID : int, description : Dictionary) -> void:
 	id = _id;
-	isBot = _isBot;
+	isBot = _botID != -1;
 	set_multiplayer_authority(id)
 	if(is_multiplayer_authority()):
 		#print(Global.instanceId + " making CONTROLLER for " + str(id));
 		var player : PlayerController = playerControllerScene.instantiate()
 		playerController = player;
-		playerController.createInputBuffer(isBot);
+		playerController.setup(isBot);
 		add_child(player, true);
 		player.animator.setPlayerCustomization(description.customization);
 		if(isBot):
@@ -59,6 +59,11 @@ func set_authority(_id : int, _isBot : bool, description : Dictionary) -> void:
 		if(!isBot):
 			player.header.setAvatar(id);
 		
+	if(!isBot):
+		GameManager.inst.addPlayerToList(self, id);
+	else:
+		GameManager.inst.addBotToList(self, _botID);
+	
 	authSet = true;
 	
 	

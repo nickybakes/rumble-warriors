@@ -17,6 +17,8 @@ const FALL_GRAVITY_MULTI = 1.7
 const ROAD_RUNNER_TIME_MAX = 0.12
 
 var input_buffer : InputBuffer;
+var combat_controller: PlayerCombatController;
+
 
 var requested_move_direction := Vector3(0, 0, 0);
 var last_non_zero_horizontal_velocity := Vector3(0, 0, -1)
@@ -51,7 +53,7 @@ func _ready():
 	pass
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-func createInputBuffer(bot : bool):
+func setup(bot : bool):
 	isBot = bot;
 	if(bot):
 		input_buffer = InputBufferBot.new();
@@ -60,9 +62,13 @@ func createInputBuffer(bot : bool):
 		add_child(attachment);
 	else:
 		input_buffer = InputBufferPlayer.new();
+		
+	combat_controller = PlayerCombatController.new(self);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	state_machine.update(delta);
+	
 	if(!isBot):
 		if(Input.is_action_just_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED):
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -111,10 +117,14 @@ func get_top_down_velocity() -> Vector2:
 func get_horizontal_velocity() -> Vector3:
 	return Vector3(velocity.x, 0, velocity.z)
 	
+func get_model_forward_direction() -> Vector3:
+	return model.transform.basis.z;
 
 
 func _physics_process(delta: float) -> void:
 	input_buffer.update(delta);
+	combat_controller.update(delta);
+	state_machine.physics_update(delta);
 	
 	if(get_top_down_velocity()):
 		last_non_zero_horizontal_velocity = get_horizontal_velocity()

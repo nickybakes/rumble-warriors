@@ -39,12 +39,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
 
-func _process(delta: float) -> void:
+func update(delta: float) -> void:
 	time_in_state += delta
 	state.update(delta)
 
 
-func _physics_process(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	state.physics_update(delta)
 
 

@@ -99,7 +99,6 @@ func update(delta: float) -> void:
 		if(initialWallDragSpeed <= 0):
 			player.animator.setAnimation(Enums.ANIMATION.Climb);
 	elif jumpSpeed > 0:
-		var invertAnimationDirection = false;	
 		if(jumpWarmup > 0):
 			jumpWarmup -= delta;
 			if(jumpWarmup <= 0):
@@ -114,6 +113,8 @@ func update(delta: float) -> void:
 				moveAlongWall(jumpDirection, jumpSpeed, true);
 				if(jumpSpeed <= 0):
 					player.animator.setAnimation(Enums.ANIMATION.Climb);
+					player.animator.setAnimationVar0(0, true);
+					player.animator.setAnimationVar1(0, true);
 	else:
 		player.velocity = Vector3.ZERO;
 		moveAlongWall(player_input, 6);

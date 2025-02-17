@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		#input_buffer.press_and_release_input(Enums.INPUT.Jump);
 	timeTilNewPath -= delta;
 	if(timeTilNewPath <= 0):
-		goalPosition = GameManager.inst.playerStatuses[0].playerController.global_position + Vector3(0, .5, 0);
+		goalPosition = GameManager.inst.playerStatuses.get(1).playerController.global_position + Vector3(0, .5, 0);
 		path = NavManager.inst.shortestPathFull(player.global_position, goalPosition);
 		currentStepInPath = 0;
 		_resetPathTimer();

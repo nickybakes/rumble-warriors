@@ -151,4 +151,4 @@ states/Vault/position = Vector2(7.20001, 211.8)
 states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
 states/Walljump/position = Vector2(-64, 159)
 transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-607, 106)
+graph_offset = Vector2(-709, 150)

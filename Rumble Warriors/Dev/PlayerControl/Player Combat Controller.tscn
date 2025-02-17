@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlh04enwpffet"]
+
+[ext_resource type="Script" path="res://Dev/PlayerControl/PlayerCombatController.gd" id="1_ld0el"]
+
+[node name="Player Combat Controller" type="Node3D"]
+script = ExtResource("1_ld0el")

@@ -52,8 +52,8 @@ func setAnimation(animation : Enums.ANIMATION, dontResetBlends = false):
 				resetBlends(animation);
 				current2DBlend = tree.get("parameters/ClimbJump/blend_position");
 		
-func setAnimationVar0(animVar : float):
-	if(animVar != animationVar0):
+func setAnimationVar0(animVar : float, forceUpdate := false):
+	if(animVar != animationVar0 or forceUpdate):
 		match(currentAnimation):
 			Enums.ANIMATION.IdleRunBlend:
 				tree.set("parameters/IdleRunBlend/blend_position", animVar)
@@ -70,8 +70,8 @@ func setAnimationVar0(animVar : float):
 		
 		animationVar0 = animVar;
 		
-func setAnimationVar1(animVar : float):
-	if(animVar != animationVar1):
+func setAnimationVar1(animVar : float, forceUpdate := false):
+	if(animVar != animationVar1 or forceUpdate):
 		match(currentAnimation):
 			Enums.ANIMATION.ClimbSlide:
 				current2DBlend.y = animVar;
@@ -85,8 +85,8 @@ func setAnimationVar1(animVar : float):
 		animationVar1 = animVar;
 		
 		
-func setAnimationVar2(animVar : float):
-	if(animVar != animationVar2):
+func setAnimationVar2(animVar : float, forceUpdate := false):
+	if(animVar != animationVar2 or forceUpdate):
 		animationVar2 = animVar;
 
 

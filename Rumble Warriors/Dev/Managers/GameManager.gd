@@ -6,31 +6,35 @@ var spawnedLevelAndPlayers := false;
 
 var botDescriptions = {};
 
-var playerStatuses;
-var botStatuses;
+var playerStatuses : Dictionary;
+var botStatuses : Dictionary;
 
-const numBots = 5;
+const numBots = 2;
 
-static var inst;
+static var inst : GameManager;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	inst = self;
+	playerStatuses = {};
+	botStatuses = {};
 	get_tree().get_root().get_node("Lobby").hide()
 	print(Global.instanceId + " Game Manager Spawned with auth:" + str(is_multiplayer_authority()))
 
-func spawn_players():
-	playerStatuses = [];
-	botStatuses = [];
+func addPlayerToList(player : PlayerStatus, id : int) -> void:
+	playerStatuses[id] = player;
 	
+func addBotToList(bot : PlayerStatus, botId : int) -> void:
+	botStatuses[botId] = bot;
+
+func spawn_players():
 	var playerPrefab = load(get_spawnable_scene(1));
 	var numPlayers = 0;
 	for p in Network.playerDescriptions.values():
 		var player : PlayerStatus = playerPrefab.instantiate()
 		add_child(player, true);
-		player.set_authority.rpc(p.id, false, p);
+		player.set_authority.rpc(p.id, -1, p);
 		numPlayers += 1;
-		playerStatuses.push_back(player);
 		
 	for i in numBots:
 		var description = {
@@ -40,8 +44,7 @@ func spawn_players():
 			};
 		var bot : PlayerStatus = playerPrefab.instantiate()
 		add_child(bot, true);
-		bot.set_authority.rpc(1, true, description);
-		botStatuses.push_back(bot);
+		bot.set_authority.rpc(1, i, description);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

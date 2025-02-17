@@ -1,5 +1,7 @@
 extends Node
 
+# This script is for managing networked combat interactions.
+
 var hitSubmissions = [];
 
 # sender, reciever, time, priority
