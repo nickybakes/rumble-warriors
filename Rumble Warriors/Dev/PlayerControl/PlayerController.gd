@@ -47,15 +47,17 @@ var pitch_input := 0.0
 @onready var camera_pitch = $CameraTwist/CameraPitch
 
 var isBot := false;
+var id : int;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-func setup(bot : bool):
-	isBot = bot;
-	if(bot):
+func setup(_bot : bool, _id : int):
+	isBot = _bot;
+	id = _id;
+	if(_bot):
 		input_buffer = InputBufferBot.new();
 		$CameraTwist.queue_free();
 		var attachment = botAttachmentPrefab.instantiate();
@@ -118,8 +120,10 @@ func get_horizontal_velocity() -> Vector3:
 	return Vector3(velocity.x, 0, velocity.z)
 	
 func get_model_forward_direction() -> Vector3:
-	return model.transform.basis.z;
+	return -model.transform.basis.z;
 
+func get_center_position() -> Vector3:
+	return position + Vector3.UP;
 
 func _physics_process(delta: float) -> void:
 	input_buffer.update(delta);

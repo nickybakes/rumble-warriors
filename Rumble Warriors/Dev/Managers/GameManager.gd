@@ -7,9 +7,11 @@ var spawnedLevelAndPlayers := false;
 var botDescriptions = {};
 
 var playerStatuses : Dictionary;
+# This dict of playerStatus should be the same just not including the local client
+var playerStatusesNotLocal : Dictionary;
 var botStatuses : Dictionary;
 
-const numBots = 2;
+const numBots = 0;
 
 static var inst : GameManager;
 
@@ -21,8 +23,10 @@ func _ready():
 	get_tree().get_root().get_node("Lobby").hide()
 	print(Global.instanceId + " Game Manager Spawned with auth:" + str(is_multiplayer_authority()))
 
-func addPlayerToList(player : PlayerStatus, id : int) -> void:
+func addPlayerToList(player : PlayerStatus, id : int, isLocal : bool) -> void:
 	playerStatuses[id] = player;
+	if(!isLocal):
+		playerStatusesNotLocal[id] = player;
 	
 func addBotToList(bot : PlayerStatus, botId : int) -> void:
 	botStatuses[botId] = bot;

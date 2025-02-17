@@ -38,14 +38,16 @@ var botDescription := {};
 func set_authority(_id : int, _botID : int, description : Dictionary) -> void:
 	id = _id;
 	isBot = _botID != -1;
+	var isLocal = false;
 	set_multiplayer_authority(id)
 	if(is_multiplayer_authority()):
 		#print(Global.instanceId + " making CONTROLLER for " + str(id));
 		var player : PlayerController = playerControllerScene.instantiate()
 		playerController = player;
-		playerController.setup(isBot);
+		playerController.setup(isBot, id);
 		add_child(player, true);
 		player.animator.setPlayerCustomization(description.customization);
+		isLocal = true;
 		if(isBot):
 			var header = player.get_node("Bot Attachment/Header") as PlayerHeader;
 			header.setName(description.displayName)
@@ -60,7 +62,7 @@ func set_authority(_id : int, _botID : int, description : Dictionary) -> void:
 			player.header.setAvatar(id);
 		
 	if(!isBot):
-		GameManager.inst.addPlayerToList(self, id);
+		GameManager.inst.addPlayerToList(self, id, isLocal);
 	else:
 		GameManager.inst.addBotToList(self, _botID);
 	
@@ -74,7 +76,6 @@ func teleport(new_position : Vector3) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -94,3 +95,6 @@ func _process(delta):
 			playerDummy.animator.setAnimationVar1(animationVar1);
 			playerDummy.animator.setAnimationVar2(animationVar2);
 	pass
+
+func get_center_position() -> Vector3:
+	return positionNetworked + Vector3.UP;
