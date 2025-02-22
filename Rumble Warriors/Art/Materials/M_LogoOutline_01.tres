@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctomsb2x1iuly"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_LogoOutline_01.gdshader" id="1_ef516"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ef516")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/timeScale = 1.04
+shader_parameter/wiggleScale = 0.06
+shader_parameter/wiggleWaveScale = 14.495

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cskvw3l75xx4g"]
+
+[ext_resource type="Script" path="res://Dev/Auto/AdvanceSteppedTime.gd" id="1_gvqox"]
+[ext_resource type="ArrayMesh" uid="uid://cwxydd4b5y65d" path="res://Art/Models/SM_LogoText_01.obj" id="3_e3qat"]
+[ext_resource type="ArrayMesh" uid="uid://bo1gu2q066pfc" path="res://Art/Models/SM_Logo_01.obj" id="4_u6qun"]
+[ext_resource type="Material" uid="uid://btt40k25ahes2" path="res://Art/Materials/M_LogoText_01.tres" id="5_sjmpe"]
+
+[node name="Logo" type="Node3D"]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_gvqox")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_u6qun")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_e3qat")
+surface_material_override/0 = ExtResource("5_sjmpe")

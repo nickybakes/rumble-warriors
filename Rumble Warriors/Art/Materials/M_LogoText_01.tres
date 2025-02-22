@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://btt40k25ahes2"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_LogoText_01.gdshader" id="1_4exhw"]
+[ext_resource type="Texture2D" uid="uid://cax426imnhivm" path="res://Art/Textures/T_LogoText_01.png" id="2_6or0v"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_4exhw")
+shader_parameter/textTexture = ExtResource("2_6or0v")

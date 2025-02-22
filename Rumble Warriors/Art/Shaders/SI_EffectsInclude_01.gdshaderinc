@@ -48,3 +48,10 @@ float fresnel(float amount, vec3 normal, vec3 view)
 {
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
 }
+
+vec3 deltaWiggle2D(vec3 vertex, float time, float wiggleScale, float waveScale){
+	vec3 delta = vec3(0.0);
+	delta.z += timeSin(vertex.x * 7.0 + vertex.y, time, waveScale) * wiggleScale;
+	delta.y += timeCos(vertex.y * 7.0, time + delta.x, waveScale * .75) * wiggleScale;
+	return delta;
+}
