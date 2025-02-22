@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ce468d1av0rsk"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_RingFire_01.gdshader" id="1_n5hpk"]
+[ext_resource type="Texture2D" uid="uid://ce31k70ac7upn" path="res://Art/Textures/T_FireNoise_03.png" id="2_ysmnk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_n5hpk")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.205
+shader_parameter/depthPower = 0.625
+shader_parameter/textureScale = 0.08
+shader_parameter/distortAmount = 0.6
+shader_parameter/timeScale = 6.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("2_ysmnk")

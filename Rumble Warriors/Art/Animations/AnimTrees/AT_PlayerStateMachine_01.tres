@@ -1,4 +1,6 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=30 format=3 uid="uid://ccw7nkpjotc8c"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=31 format=3 uid="uid://ccw7nkpjotc8c"]
+
+[ext_resource type="AnimationNodeStateMachine" uid="uid://s7o66ebxvy8u" path="res://Art/Animations/AnimTrees/AT_PlayerAttackSM_01.tres" id="1_plbwn"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xw3ux"]
 animation = &"A_ClimbingUp_01loop"
@@ -127,6 +129,8 @@ advance_mode = 2
 
 [resource]
 allow_transition_to_self = true
+"states/Attack State Machine/node" = ExtResource("1_plbwn")
+"states/Attack State Machine/position" = Vector2(-69.6, 383)
 states/Climb/node = SubResource("AnimationNodeBlendSpace2D_rx076")
 states/Climb/position = Vector2(-292.64, 261.8)
 states/ClimbJump/node = SubResource("AnimationNodeBlendSpace2D_eb2gq")
@@ -151,4 +155,4 @@ states/Vault/position = Vector2(7.20001, 211.8)
 states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
 states/Walljump/position = Vector2(-64, 159)
 transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-709, 150)
+graph_offset = Vector2(-597, 146)

@@ -15,11 +15,11 @@ func _init(playerController : PlayerController) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
 	if(input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
-		getTargetsInField(5, 0, 0);
+		getTargetsInField(25, 0, 0);
 	pass
 
 
-func getTargetsInField(range : float, angleThresholdH : float, angleThresholdV : float) -> Dictionary:
+func getTargetsInField(squaredRange : float, angleThresholdH : float, angleThresholdV : float) -> Dictionary:
 	var targets = {};
 	
 	# get all current playerStatuses except for the current one.
@@ -31,21 +31,21 @@ func getTargetsInField(range : float, angleThresholdH : float, angleThresholdV :
 		playerIds.push_back(id);
 		playerPositions.push_back((playerStatuses[id] as PlayerStatus).get_center_position());
 	
-	checkWhichTargetsAreInField(playerIds, playerPositions, range, angleThresholdH, angleThresholdV);
+	checkWhichTargetsAreInField(playerIds, playerPositions, squaredRange, angleThresholdH, angleThresholdV);
 	
 	return targets;
 	pass;
 
 
-func checkWhichTargetsAreInField(ids : Array, positions : Array, range : float, angleThresholdH : float, angleThresholdV : float) -> Array:
+func checkWhichTargetsAreInField(ids : Array, positions : Array, squaredRange : float, angleThresholdH : float, angleThresholdV : float) -> Array:
 	var targets = [];
 	var myPosition = player.get_center_position();
 	for position in positions:
-		var data = isTargetInField(myPosition, position, range, angleThresholdH, angleThresholdV);
-		print(data.angle);
+		var data = isTargetInField(myPosition, position, squaredRange, angleThresholdH, angleThresholdV);
+		print(data);
 	return targets;
 	
-func isTargetInField(myPosition : Vector3, targetPosition : Vector3, range : float, angleThresholdH : float, angleThresholdV : float) -> R_TargetInFieldData:
+func isTargetInField(myPosition : Vector3, targetPosition : Vector3, squaredRange : float, angleThresholdH : float, angleThresholdV : float) -> R_TargetInFieldData:
 	var data = R_TargetInFieldData.new();
 	var myPositionH = Vector2(myPosition.x, myPosition.z);
 	var targetPositionH = Vector2(targetPosition.x, targetPosition.z);
@@ -55,4 +55,6 @@ func isTargetInField(myPosition : Vector3, targetPosition : Vector3, range : flo
 	var angleV = 1 - (targetPosition - myPosition).normalized().y;
 	
 	data.angle = (angleH + angleV) * .5;
+	data.squaredDistance = myPosition.distance_squared_to(targetPosition);
+	data.inField = angleH > angleThresholdH and angleV > angleThresholdV and data.squaredDistance < squaredRange;
 	return data;

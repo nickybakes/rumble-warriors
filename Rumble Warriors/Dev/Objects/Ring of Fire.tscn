@@ -1,0 +1,311 @@
+[gd_scene load_steps=24 format=3 uid="uid://dt3afwmwd34kt"]
+
+[ext_resource type="Script" path="res://Dev/Objects/RingOfFire.gd" id="1_gbfgq"]
+[ext_resource type="PackedScene" uid="uid://dj1w377o2ju8o" path="res://Art/Models/VM_Ring_01.glb" id="2_bca52"]
+[ext_resource type="Material" uid="uid://ce468d1av0rsk" path="res://Art/Materials/M_RingOfFire_01.tres" id="3_4bcu5"]
+[ext_resource type="PackedScene" uid="uid://ur4m0mmc3hh8" path="res://Art/Particles/P_Ember_01.tscn" id="4_w1ll5"]
+[ext_resource type="Shader" path="res://Art/Shaders/S_Ember_01.gdshader" id="5_wrj5m"]
+[ext_resource type="Texture2D" uid="uid://ce31k70ac7upn" path="res://Art/Textures/T_FireNoise_03.png" id="6_whf0h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6kir"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="QuadMesh" id="QuadMesh_a2sx2"]
+size = Vector2(1.855, 3.35)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_th00n"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbsg1"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqejs"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcede"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnk7s"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhmlj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h02p4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fw2pn"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1s6w"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0xyb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xxpyo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_age0i"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5ng2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dd1ae"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pws2w"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[node name="Ring of Fire" type="Node3D"]
+transform = Transform3D(7.9, 0, 0, 0, 1, 0, 0, 0, 7.9, 0, 0, 0)
+script = ExtResource("1_gbfgq")
+
+[node name="VM_Ring" parent="." instance=ExtResource("2_bca52")]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="VM_Ring_01" parent="VM_Ring" index="0"]
+surface_material_override/0 = ExtResource("3_4bcu5")
+
+[node name="P_Ember_01" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 1, 0, 0)
+material_override = SubResource("ShaderMaterial_k6kir")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_02" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.092388, 0, -0.0382683, 0, 1, 0, 0.0382683, 0, 0.092388, 0.92388, 0, 0.382683)
+material_override = SubResource("ShaderMaterial_th00n")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_03" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0707107, 0, -0.0707107, 0, 1, 0, 0.0707107, 0, 0.0707107, 0.707107, 0, 0.707107)
+material_override = SubResource("ShaderMaterial_wbsg1")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_04" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0382683, 0, -0.092388, 0, 1, 0, 0.092388, 0, 0.0382683, 0.382683, 0, 0.92388)
+material_override = SubResource("ShaderMaterial_wqejs")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_05" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 1, 0, 0.1, 0, -4.37114e-09, 6.12303e-17, 0, 1)
+material_override = SubResource("ShaderMaterial_dcede")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_06" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0382683, 0, -0.092388, 0, 1, 0, 0.092388, 0, -0.0382683, -0.382683, 0, 0.92388)
+material_override = SubResource("ShaderMaterial_dnk7s")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_07" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0707107, 0, -0.0707107, 0, 1, 0, 0.0707107, 0, -0.0707107, -0.707107, 0, 0.707107)
+material_override = SubResource("ShaderMaterial_jhmlj")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_08" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.092388, 0, -0.0382684, 0, 1, 0, 0.0382684, 0, -0.092388, -0.92388, 0, 0.382683)
+material_override = SubResource("ShaderMaterial_h02p4")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_09" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.1, 0, 8.74228e-09, 0, 1, 0, -8.74228e-09, 0, -0.1, -1, 0, 1.22461e-16)
+material_override = SubResource("ShaderMaterial_fw2pn")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_10" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.092388, 0, 0.0382683, 0, 1, 0, -0.0382683, 0, -0.092388, -0.92388, 0, -0.382683)
+material_override = SubResource("ShaderMaterial_v1s6w")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_11" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0707107, 0, 0.0707107, 0, 1, 0, -0.0707107, 0, -0.0707107, -0.707107, 0, -0.707107)
+material_override = SubResource("ShaderMaterial_x0xyb")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_12" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0382684, 0, 0.092388, 0, 1, 0, -0.092388, 0, -0.0382684, -0.382683, 0, -0.92388)
+material_override = SubResource("ShaderMaterial_xxpyo")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_13" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(1.19249e-09, 0, 0.1, 0, 1, 0, -0.1, 0, 1.19249e-09, -1.83691e-16, 0, -1)
+material_override = SubResource("ShaderMaterial_age0i")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_14" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0382684, 0, 0.0923879, 0, 1, 0, -0.0923879, 0, 0.0382684, 0.382683, 0, -0.92388)
+material_override = SubResource("ShaderMaterial_v5ng2")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_15" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0707107, 0, 0.0707107, 0, 1, 0, -0.0707107, 0, 0.0707107, 0.707107, 0, -0.707107)
+material_override = SubResource("ShaderMaterial_dd1ae")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[node name="P_Ember_16" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.092388, 0, 0.0382683, 0, 1, 0, -0.0382683, 0, 0.092388, 0.92388, 0, -0.382683)
+material_override = SubResource("ShaderMaterial_pws2w")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+
+[editable path="VM_Ring"]

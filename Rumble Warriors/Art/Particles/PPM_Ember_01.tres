@@ -1,0 +1,14 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://e1oewjk1afay"]
+
+[sub_resource type="Gradient" id="Gradient_j1yq4"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ynyex"]
+gradient = SubResource("Gradient_j1yq4")
+
+[resource]
+particle_flag_rotate_y = true
+emission_shape_offset = Vector3(0, 1.88, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.415, 0.675, 1.955)
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ynyex")

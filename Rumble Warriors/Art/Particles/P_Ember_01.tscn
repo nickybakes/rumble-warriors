@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://ur4m0mmc3hh8"]
+
+[ext_resource type="Material" uid="uid://c6oqy1yepckvl" path="res://Art/Materials/M_Ember_01.tres" id="1_ulqhl"]
+[ext_resource type="Material" uid="uid://e1oewjk1afay" path="res://Art/Particles/PPM_Ember_01.tres" id="2_garkh"]
+[ext_resource type="Script" path="res://Dev/Objects/RingEmberControl.gd" id="3_3niqh"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_a2sx2"]
+size = Vector2(1.855, 3.35)
+
+[node name="P_Ember_01" type="GPUParticles3D"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = ExtResource("1_ulqhl")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("2_garkh")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("3_3niqh")

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c6oqy1yepckvl"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/S_Ember_01.gdshader" id="1_ylxvm"]
+[ext_resource type="Texture2D" uid="uid://ce31k70ac7upn" path="res://Art/Textures/T_FireNoise_03.png" id="2_f0ph1"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_ylxvm")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fireNoiseTexture = ExtResource("2_f0ph1")
