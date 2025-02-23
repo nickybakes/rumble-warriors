@@ -19,7 +19,5 @@ func _process(delta):
 	if(clock > .15):
 		if(currentClock >= 100.0):
 			currentClock = 0.0;
-			if not Engine.is_editor_hint():
-				get_tree().quit();
 		RenderingServer.global_shader_parameter_set("steppedTime", currentClock + clock);
 		clock = 0.0;

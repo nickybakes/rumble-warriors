@@ -125,12 +125,13 @@ holster={
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/use_debanding=true
 
 [shader_globals]
 
 steppedTime={
 "type": "float",
-"value": 0.0
+"value": 22.735
 }
 ringCenter={
 "type": "vec2",

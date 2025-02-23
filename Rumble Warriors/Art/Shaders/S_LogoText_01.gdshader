@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, unshaded, cull_disabled;
+render_mode blend_mix, unshaded, cull_back;
 #include "SI_EffectsInclude_01.gdshaderinc"
 
 global uniform float steppedTime;
