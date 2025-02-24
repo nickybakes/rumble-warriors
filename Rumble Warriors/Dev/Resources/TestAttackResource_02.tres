@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="R_Attack" load_steps=2 format=3 uid="uid://deq3h0tsx6nv6"]
+
+[ext_resource type="Script" path="res://Dev/Resources/R_Attack.gd" id="1_bb63y"]
+
+[resource]
+script = ExtResource("1_bb63y")
+inField = false

@@ -48,6 +48,7 @@ void fragment() {
 	//ALBEDO = vec3(distortSin);
 	float fadeAway = saturate(fadeAwayDistance - abs(VERTEX.z));
 	ALPHA = saturate(1.0 - smoothstep(emberMask - noiseSample - depth - fadeAway, 0.1, 1.0));
+	ALPHA_SCISSOR_THRESHOLD = .1;
 	//ALBEDO = vec3(emberMask);
 
 }

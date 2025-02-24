@@ -8,6 +8,12 @@ var currentRadius : float = 1;
 @export var CreateEmberParticles: bool:
 	set(value):
 		create_ember_particles();
+		
+@export var DeleteEmberParticles: bool:
+	set(value):
+		delete_ember_particles();
+		
+@export var numParticles : int = 32;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,8 +45,6 @@ func delete_ember_particles():
 
 func create_ember_particles():
 	delete_ember_particles();
-	
-	const numParticles = 16;
 	
 	var emberScene = load("res://Art/Particles/P_Ember_01.tscn") as PackedScene;
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dt3afwmwd34kt"]
+[gd_scene load_steps=42 format=3 uid="uid://dt3afwmwd34kt"]
 
 [ext_resource type="Script" path="res://Dev/Objects/RingOfFire.gd" id="1_gbfgq"]
 [ext_resource type="PackedScene" uid="uid://dj1w377o2ju8o" path="res://Art/Models/VM_Ring_01.glb" id="2_bca52"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ur4m0mmc3hh8" path="res://Art/Particles/P_Ember_01.tscn" id="4_w1ll5"]
 [ext_resource type="Shader" path="res://Art/Shaders/S_Ember_01.gdshader" id="5_wrj5m"]
 [ext_resource type="Texture2D" uid="uid://ce31k70ac7upn" path="res://Art/Textures/T_FireNoise_03.png" id="6_whf0h"]
+[ext_resource type="Material" uid="uid://e1oewjk1afay" path="res://Art/Particles/PPM_Ember_01.tres" id="7_87xbx"]
+[ext_resource type="Script" path="res://Dev/Objects/RingEmberControl.gd" id="8_bcy6c"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6kir"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xbdj"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -17,13 +19,13 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="QuadMesh" id="QuadMesh_a2sx2"]
 size = Vector2(1.855, 3.35)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_th00n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oys6d"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -33,10 +35,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbsg1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fncp0"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -46,10 +48,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqejs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ronux"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -59,10 +61,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcede"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qer4f"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -72,10 +74,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnk7s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_laybw"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -85,10 +87,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhmlj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdsg3"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -98,10 +100,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h02p4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1smd"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -111,10 +113,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fw2pn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ieo02"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -124,10 +126,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1s6w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17guf"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -137,10 +139,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0xyb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpf6v"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -150,10 +152,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xxpyo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gs4m2"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -163,10 +165,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_age0i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6pd0"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -176,10 +178,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5ng2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ouvoi"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -189,10 +191,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dd1ae"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qyht2"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -202,10 +204,10 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pws2w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uaj08"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
@@ -215,7 +217,215 @@ shader_parameter/depthMultiply = 0.225
 shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
-shader_parameter/fadeAwayDistance = 4.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sg64u"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1b4w1"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0oyf"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fkv7"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mba4e"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_msy6o"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbl1h"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxmht"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6e6mv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_einy8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4bh1"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1cfl"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7h1m1"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r55ic"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aejbe"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbits"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_wrj5m")
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/depthMultiply = 0.225
+shader_parameter/depthPower = 0.815
+shader_parameter/textureScale = 0.09
+shader_parameter/distortAmount = 1.0
+shader_parameter/fadeAwayDistance = 3.5
 shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [node name="Ring of Fire" type="Node3D"]
@@ -228,84 +438,484 @@ transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 1, 0, 0, 0)
 [node name="VM_Ring_01" parent="VM_Ring" index="0"]
 surface_material_override/0 = ExtResource("3_4bcu5")
 
-[node name="P_Ember_01" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_01" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 1, 0, 0)
-material_override = SubResource("ShaderMaterial_k6kir")
+material_override = SubResource("ShaderMaterial_6xbdj")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_02" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_02" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0980786, 0, -0.019509, 0, 1, 0, 0.019509, 0, 0.0980786, 0.980786, 0, 0.19509)
+material_override = SubResource("ShaderMaterial_oys6d")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_03" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(0.092388, 0, -0.0382683, 0, 1, 0, 0.0382683, 0, 0.092388, 0.92388, 0, 0.382683)
-material_override = SubResource("ShaderMaterial_th00n")
+material_override = SubResource("ShaderMaterial_fncp0")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_03" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_04" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0831471, 0, -0.0555571, 0, 1, 0, 0.0555571, 0, 0.0831471, 0.83147, 0, 0.555571)
+material_override = SubResource("ShaderMaterial_ronux")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_05" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(0.0707107, 0, -0.0707107, 0, 1, 0, 0.0707107, 0, 0.0707107, 0.707107, 0, 0.707107)
-material_override = SubResource("ShaderMaterial_wbsg1")
+material_override = SubResource("ShaderMaterial_qer4f")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_04" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_06" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0555571, 0, -0.0831471, 0, 1, 0, 0.0831471, 0, 0.0555571, 0.555571, 0, 0.83147)
+material_override = SubResource("ShaderMaterial_laybw")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_07" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(0.0382683, 0, -0.092388, 0, 1, 0, 0.092388, 0, 0.0382683, 0.382683, 0, 0.92388)
-material_override = SubResource("ShaderMaterial_wqejs")
+material_override = SubResource("ShaderMaterial_vdsg3")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_05" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_08" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.019509, 0, -0.0980786, 0, 1, 0, 0.0980786, 0, 0.019509, 0.19509, 0, 0.980786)
+material_override = SubResource("ShaderMaterial_e1smd")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_09" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 1, 0, 0.1, 0, -4.37114e-09, 6.12303e-17, 0, 1)
-material_override = SubResource("ShaderMaterial_dcede")
+material_override = SubResource("ShaderMaterial_ieo02")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_06" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_10" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.019509, 0, -0.0980786, 0, 1, 0, 0.0980786, 0, -0.019509, -0.19509, 0, 0.980786)
+material_override = SubResource("ShaderMaterial_17guf")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_11" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.0382683, 0, -0.092388, 0, 1, 0, 0.092388, 0, -0.0382683, -0.382683, 0, 0.92388)
-material_override = SubResource("ShaderMaterial_dnk7s")
+material_override = SubResource("ShaderMaterial_dpf6v")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_07" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_12" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0555571, 0, -0.0831471, 0, 1, 0, 0.0831471, 0, -0.0555571, -0.555571, 0, 0.83147)
+material_override = SubResource("ShaderMaterial_gs4m2")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_13" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.0707107, 0, -0.0707107, 0, 1, 0, 0.0707107, 0, -0.0707107, -0.707107, 0, 0.707107)
-material_override = SubResource("ShaderMaterial_jhmlj")
+material_override = SubResource("ShaderMaterial_h6pd0")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_08" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_14" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0831471, 0, -0.0555571, 0, 1, 0, 0.0555571, 0, -0.0831471, -0.83147, 0, 0.555571)
+material_override = SubResource("ShaderMaterial_ouvoi")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_15" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.092388, 0, -0.0382684, 0, 1, 0, 0.0382684, 0, -0.092388, -0.92388, 0, 0.382683)
-material_override = SubResource("ShaderMaterial_h02p4")
+material_override = SubResource("ShaderMaterial_qyht2")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_09" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_16" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0980786, 0, -0.019509, 0, 1, 0, 0.019509, 0, -0.0980786, -0.980786, 0, 0.19509)
+material_override = SubResource("ShaderMaterial_uaj08")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_17" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.1, 0, 8.74228e-09, 0, 1, 0, -8.74228e-09, 0, -0.1, -1, 0, 1.22461e-16)
-material_override = SubResource("ShaderMaterial_fw2pn")
+material_override = SubResource("ShaderMaterial_sg64u")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_10" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_18" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0980786, 0, 0.019509, 0, 1, 0, -0.019509, 0, -0.0980786, -0.980786, 0, -0.19509)
+material_override = SubResource("ShaderMaterial_1b4w1")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_19" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.092388, 0, 0.0382683, 0, 1, 0, -0.0382683, 0, -0.092388, -0.92388, 0, -0.382683)
-material_override = SubResource("ShaderMaterial_v1s6w")
+material_override = SubResource("ShaderMaterial_v0oyf")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_11" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_20" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0831471, 0, 0.0555571, 0, 1, 0, -0.0555571, 0, -0.0831471, -0.83147, 0, -0.555571)
+material_override = SubResource("ShaderMaterial_5fkv7")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_21" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.0707107, 0, 0.0707107, 0, 1, 0, -0.0707107, 0, -0.0707107, -0.707107, 0, -0.707107)
-material_override = SubResource("ShaderMaterial_x0xyb")
+material_override = SubResource("ShaderMaterial_mba4e")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_12" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_22" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.0555571, 0, 0.0831471, 0, 1, 0, -0.0831471, 0, -0.0555571, -0.555571, 0, -0.83147)
+material_override = SubResource("ShaderMaterial_msy6o")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_23" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(-0.0382684, 0, 0.092388, 0, 1, 0, -0.092388, 0, -0.0382684, -0.382683, 0, -0.92388)
-material_override = SubResource("ShaderMaterial_xxpyo")
+material_override = SubResource("ShaderMaterial_dbl1h")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_13" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_24" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(-0.019509, 0, 0.0980786, 0, 1, 0, -0.0980786, 0, -0.019509, -0.19509, 0, -0.980786)
+material_override = SubResource("ShaderMaterial_sxmht")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_25" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(1.19249e-09, 0, 0.1, 0, 1, 0, -0.1, 0, 1.19249e-09, -1.83691e-16, 0, -1)
-material_override = SubResource("ShaderMaterial_age0i")
+material_override = SubResource("ShaderMaterial_6e6mv")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_14" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_26" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.019509, 0, 0.0980786, 0, 1, 0, -0.0980786, 0, 0.019509, 0.19509, 0, -0.980786)
+material_override = SubResource("ShaderMaterial_einy8")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_27" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(0.0382684, 0, 0.0923879, 0, 1, 0, -0.0923879, 0, 0.0382684, 0.382683, 0, -0.92388)
-material_override = SubResource("ShaderMaterial_v5ng2")
+material_override = SubResource("ShaderMaterial_j4bh1")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_15" parent="." instance=ExtResource("4_w1ll5")]
+[node name="P_Ember_28" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0555571, 0, 0.0831471, 0, 1, 0, -0.0831471, 0, 0.0555571, 0.555571, 0, -0.83147)
+material_override = SubResource("ShaderMaterial_b1cfl")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_29" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
 transform = Transform3D(0.0707107, 0, 0.0707107, 0, 1, 0, -0.0707107, 0, 0.0707107, 0.707107, 0, -0.707107)
-material_override = SubResource("ShaderMaterial_dd1ae")
+material_override = SubResource("ShaderMaterial_7h1m1")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
-[node name="P_Ember_16" parent="." instance=ExtResource("4_w1ll5")]
-transform = Transform3D(0.092388, 0, 0.0382683, 0, 1, 0, -0.0382683, 0, 0.092388, 0.92388, 0, -0.382683)
-material_override = SubResource("ShaderMaterial_pws2w")
+[node name="P_Ember_30" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0831471, 0, 0.0555571, 0, 1, 0, -0.0555571, 0, 0.0831471, 0.83147, 0, -0.555571)
+material_override = SubResource("ShaderMaterial_r55ic")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
 draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_31" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.092388, 0, 0.0382683, 0, 1, 0, -0.0382683, 0, 0.092388, 0.92388, 0, -0.382683)
+material_override = SubResource("ShaderMaterial_aejbe")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
+
+[node name="P_Ember_32" type="GPUParticles3D" parent="." instance=ExtResource("4_w1ll5")]
+transform = Transform3D(0.0980786, 0, 0.019509, 0, 1, 0, -0.019509, 0, 0.0980786, 0.980786, 0, -0.19509)
+material_override = SubResource("ShaderMaterial_cbits")
+cast_shadow = 0
+gi_mode = 0
+amount = 6
+lifetime = 1.31
+fixed_fps = 4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-2.13464, -1.32192, -2.51363, 4.26928, 5.6995, 5.02725)
+process_material = ExtResource("7_87xbx")
+draw_pass_1 = SubResource("QuadMesh_a2sx2")
+script = ExtResource("8_bcy6c")
 
 [editable path="VM_Ring"]
