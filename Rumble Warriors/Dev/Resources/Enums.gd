@@ -27,6 +27,16 @@ enum ANIMATION
 	ClimbJump,
 }
 
+enum ATTACK
+{
+	BasicStrike_01
+}
+
+enum ATTACK_ANIMATION
+{
+	BasicStrike_01
+}
+
 enum ANIM_SM
 {
 	Platforming,
