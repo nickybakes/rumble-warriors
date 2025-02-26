@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="R_Attack" load_steps=2 format=3 uid="uid://df2lua851vtpd"]
+[gd_resource type="Resource" script_class="R_Attack" load_steps=2 format=3 uid="uid://xrq634j1yg40"]
 
-[ext_resource type="Script" path="res://Dev/Resources/R_Attack.gd" id="1_r3uvn"]
+[ext_resource type="Script" path="res://Dev/Resources/R_Attack.gd" id="1_6aqt6"]
 
 [resource]
-script = ExtResource("1_r3uvn")
+script = ExtResource("1_6aqt6")
 range = 3.0
 angleThresholdHorizontal = 0.5
 angleThresholdVertical = 0.5

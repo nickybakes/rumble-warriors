@@ -1,13 +1,20 @@
 extends Node
+class_name CombatManager
+
+## All Attack resources to be loaded into the game.
+@export var attacks := [] as Array[R_Attack];
 
 # This script is for managing networked combat interactions.
 
+
 var hitSubmissions = [];
 
-# sender, reciever, time, priority
+
+static var inst : CombatManager;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	inst = self;
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
