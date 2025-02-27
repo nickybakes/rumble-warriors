@@ -15,12 +15,16 @@ const numBots = 0;
 
 static var inst : GameManager;
 
+@onready var combatManager = preload("res://Dev/Managers/Combat Manager.tscn");
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	inst = self;
 	playerStatuses = {};
 	botStatuses = {};
 	get_tree().get_root().get_node("Lobby").hide()
+	var cm = combatManager.instantiate();
+	add_child(cm, true);
 	print(Global.instanceId + " Game Manager Spawned with auth:" + str(is_multiplayer_authority()))
 
 func addPlayerToList(player : PlayerStatus, id : int, isLocal : bool) -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://jhdlqsokif5o"]
+[gd_scene load_steps=9 format=3 uid="uid://jhdlqsokif5o"]
 
 [ext_resource type="Script" path="res://Dev/Managers/LobbyManager.gd" id="1"]
 [ext_resource type="Script" path="res://Dev/UI/PlayerList.gd" id="2_wih6l"]
 [ext_resource type="Script" path="res://Dev/UI/PlayerCustomizationPanel.gd" id="3_6dll3"]
+[ext_resource type="Script" path="res://Dev/Debug/DebugAutoStartGame.gd" id="4_x3ag4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmcyg"]
 font_size = 32
@@ -310,6 +311,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
+
+[node name="DebugAutoStartGame" type="Node" parent="."]
+script = ExtResource("4_x3ag4")
 
 [connection signal="pressed" from="Inside Lobby Panel/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Inside Lobby Panel/Leave Lobby" to="." method="_on_leave_lobby_pressed"]
