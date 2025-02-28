@@ -30,6 +30,9 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to(Enums.STATE.JumpFall)
 		return
 		
+	if(player.combat_controller.checkInputs(delta)):
+		return
+		
 	if not player.grounded:
 		state_machine.transition_to(Enums.STATE.JumpFall)
 		return

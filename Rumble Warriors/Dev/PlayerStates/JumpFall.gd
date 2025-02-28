@@ -26,6 +26,9 @@ func update(delta: float) -> void:
 	
 	var player_input = player.get_requested_move_direction()
 	
+	if(player.combat_controller.checkInputs(delta)):
+		return
+	
 	if(player.grounded and player_input):
 		state_machine.transition_to(Enums.STATE.Run)
 		return

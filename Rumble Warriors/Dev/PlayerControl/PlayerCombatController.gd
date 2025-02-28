@@ -14,10 +14,25 @@ func _init(playerController : PlayerController) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
-	if(input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
-		getTargetsInField(25, 0, 0, 0);
 	pass
 
+
+func checkInputs(delta: float) -> bool:
+	if(input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
+		if(player.grounded):
+			print("ground strike");
+			getTargetsInField(25, 0, 0, 0);
+		else:
+			print("elbow drop");
+		return true;
+	if(input_buffer.is_action_just_pressed(Enums.INPUT.Grab)):
+		if(player.grounded):
+			print("ground grab");
+			getTargetsInField(25, 0, 0, 0);
+		else:
+			print("slam");
+		return true;
+	return false;
 
 func getTargetsInField(squaredRange : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> Dictionary:
 	var targets = {};
