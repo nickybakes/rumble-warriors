@@ -32,3 +32,6 @@ var squaredRange = 0.0;
 
 func _init() -> void:
 	squaredRange = pow(range, 2);
+	
+func total_time() -> float:
+	return windupTime + recoveryTime;

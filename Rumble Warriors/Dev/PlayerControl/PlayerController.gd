@@ -40,11 +40,11 @@ var gamepad_sensitivity := .05
 var twist_input := 0.0
 var pitch_input := 0.0
 
-@onready var model = $Model
-@onready var state_machine: StateMachine = $StateMachine
-@onready var animator = $"Model/ModelPitch/Player Animator" as PlayerAnimator
-@onready var camera_twist = $CameraTwist
-@onready var camera_pitch = $CameraTwist/CameraPitch
+var model: Node3D;
+var state_machine: StateMachine;
+var animator : PlayerAnimator;
+var camera_twist: Node3D;
+var camera_pitch: Node3D;
 
 var isBot := false;
 var id : int;
@@ -65,6 +65,12 @@ func setup(_bot : bool, _id : int):
 	else:
 		input_buffer = InputBufferPlayer.new();
 		
+	camera_twist = $CameraTwist;
+	camera_pitch = $CameraTwist/CameraPitch;
+	
+	model = $Model;
+	state_machine = $StateMachine;
+	animator = $"Model/ModelPitch/Player Animator";
 	combat_controller = PlayerCombatController.new(self);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -127,7 +133,6 @@ func get_center_position() -> Vector3:
 
 func _physics_process(delta: float) -> void:
 	input_buffer.update(delta);
-	combat_controller.update(delta);
 	state_machine.physics_update(delta);
 	
 	if(get_top_down_velocity()):

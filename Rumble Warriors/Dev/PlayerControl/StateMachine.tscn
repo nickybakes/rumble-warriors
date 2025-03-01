@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b33ledva3almy"]
+[gd_scene load_steps=12 format=3 uid="uid://b33ledva3almy"]
 
 [ext_resource type="Script" path="res://Dev/PlayerStates/StateMachine.gd" id="1_m6w0o"]
 [ext_resource type="Script" path="res://Dev/PlayerStates/Idle.gd" id="2_4cfl0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Dev/PlayerStates/Vault.gd" id="8_m7pa5"]
 [ext_resource type="Script" path="res://Dev/PlayerStates/Climb.gd" id="9_n5t6b"]
 [ext_resource type="Script" path="res://Dev/PlayerStates/ClimbFromGround.gd" id="10_c6ilq"]
+[ext_resource type="Script" path="res://Dev/PlayerStates/Attack.gd" id="11_rwh64"]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource("1_m6w0o")
@@ -41,3 +42,6 @@ script = ExtResource("9_n5t6b")
 
 [node name="ClimbFromGround" type="Node" parent="."]
 script = ExtResource("10_c6ilq")
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("11_rwh64")

@@ -25,6 +25,10 @@ InputBuffer="res://Dev/Auto/inputbuffer.gd"
 
 file_logging/enable_file_logging=true
 
+[editor]
+
+run/main_run_args="--player=0"
+
 [input]
 
 move_forward={

@@ -8,8 +8,8 @@ advance_mode = 2
 
 [resource]
 allow_transition_to_self = true
-states/A_Attack_Strike_01/node = SubResource("AnimationNodeAnimation_oyu4s")
-states/A_Attack_Strike_01/position = Vector2(-41, 248)
-states/Start/position = Vector2(-235.4, 148)
-transitions = ["Start", "A_Attack_Strike_01", SubResource("AnimationNodeStateMachineTransition_yuge3")]
+states/BasicStrike_01/node = SubResource("AnimationNodeAnimation_oyu4s")
+states/BasicStrike_01/position = Vector2(-41, 248)
+states/Start/position = Vector2(-246.4, 153)
+transitions = ["Start", "BasicStrike_01", SubResource("AnimationNodeStateMachineTransition_yuge3")]
 graph_offset = Vector2(-578, 26)

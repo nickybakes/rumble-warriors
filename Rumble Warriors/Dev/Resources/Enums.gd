@@ -9,7 +9,8 @@ enum STATE
 	Walljump,
 	Vault,
 	Climb,
-	ClimbFromGround
+	ClimbFromGround,
+	Attack
 }
 
 enum ANIMATION
@@ -25,6 +26,7 @@ enum ANIMATION
 	Climb,
 	ClimbSlide,
 	ClimbJump,
+	Attack,
 }
 
 enum ATTACK

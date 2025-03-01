@@ -15,7 +15,7 @@ const numBots = 0;
 
 static var inst : GameManager;
 
-@onready var combatManager = preload("res://Dev/Managers/Combat Manager.tscn");
+@onready var combatManager = preload("res://Dev/Managers/Combat Manager.tscn") as PackedScene;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

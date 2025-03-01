@@ -1,37 +1,50 @@
 class_name PlayerCombatController;
 
 var player: PlayerController;
+var animator : PlayerAnimator;
 var status: PlayerStatus;
 var state_machine: StateMachine;
 var input_buffer: InputBuffer;
+
+var currentAttack : R_Attack;
 
 
 # Called when the node enters the scene tree for the first time.
 func _init(playerController : PlayerController) -> void:
 	player = playerController as PlayerController;
+	animator = playerController.animator as PlayerAnimator;
 	state_machine = player.state_machine as StateMachine;
 	input_buffer = player.input_buffer as InputBuffer;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
+	if(state_machine.time_in_state > currentAttack.total_time()):
+		if(player.grounded):
+			state_machine.transition_to(Enums.STATE.Idle);
+		else:
+			state_machine.transition_to(Enums.STATE.JumpFall);
+	
 	pass
 
+func startAttack():
+	state_machine.transition_to(Enums.STATE.Attack);
+	currentAttack = CombatManager.inst.get_attack(Enums.ATTACK.BasicStrike_01);
+	animator.setAttackAnimation(currentAttack.attackAnimation);
+	player.requested_move_direction = Vector3.ZERO;
+	getTargetsInField(25, 0, 0, 0);
+	pass;
 
 func checkInputs(delta: float) -> bool:
 	if(input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
-		if(player.grounded):
-			print("ground strike");
-			getTargetsInField(25, 0, 0, 0);
-		else:
-			print("elbow drop");
+		startAttack();
 		return true;
-	if(input_buffer.is_action_just_pressed(Enums.INPUT.Grab)):
-		if(player.grounded):
-			print("ground grab");
-			getTargetsInField(25, 0, 0, 0);
-		else:
-			print("slam");
-		return true;
+	#if(input_buffer.is_action_just_pressed(Enums.INPUT.Grab)):
+		#if(player.grounded):
+			#print("ground grab");
+			#getTargetsInField(25, 0, 0, 0);
+		#else:
+			#print("slam");
+		#return true;
 	return false;
 
 func getTargetsInField(squaredRange : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> Dictionary:
