@@ -14,8 +14,6 @@ var playerModelMaterial : ShaderMaterial;
 var currentAnimation := Enums.ANIMATION.IdleRunBlend;
 var previousAnimation := Enums.ANIMATION.IdleRunBlend;
 
-var currentAttackAnimation := Enums.ATTACK_ANIMATION.BasicStrike_01;
-
 var animationVar0 := 0.0;
 var animationVar1 := 0.0;
 var animationVar2 := 0.0;
@@ -56,16 +54,6 @@ func setAnimation(animation : Enums.ANIMATION, dontResetBlends = false):
 		Enums.ANIMATION.ClimbJump:
 			resetBlends(animation);
 			current2DBlend = tree.get("parameters/ClimbJump/blend_position");
-
-func setAttackAnimation(animation : Enums.ATTACK_ANIMATION):
-	if(currentAnimation == Enums.ANIMATION.Attack && currentAttackAnimation == animation):
-		return;
-	currentAnimation = Enums.ANIMATION.Attack;
-	currentAttackAnimation = animation;
-	#animSM.stop();
-	animSM.start("Attack State Machine");
-	attackAnimSM.start(Enums.ATTACK_ANIMATION.keys()[animation], true);
-	pass;
 
 func setAnimationVar0(animVar : float, forceUpdate := false):
 	if(animVar != animationVar0 or forceUpdate):

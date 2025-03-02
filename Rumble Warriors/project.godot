@@ -24,6 +24,7 @@ InputBuffer="res://Dev/Auto/inputbuffer.gd"
 [debug]
 
 file_logging/enable_file_logging=true
+gdscript/warnings/enable=false
 
 [editor]
 

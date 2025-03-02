@@ -10,13 +10,13 @@ class_name R_Attack
 
 @export_category("Timings")
 @export var windupTime = .25;
-@export var recoveryTime = .15;
+@export var recoveryTime = .8;
 ## How long after recovery starts to allow for 
 ## input for the next attack in a combo.
-@export var comboAvailableStartTime = .075;
+@export var comboAvailableStartTime = .25;
 
 @export_category("Animations")
-@export var attackAnimation := Enums.ATTACK_ANIMATION.BasicStrike_01;
+@export var attackAnimation := Enums.ANIMATION.BasicStrike_01;
 ## Should go from 0 to 1. Will be scaled to the duration of windup.
 @export var velocityAnimation : Animation;
 
@@ -31,7 +31,7 @@ class_name R_Attack
 var squaredRange = 0.0;
 
 func _init() -> void:
-	squaredRange = pow(range, 2);
+	squaredRange = pow(range, 2.0);
 	
 func total_time() -> float:
 	return windupTime + recoveryTime;

@@ -26,25 +26,12 @@ enum ANIMATION
 	Climb,
 	ClimbSlide,
 	ClimbJump,
-	Attack,
+	BasicStrike_01,
 }
 
 enum ATTACK
 {
 	BasicStrike_01
-}
-
-enum ATTACK_ANIMATION
-{
-	BasicStrike_01
-}
-
-enum ANIM_SM
-{
-	Platforming,
-	Climbing,
-	Combat,
-	Knocked	
 }
 
 enum INPUT

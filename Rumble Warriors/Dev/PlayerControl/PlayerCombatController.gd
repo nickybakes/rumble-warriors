@@ -29,9 +29,9 @@ func update(delta: float) -> void:
 func startAttack():
 	state_machine.transition_to(Enums.STATE.Attack);
 	currentAttack = CombatManager.inst.get_attack(Enums.ATTACK.BasicStrike_01);
-	animator.setAttackAnimation(currentAttack.attackAnimation);
+	animator.setAnimation(currentAttack.attackAnimation);
 	player.requested_move_direction = Vector3.ZERO;
-	getTargetsInField(25, 0, 0, 0);
+	getTargetsInField(currentAttack.squaredRange, currentAttack.angleThresholdHorizontal, currentAttack.angleThresholdVertical, currentAttack.heightOffset);
 	pass;
 
 func checkInputs(delta: float) -> bool:
