@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_6aqt6")
-range = 3.0
+range = 4.0
 angleThresholdHorizontal = 0.5
-angleThresholdVertical = 0.5
+angleThresholdVertical = 0.25
 heightOffset = 0.0
 windupTime = 0.25
 recoveryTime = 0.8
 comboAvailableStartTime = 0.25
 attackAnimation = 11
-damage = null
-staminaDamage = null
-staminaCost = null
-nextAttackInCombo = null
+damage = 25.0
+staminaDamage = 0.0
+staminaCost = 0.0
+nextAttackInCombo = 1

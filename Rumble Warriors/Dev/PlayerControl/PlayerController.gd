@@ -16,6 +16,8 @@ const JUMP_HEIGHT = 3.4
 const FALL_GRAVITY_MULTI = 1.7
 const ROAD_RUNNER_TIME_MAX = 0.12
 
+var customSpeed = 0.0;
+
 var input_buffer : InputBuffer;
 var combat_controller: PlayerCombatController;
 
@@ -103,7 +105,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	
 func current_speed() -> float:
-	return SPEED * state_machine.state.speed_multiplier;
+	match(state_machine.state.speed_mode):
+		Enums.SPEED_MODE.Multiplied:
+			return SPEED * state_machine.state.speed_multiplier;
+		Enums.SPEED_MODE.Custom:
+			return customSpeed;
+	return 0;
 	
 func get_basic_input_dir() -> Vector2:
 	return input_buffer.get_movement_direction();

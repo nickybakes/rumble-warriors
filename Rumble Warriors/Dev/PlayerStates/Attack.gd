@@ -1,13 +1,15 @@
 extends PlayerState
 
 func _init():
-	speed_multiplier = 1
+	speed_mode = Enums.SPEED_MODE.Custom;
+	movement_mode = Enums.MOVEMENT_MODE.None;
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(previousState: Enums.STATE, _msg := {}) -> void:
 	pass;
 
 func exit() -> void:
+	player.requested_move_direction = Vector3.ZERO;
 	pass;
 	
 func update(delta: float) -> void:

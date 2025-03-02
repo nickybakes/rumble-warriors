@@ -8,6 +8,8 @@ var input_buffer: InputBuffer;
 
 var currentAttack : R_Attack;
 
+var currentTrackingTarget : PlayerStatus;
+
 
 # Called when the node enters the scene tree for the first time.
 func _init(playerController : PlayerController) -> void:
@@ -23,20 +25,49 @@ func update(delta: float) -> void:
 			state_machine.transition_to(Enums.STATE.Idle);
 		else:
 			state_machine.transition_to(Enums.STATE.JumpFall);
+		return;
+	
+	if(checkInputsDuringAttack(delta)):
+		return;
+		
+	if(currentTrackingTarget != null && state_machine.time_in_state < currentAttack.windupTime):
+		var direction = (currentTrackingTarget.positionNetworked - player.position).normalized();
+		var goalPosition = currentTrackingTarget.positionNetworked - direction;
+		var distance = player.position.distance_to(goalPosition);
+		var timeLeft = currentAttack.windupTime - state_machine.time_in_state
+		if(timeLeft > 0.2):
+			var speed = distance/timeLeft;
+			player.customSpeed = speed;
+			player.velocity = direction * speed;
+	else:
+		player.requested_move_direction = Vector3.ZERO;
+		player.velocity = Vector3.ZERO;
+			
 	
 	pass
 
-func startAttack():
+func startAttack(attack : Enums.ATTACK):
+	if(attack == Enums.ATTACK.None):
+		return;
+		
 	state_machine.transition_to(Enums.STATE.Attack);
-	currentAttack = CombatManager.inst.get_attack(Enums.ATTACK.BasicStrike_01);
+	currentAttack = CombatManager.inst.get_attack(attack);
 	animator.setAnimation(currentAttack.attackAnimation);
 	player.requested_move_direction = Vector3.ZERO;
-	getTargetsInField(currentAttack.squaredRange, currentAttack.angleThresholdHorizontal, currentAttack.angleThresholdVertical, currentAttack.heightOffset);
+	player.velocity = Vector3.ZERO;
+	currentTrackingTarget = null;
+	attackHitboxRegister(currentAttack);
 	pass;
+
+func checkInputsDuringAttack(delta: float) -> bool:
+	if(currentAttack.nextAttackInCombo != Enums.ATTACK.None && state_machine.time_in_state >= currentAttack.combo_start_total_time() && input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
+		startAttack(currentAttack.nextAttackInCombo);
+		return true;
+	return false;
 
 func checkInputs(delta: float) -> bool:
 	if(input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
-		startAttack();
+		startAttack(Enums.ATTACK.BasicStrike_01);
 		return true;
 	#if(input_buffer.is_action_just_pressed(Enums.INPUT.Grab)):
 		#if(player.grounded):
@@ -47,8 +78,21 @@ func checkInputs(delta: float) -> bool:
 		#return true;
 	return false;
 
-func getTargetsInField(squaredRange : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> Dictionary:
-	var targets = {};
+func attackHitboxRegister(attack : R_Attack):
+	var targets = getTargetsInField(attack.range, attack.angleThresholdHorizontal, attack.angleThresholdVertical, attack.heightOffset);
+	var currentBestPlayerTarget: R_TargetData = null;
+	
+	for playerTarget in targets.players:
+		if(currentBestPlayerTarget == null or currentBestPlayerTarget.trackingScore < playerTarget.trackingScore):
+			currentBestPlayerTarget = playerTarget;
+		pass;
+		
+	if(currentBestPlayerTarget != null):
+		currentTrackingTarget = GameManager.inst.playerStatuses[currentBestPlayerTarget.id];
+	print("BEST TRACKING: ", currentBestPlayerTarget);
+		
+func getTargetsInField(range : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> R_TargetList:
+	var targets = R_TargetList.new();
 	
 	# get all current playerStatuses except for the current one.
 	var playerStatuses = GameManager.inst.playerStatusesNotLocal;
@@ -59,30 +103,40 @@ func getTargetsInField(squaredRange : float, angleThresholdH : float, angleThres
 		playerIds.push_back(id);
 		playerPositions.push_back((playerStatuses[id] as PlayerStatus).get_center_position());
 	
-	checkWhichTargetsAreInField(playerIds, playerPositions, squaredRange, angleThresholdH, angleThresholdV, 0);
-	
+	var hitPlayerTargets = checkWhichTargetsAreInField(playerIds, playerPositions, range, angleThresholdH, angleThresholdV, 0);
+	targets.players = hitPlayerTargets;
+
 	return targets;
 	pass;
 
 
-func checkWhichTargetsAreInField(ids : Array, positions : Array, squaredRange : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> Array:
-	var targets = [];
+func checkWhichTargetsAreInField(ids : Array, positions : Array, range : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> Array[R_TargetData]:
+	var targets = [] as Array[R_TargetData];
 	var myPosition = player.get_center_position();
-	for position in positions:
-		var data = isTargetInField(myPosition, position, squaredRange, angleThresholdH, angleThresholdV, 0);
-		print(data);
+	for index in ids.size():
+		var data = isTargetInField(myPosition, positions[index], range, angleThresholdH, angleThresholdV, 0);
+		if(data.inField):
+			data.id = ids[index];
+			data.trackingScore = getTargetTrackingScore(data, range);
+			targets.push_back(data);
+			
 	return targets;
-	
-func isTargetInField(myPosition : Vector3, targetPosition : Vector3, squaredRange : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> R_TargetInFieldData:
-	var data = R_TargetInFieldData.new();
+
+func getTargetTrackingScore(target : R_TargetData, range : float) -> float:
+	var score = (1.0 - (target.distance/range)) + target.angle;
+	return score;
+
+func isTargetInField(myPosition : Vector3, targetPosition : Vector3, range : float, angleThresholdH : float, angleThresholdV : float, yOffset : float) -> R_TargetData:
+	var data = R_TargetData.new();
 	var myPositionH = Vector2(myPosition.x, myPosition.z);
 	var targetPositionH = Vector2(targetPosition.x, targetPosition.z);
 	var myDirection = player.get_model_forward_direction();
 	var myDirectionH = Vector2(myDirection.x, myDirection.z);
 	var angleH = (targetPositionH - myPositionH).normalized().dot(myDirectionH);
-	var angleV = 1 - (targetPosition - (myPosition + Vector3(0, yOffset, 0))).normalized().y;
+	var angleV = 1 - abs((targetPosition - (myPosition + Vector3(0, yOffset, 0))).normalized().y);
 	
 	data.angle = (angleH + angleV) * .5;
-	data.squaredDistance = myPosition.distance_squared_to(targetPosition);
-	data.inField = angleH > angleThresholdH and angleV > angleThresholdV and data.squaredDistance < squaredRange;
+	data.distance = myPosition.distance_to(targetPosition);
+	var angleThresholdAdjust = (1.0 - (data.distance / range)) * .6;
+	data.inField = angleH > (angleThresholdH - angleThresholdAdjust) and angleV > (angleThresholdV - angleThresholdAdjust) and data.distance < range;
 	return data;

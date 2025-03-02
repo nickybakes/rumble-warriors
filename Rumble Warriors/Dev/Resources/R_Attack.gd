@@ -24,7 +24,7 @@ class_name R_Attack
 @export var damage := 25.0;
 @export var staminaDamage := 0.0;
 @export var staminaCost := 0.0;
-@export var nextAttackInCombo := Enums.ATTACK.BasicStrike_01;
+@export var nextAttackInCombo := Enums.ATTACK.None;
 
 
 
@@ -35,3 +35,6 @@ func _init() -> void:
 	
 func total_time() -> float:
 	return windupTime + recoveryTime;
+	
+func combo_start_total_time() -> float:
+	return windupTime + comboAvailableStartTime;

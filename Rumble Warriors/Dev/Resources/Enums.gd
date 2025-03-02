@@ -31,7 +31,8 @@ enum ANIMATION
 
 enum ATTACK
 {
-	BasicStrike_01
+	BasicStrike_01,
+	None,
 }
 
 enum INPUT
@@ -56,6 +57,12 @@ enum MOVEMENT_MODE
 {
 	Velocity,
 	None
+}
+
+enum SPEED_MODE
+{
+	Multiplied,
+	Custom
 }
 
 enum PRIORITY
