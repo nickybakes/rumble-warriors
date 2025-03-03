@@ -10,7 +10,9 @@ enum STATE
 	Vault,
 	Climb,
 	ClimbFromGround,
-	Attack
+	Attack,
+	ElbowDrop,
+	ElbowDropRecovery,
 }
 
 enum ANIMATION
@@ -27,6 +29,9 @@ enum ANIMATION
 	ClimbSlide,
 	ClimbJump,
 	BasicStrike_01,
+	ElbowDrop_01,
+	ElbowDropLand_01,
+	ElbowDropGetUp_01,
 }
 
 enum ATTACK

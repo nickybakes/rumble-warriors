@@ -2,7 +2,6 @@ extends PlayerState
 
 func _init():
 	speed_mode = Enums.SPEED_MODE.Custom;
-	movement_mode = Enums.MOVEMENT_MODE.None;
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(previousState: Enums.STATE, _msg := {}) -> void:

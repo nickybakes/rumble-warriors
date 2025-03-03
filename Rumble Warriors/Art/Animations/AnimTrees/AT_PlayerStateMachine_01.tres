@@ -1,7 +1,7 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=31 format=3 uid="uid://ccw7nkpjotc8c"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=34 format=3 uid="uid://ccw7nkpjotc8c"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1f4yk"]
-animation = &"A_Attack_Strike_01"
+animation = &"A_Attack_BasicStrike_01"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xw3ux"]
 animation = &"A_ClimbingUp_01loop"
@@ -89,6 +89,15 @@ blend_point_4/pos = Vector2(-1, 0)
 snap = Vector2(1, 1)
 sync = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iyre2"]
+animation = &"A_ElbowDropGetUp_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_228r0"]
+animation = &"A_ElbowDropLand_01"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbqu2"]
+animation = &"A_ElbowDrop_01"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxlnj"]
 animation = &"A_Fall_01"
 
@@ -138,6 +147,12 @@ states/ClimbJump/node = SubResource("AnimationNodeBlendSpace2D_eb2gq")
 states/ClimbJump/position = Vector2(-292.672, 337.8)
 states/ClimbSlide/node = SubResource("AnimationNodeBlendSpace2D_l8i1v")
 states/ClimbSlide/position = Vector2(-293.4, 185.8)
+states/ElbowDropGetUp_01/node = SubResource("AnimationNodeAnimation_iyre2")
+states/ElbowDropGetUp_01/position = Vector2(307, 375.8)
+states/ElbowDropLand_01/node = SubResource("AnimationNodeAnimation_228r0")
+states/ElbowDropLand_01/position = Vector2(307, 301)
+states/ElbowDrop_01/node = SubResource("AnimationNodeAnimation_xbqu2")
+states/ElbowDrop_01/position = Vector2(290, 232)
 states/Fall/node = SubResource("AnimationNodeAnimation_kxlnj")
 states/Fall/position = Vector2(-66.6, 375.8)
 states/HighJump/node = SubResource("AnimationNodeAnimation_8p50p")
@@ -156,4 +171,4 @@ states/Vault/position = Vector2(-69.6, 207.8)
 states/Walljump/node = SubResource("AnimationNodeAnimation_7xhcl")
 states/Walljump/position = Vector2(-64, 159)
 transitions = ["Start", "IdleRunBlend", SubResource("AnimationNodeStateMachineTransition_5y6ty")]
-graph_offset = Vector2(-489, 75)
+graph_offset = Vector2(-203, 194)

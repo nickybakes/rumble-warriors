@@ -17,6 +17,7 @@ const FALL_GRAVITY_MULTI = 1.7
 const ROAD_RUNNER_TIME_MAX = 0.12
 
 var customSpeed = 0.0;
+var customGravityMultiplier = 1.0;
 
 var input_buffer : InputBuffer;
 var combat_controller: PlayerCombatController;
@@ -252,9 +253,9 @@ func jump_and_gravity(delta: float) -> void:
 		# Add the gravity.
 		if(state_machine.state.gravity_enabled):
 			if(velocity.y < 0):
-				velocity.y -= GRAVITY * FALL_GRAVITY_MULTI * delta
+				velocity.y -= GRAVITY * FALL_GRAVITY_MULTI * delta * customGravityMultiplier
 			else:
-				velocity.y -= GRAVITY * delta
+				velocity.y -= GRAVITY * delta * customGravityMultiplier
 				
 var highJump = false;
 func do_jump(skipBoostCheck = false):

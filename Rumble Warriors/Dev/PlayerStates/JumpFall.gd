@@ -26,7 +26,7 @@ func update(delta: float) -> void:
 	
 	var player_input = player.get_requested_move_direction()
 	
-	if(player.combat_controller.checkInputs(delta)):
+	if(player.time_in_air > .2 && player.combat_controller.checkInputs(delta)):
 		return
 	
 	if(player.grounded and player_input):

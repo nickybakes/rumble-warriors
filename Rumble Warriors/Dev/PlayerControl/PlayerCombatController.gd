@@ -35,10 +35,10 @@ func update(delta: float) -> void:
 		var goalPosition = currentTrackingTarget.positionNetworked - direction;
 		var distance = player.position.distance_to(goalPosition);
 		var timeLeft = currentAttack.windupTime - state_machine.time_in_state
-		if(timeLeft > 0.2):
+		if(timeLeft > 0.0):
 			var speed = distance/timeLeft;
 			player.customSpeed = speed;
-			player.velocity = direction * speed;
+			player.requested_move_direction = direction;
 	else:
 		player.requested_move_direction = Vector3.ZERO;
 		player.velocity = Vector3.ZERO;
@@ -58,6 +58,11 @@ func startAttack(attack : Enums.ATTACK):
 	currentTrackingTarget = null;
 	attackHitboxRegister(currentAttack);
 	pass;
+	
+func startElbowDrop():
+	state_machine.transition_to(Enums.STATE.ElbowDrop);
+	currentTrackingTarget = null;
+	#attackHitboxRegister(currentAttack);
 
 func checkInputsDuringAttack(delta: float) -> bool:
 	if(currentAttack.nextAttackInCombo != Enums.ATTACK.None && state_machine.time_in_state >= currentAttack.combo_start_total_time() && input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
@@ -67,8 +72,12 @@ func checkInputsDuringAttack(delta: float) -> bool:
 
 func checkInputs(delta: float) -> bool:
 	if(input_buffer.is_action_just_pressed(Enums.INPUT.Strike)):
-		startAttack(Enums.ATTACK.BasicStrike_01);
-		return true;
+		if(player.grounded):
+			startAttack(Enums.ATTACK.BasicStrike_01);
+			return true;
+		else:
+			startElbowDrop();
+			return true;
 	#if(input_buffer.is_action_just_pressed(Enums.INPUT.Grab)):
 		#if(player.grounded):
 			#print("ground grab");
@@ -134,6 +143,21 @@ func isTargetInField(myPosition : Vector3, targetPosition : Vector3, range : flo
 	var myDirectionH = Vector2(myDirection.x, myDirection.z);
 	var angleH = (targetPositionH - myPositionH).normalized().dot(myDirectionH);
 	var angleV = 1 - abs((targetPosition - (myPosition + Vector3(0, yOffset, 0))).normalized().y);
+	
+	data.angle = (angleH + angleV) * .5;
+	data.distance = myPosition.distance_to(targetPosition);
+	var angleThresholdAdjust = (1.0 - (data.distance / range)) * .6;
+	data.inField = angleH > (angleThresholdH - angleThresholdAdjust) and angleV > (angleThresholdV - angleThresholdAdjust) and data.distance < range;
+	return data;
+	
+func isTargetInFieldBelow(myPosition : Vector3, targetPosition : Vector3, range : float, angleThresholdH : float, angleThresholdV : float) -> R_TargetData:
+	var data = R_TargetData.new();
+	var myPositionH = Vector2(myPosition.x, myPosition.z);
+	var targetPositionH = Vector2(targetPosition.x, targetPosition.z);
+	var myDirection = player.get_model_forward_direction();
+	var myDirectionH = Vector2(myDirection.x, myDirection.z);
+	var angleH = (targetPositionH - myPositionH).normalized().dot(myDirectionH);
+	var angleV = 1 - abs((targetPosition - myPosition).normalized().y);
 	
 	data.angle = (angleH + angleV) * .5;
 	data.distance = myPosition.distance_to(targetPosition);

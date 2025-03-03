@@ -41,6 +41,7 @@ func setAnimation(animation : Enums.ANIMATION, dontResetBlends = false):
 		return;
 	currentAnimation = animation;
 	animSM.start(Enums.ANIMATION.keys()[animation], true);
+
 	match(currentAnimation):
 		Enums.ANIMATION.IdleRunBlend:
 			resetBlends(animation);
