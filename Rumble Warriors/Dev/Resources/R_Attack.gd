@@ -17,8 +17,9 @@ class_name R_Attack
 
 @export_category("Animations")
 @export var attackAnimation := Enums.ANIMATION.BasicStrike_01;
-## Should go from 0 to 1. Will be scaled to the duration of windup.
-@export var velocityAnimation : Animation;
+## Sets the velocity, relative to the direction of the player,
+## during the attack.
+@export var velocityTimeline : R_VelocityTimeline;
 
 @export_category("Properties")
 @export var damage := 25.0;
@@ -38,3 +39,9 @@ func total_time() -> float:
 	
 func combo_start_total_time() -> float:
 	return windupTime + comboAvailableStartTime;
+	
+func sample_velocity(time : float) -> Vector3:
+	if(velocityTimeline != null):
+		return velocityTimeline.sample(time / total_time());
+	else:
+		return Vector3.ZERO;

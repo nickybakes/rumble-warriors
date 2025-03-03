@@ -8,6 +8,9 @@ var input_buffer: InputBuffer;
 
 var currentAttack : R_Attack;
 
+var attackDirection : Vector3;
+var attackDirectionSideways : Vector3;
+#Vector3(wallNormal.z, 0, -wallNormal.x).normalized()
 var currentTrackingTarget : PlayerStatus;
 
 
@@ -30,18 +33,23 @@ func update(delta: float) -> void:
 	if(checkInputsDuringAttack(delta)):
 		return;
 		
-	if(currentTrackingTarget != null && state_machine.time_in_state < currentAttack.windupTime):
-		var direction = (currentTrackingTarget.positionNetworked - player.position).normalized();
-		var goalPosition = currentTrackingTarget.positionNetworked - direction;
-		var distance = player.position.distance_to(goalPosition);
-		var timeLeft = currentAttack.windupTime - state_machine.time_in_state
-		if(timeLeft > 0.0):
-			var speed = distance/timeLeft;
-			player.customSpeed = speed;
-			player.requested_move_direction = direction;
+	if(currentTrackingTarget != null):
+		if(state_machine.time_in_state < currentAttack.windupTime):
+			var direction = (currentTrackingTarget.positionNetworked - player.position).normalized();
+			var goalPosition = currentTrackingTarget.positionNetworked - direction;
+			var distance = player.position.distance_to(goalPosition);
+			var timeLeft = currentAttack.windupTime - state_machine.time_in_state
+			if(timeLeft > 0.0):
+				var speed = distance/timeLeft;
+				player.customSpeed = speed;
+				player.requested_move_direction = direction;
+		else:
+			player.requested_move_direction = Vector3.ZERO;
+			player.velocity = Vector3.ZERO;
 	else:
-		player.requested_move_direction = Vector3.ZERO;
-		player.velocity = Vector3.ZERO;
+		var velocitySample = currentAttack.sample_velocity(state_machine.time_in_state);
+		var horizontalMovement = (velocitySample.x * attackDirectionSideways + velocitySample.z * attackDirection);
+		player.velocity = Vector3(horizontalMovement.x, velocitySample.y, horizontalMovement.z);
 			
 	
 	pass
@@ -56,7 +64,18 @@ func startAttack(attack : Enums.ATTACK):
 	player.requested_move_direction = Vector3.ZERO;
 	player.velocity = Vector3.ZERO;
 	currentTrackingTarget = null;
+	if(player.get_requested_move_direction()):
+		attackDirection = player.get_requested_move_direction();
+	else:
+		attackDirection = player.get_model_forward_direction();
+	attackDirectionSideways = Vector3(-attackDirection.z, 0, attackDirection.x).normalized();
 	attackHitboxRegister(currentAttack);
+	if(currentTrackingTarget != null):
+		state_machine.state.movement_mode = Enums.MOVEMENT_MODE.Velocity;
+	else:
+		state_machine.state.movement_mode = Enums.MOVEMENT_MODE.None;
+		player.requested_move_direction = Vector3.ZERO;
+		
 	pass;
 	
 func startElbowDrop():
@@ -139,8 +158,7 @@ func isTargetInField(myPosition : Vector3, targetPosition : Vector3, range : flo
 	var data = R_TargetData.new();
 	var myPositionH = Vector2(myPosition.x, myPosition.z);
 	var targetPositionH = Vector2(targetPosition.x, targetPosition.z);
-	var myDirection = player.get_model_forward_direction();
-	var myDirectionH = Vector2(myDirection.x, myDirection.z);
+	var myDirectionH = Vector2(attackDirection.x, attackDirection.z);
 	var angleH = (targetPositionH - myPositionH).normalized().dot(myDirectionH);
 	var angleV = 1 - abs((targetPosition - (myPosition + Vector3(0, yOffset, 0))).normalized().y);
 	

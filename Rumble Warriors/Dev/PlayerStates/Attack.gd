@@ -9,6 +9,7 @@ func enter(previousState: Enums.STATE, _msg := {}) -> void:
 
 func exit() -> void:
 	player.requested_move_direction = Vector3.ZERO;
+	player.velocity = Vector3.ZERO;
 	pass;
 	
 func update(delta: float) -> void:

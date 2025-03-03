@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="R_VelocityTimeline" load_steps=3 format=3 uid="uid://d4htv3dxyc6ak"]
+
+[ext_resource type="Script" path="res://Dev/Resources/R_VelocityTimeline.gd" id="1_ig6js"]
+
+[sub_resource type="Curve" id="Curve_umimw"]
+max_value = 21.28
+_data = [Vector2(0.0886699, 0), 0.0, 0.0, 0, 0, Vector2(0.232, 12), 0.0, 0.0, 0, 0, Vector2(0.52, 12), 0.0, 0.0, 0, 0, Vector2(0.70936, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[resource]
+script = ExtResource("1_ig6js")
+forward = SubResource("Curve_umimw")
