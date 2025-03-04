@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cakafyfvjjcs3"]
 
-[ext_resource type="Script" path="res://Dev/Managers/LobbyManager.gd" id="1_7titn"]
+[ext_resource type="Script" uid="uid://bfwqbkp8pqnco" path="res://Dev/Managers/LobbyManager.gd" id="1_7titn"]
 
 [node name="Lobby" type="VBoxContainer" node_paths=PackedStringArray("player_name", "error_label", "host", "lobby_container")]
 anchors_preset = 15

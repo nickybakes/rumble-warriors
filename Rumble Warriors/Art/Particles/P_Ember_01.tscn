@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://c6oqy1yepckvl" path="res://Art/Materials/M_Ember_01.tres" id="1_ulqhl"]
 [ext_resource type="Material" uid="uid://e1oewjk1afay" path="res://Art/Particles/PPM_Ember_01.tres" id="2_garkh"]
-[ext_resource type="Script" path="res://Dev/Objects/RingEmberControl.gd" id="3_3niqh"]
+[ext_resource type="Script" uid="uid://glai7jmiw4sx" path="res://Dev/Objects/RingEmberControl.gd" id="3_3niqh"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_a2sx2"]
 size = Vector2(1.855, 3.35)

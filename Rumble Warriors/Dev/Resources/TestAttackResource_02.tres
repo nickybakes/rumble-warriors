@@ -1,7 +1,18 @@
 [gd_resource type="Resource" script_class="R_Attack" load_steps=2 format=3 uid="uid://deq3h0tsx6nv6"]
 
-[ext_resource type="Script" path="res://Dev/Resources/R_Attack.gd" id="1_bb63y"]
+[ext_resource type="Script" uid="uid://dc7mpefwy78ln" path="res://Dev/Resources/R_Attack.gd" id="1_bb63y"]
 
 [resource]
 script = ExtResource("1_bb63y")
-inField = false
+range = 3.0
+angleThresholdHorizontal = 0.5
+angleThresholdVertical = 0.5
+heightOffset = 0.0
+windupTime = 0.25
+recoveryTime = 0.8
+comboAvailableStartTime = 0.25
+attackAnimation = 11
+damage = 25.0
+staminaDamage = 0.0
+staminaCost = 0.0
+nextAttackInCombo = 1

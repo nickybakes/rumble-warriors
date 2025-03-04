@@ -1,16 +1,17 @@
 [gd_scene load_steps=40 format=3 uid="uid://dt3afwmwd34kt"]
 
-[ext_resource type="Script" path="res://Dev/Objects/RingOfFire.gd" id="1_gbfgq"]
+[ext_resource type="Script" uid="uid://8a8p3mwqy6t4" path="res://Dev/Objects/RingOfFire.gd" id="1_gbfgq"]
 [ext_resource type="PackedScene" uid="uid://dj1w377o2ju8o" path="res://Art/Models/VM_Ring_01.glb" id="2_bca52"]
 [ext_resource type="Material" uid="uid://ce468d1av0rsk" path="res://Art/Materials/M_RingOfFire_01.tres" id="3_4bcu5"]
 [ext_resource type="PackedScene" uid="uid://ur4m0mmc3hh8" path="res://Art/Particles/P_Ember_01.tscn" id="4_w1ll5"]
-[ext_resource type="Shader" path="res://Art/Shaders/S_Ember_01.gdshader" id="5_wrj5m"]
+[ext_resource type="Shader" uid="uid://cy21rl531vteb" path="res://Art/Shaders/S_Ember_01.gdshader" id="5_wrj5m"]
 [ext_resource type="Texture2D" uid="uid://ce31k70ac7upn" path="res://Art/Textures/T_FireNoise_03.png" id="6_whf0h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6xbdj"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -18,7 +19,6 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="QuadMesh" id="QuadMesh_a2sx2"]
 size = Vector2(1.855, 3.35)
@@ -27,6 +27,7 @@ size = Vector2(1.855, 3.35)
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -34,12 +35,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fncp0"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -47,12 +48,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ronux"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -60,12 +61,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qer4f"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -73,12 +74,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_laybw"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -86,12 +87,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vdsg3"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -99,12 +100,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1smd"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -112,12 +113,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ieo02"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -125,12 +126,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_17guf"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -138,12 +139,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dpf6v"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -151,12 +152,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs4m2"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -164,12 +165,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h6pd0"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -177,12 +178,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ouvoi"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -190,12 +191,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qyht2"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -203,12 +204,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uaj08"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -216,12 +217,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sg64u"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -229,12 +230,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1b4w1"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -242,12 +243,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v0oyf"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -255,12 +256,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5fkv7"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -268,12 +269,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mba4e"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -281,12 +282,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_msy6o"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -294,12 +295,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dbl1h"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -307,12 +308,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxmht"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -320,12 +321,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6e6mv"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -333,12 +334,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_einy8"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -346,12 +347,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4bh1"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -359,12 +360,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b1cfl"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -372,12 +373,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7h1m1"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -385,12 +386,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r55ic"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -398,12 +399,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aejbe"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -411,12 +412,12 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cbits"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_wrj5m")
+shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/depthMultiply = 0.225
@@ -424,7 +425,6 @@ shader_parameter/depthPower = 0.815
 shader_parameter/textureScale = 0.09
 shader_parameter/distortAmount = 1.0
 shader_parameter/fadeAwayDistance = 3.5
-shader_parameter/fireNoiseTexture = ExtResource("6_whf0h")
 
 [node name="Ring of Fire" type="Node3D"]
 transform = Transform3D(7.9, 0, 0, 0, 1, 0, 0, 0, 7.9, 0, 0, 0)

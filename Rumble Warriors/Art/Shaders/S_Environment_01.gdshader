@@ -19,7 +19,7 @@ void vertex() {
 
 void fragment() {
 	vec3 WORLD_POS = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(NORMAL.xyz, 0.0)).xyz;
+	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(normalize(NORMAL), 0.0)).xyz;
 	vec3 absNormal = abs(WORLD_NORMAL);
 	vec3 blendWeights = pow(absNormal, vec3(100.0));
 	blendWeights = normalize(blendWeights);

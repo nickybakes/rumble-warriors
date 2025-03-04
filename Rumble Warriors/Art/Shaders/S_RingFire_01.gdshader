@@ -22,8 +22,6 @@ uniform float fadeAwayDistance = 2.0;
 
 void fragment() {
 	vec3 WORLD_POS = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(NORMAL.xyz, 0.0)).xyz;
-	vec3 absNormal = abs(WORLD_NORMAL);
 	// Get the raw linear depth from the depth texture into a  [-1, 1] range
     float depth = textureLod(depth_texture, SCREEN_UV, 0.0).r;	
 	// Recreate linear depth of the intersecting geometry using projection matrix, and subtract the vertex of the sphere

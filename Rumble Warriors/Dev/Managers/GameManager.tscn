@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0x5a8gkq2q6h"]
 
-[ext_resource type="Script" path="res://Dev/Managers/GameManager.gd" id="1_oam53"]
+[ext_resource type="Script" uid="uid://q4vcnx3nlpt7" path="res://Dev/Managers/GameManager.gd" id="1_oam53"]
 
 [node name="GameManager" type="MultiplayerSpawner"]
 _spawnable_scenes = PackedStringArray("res://Scenes/SCENE_Map_01.tscn", "res://Dev/PlayerControl/Player Status.tscn")

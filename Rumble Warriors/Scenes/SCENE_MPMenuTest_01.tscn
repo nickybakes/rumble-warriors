@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://jhdlqsokif5o"]
 
-[ext_resource type="Script" path="res://Dev/Managers/LobbyManager.gd" id="1"]
-[ext_resource type="Script" path="res://Dev/UI/PlayerList.gd" id="2_wih6l"]
-[ext_resource type="Script" path="res://Dev/UI/PlayerCustomizationPanel.gd" id="3_6dll3"]
-[ext_resource type="Script" path="res://Dev/Debug/DebugAutoStartGame.gd" id="4_x3ag4"]
+[ext_resource type="Script" uid="uid://bfwqbkp8pqnco" path="res://Dev/Managers/LobbyManager.gd" id="1"]
+[ext_resource type="Script" uid="uid://btmi43s7bt7bl" path="res://Dev/UI/PlayerList.gd" id="2_wih6l"]
+[ext_resource type="Script" uid="uid://bvb087n5yeyi7" path="res://Dev/UI/PlayerCustomizationPanel.gd" id="3_6dll3"]
+[ext_resource type="Script" uid="uid://bewi0bihp8yqx" path="res://Dev/Debug/DebugAutoStartGame.gd" id="4_x3ag4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmcyg"]
 font_size = 32

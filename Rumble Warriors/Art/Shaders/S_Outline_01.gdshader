@@ -6,7 +6,7 @@ uniform vec3 outlineColor : source_color = vec3(0, 0, 0);
 uniform float outlineThickness = .1;
 
 void vertex(){
-	VERTEX += NORMAL * outlineThickness;
+	VERTEX += normalize(NORMAL) * outlineThickness;
 }
 
 void fragment() {

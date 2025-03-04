@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ci1cg3yhs7e3d"]
 
-[ext_resource type="Script" path="res://Dev/UI/PlayerListDisplay.gd" id="1_wqgab"]
+[ext_resource type="Script" uid="uid://bqc0ogge0sdnp" path="res://Dev/UI/PlayerListDisplay.gd" id="1_wqgab"]
 [ext_resource type="Texture2D" uid="uid://chcfiuyiwvpt1" path="res://icon.svg" id="2_q751w"]
 [ext_resource type="Texture2D" uid="uid://cnsncbplkuu2" path="res://Art/Sprites/SPR_ColorIcon_01.png" id="3_j1m14"]
 [ext_resource type="Texture2D" uid="uid://bct77dun4d3nf" path="res://Art/Sprites/SPR_Crown_01.png" id="4_5dj4j"]

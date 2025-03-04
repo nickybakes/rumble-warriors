@@ -1,11 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dlmmq232uvs6q"]
 
-[ext_resource type="Shader" path="res://Art/Shaders/S_LogoBackground_01.gdshader" id="1_u4dr1"]
+[ext_resource type="Shader" uid="uid://mr2f712a4p6p" path="res://Art/Shaders/S_LogoBackground_01.gdshader" id="1_u4dr1"]
 [ext_resource type="Texture2D" uid="uid://ce31k70ac7upn" path="res://Art/Textures/T_FireNoise_03.png" id="2_jk5e3"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_u4dr1")
+shader_parameter/fireNoiseTexture = ExtResource("2_jk5e3")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)
 shader_parameter/textureScale = 0.72
@@ -13,4 +14,3 @@ shader_parameter/distortAmount = 0.34
 shader_parameter/timeScale = 0.27
 shader_parameter/wiggleScale = 0.235
 shader_parameter/wiggleWaveScale = 13.065
-shader_parameter/fireNoiseTexture = ExtResource("2_jk5e3")

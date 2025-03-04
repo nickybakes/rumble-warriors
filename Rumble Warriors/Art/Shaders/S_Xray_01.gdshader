@@ -7,7 +7,7 @@ uniform float fresnelPower = 1.0;
 uniform float fresnelMultiply = 1.0;
 
 void fragment() {
-	float value = pow(dot(NORMAL, VIEW), fresnelPower) * fresnelMultiply;
+	float value = pow(dot(normalize(NORMAL), VIEW), fresnelPower) * fresnelMultiply;
 	vec2 tone = tone(VERTEX);
 	ALPHA = .5 * (clamp(trunc(value + tone.y), 0.0, 1.0)) * 2.0;
 	ALBEDO = color;

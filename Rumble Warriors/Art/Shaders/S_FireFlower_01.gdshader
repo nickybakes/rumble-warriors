@@ -18,7 +18,7 @@ void vertex() {
 }
 
 void fragment() {
-	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(NORMAL.xyz, 0.0)).xyz;
+	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(normalize(NORMAL), 0.0)).xyz;
 	vec3 VIEW_LIGHT_NORMAL = (INV_VIEW_MATRIX * vec4(normalize(vec3(0.6, 0.5, -1.0)), 0.0)).xyz;
 	
 	float value = dot(WORLD_NORMAL, VIEW_LIGHT_NORMAL);

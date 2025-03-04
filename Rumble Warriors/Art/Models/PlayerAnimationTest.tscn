@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://cxa2clvshaysa"]
 
-[ext_resource type="Script" path="res://Dev/PlayerControl/PlayerAnimator.gd" id="1_ggqlw"]
+[ext_resource type="Script" uid="uid://yil2cfkfbqrx" path="res://Dev/PlayerControl/PlayerAnimator.gd" id="1_ggqlw"]
 [ext_resource type="AnimationLibrary" uid="uid://bedae7cuhqqbo" path="res://Art/Animations/Libraries/LIB_PlayerAnimations_01.res" id="2_4hpvx"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://ccw7nkpjotc8c" path="res://Art/Animations/AnimTrees/AT_PlayerStateMachine_01.tres" id="3_qyqux"]
 
