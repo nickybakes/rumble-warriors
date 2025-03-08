@@ -13,6 +13,8 @@ enum STATE
 	Attack,
 	ElbowDrop,
 	ElbowDropRecovery,
+	Victim,
+	
 }
 
 enum ANIMATION

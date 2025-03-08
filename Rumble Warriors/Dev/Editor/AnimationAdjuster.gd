@@ -7,15 +7,29 @@ func _run():   # this is the main function
 	if selection.size()!=1 and not selection is AnimationPlayer: # if the wrong node is selected, do nothing
 		return
 	else:
-		var animlist = selection[0].get_animation_list() # finds every animation on the selected AnimationPlayer
-		print("animations found: "+str(animlist))
-		for anm in animlist: # loops between every animation and apply the fix
-			interpolation_change(selection,anm)
+		var animationPlayer = selection[0] as AnimationPlayer;
+		var animationLibraryKeys = animationPlayer.get_animation_library_list();
+		for animLibKey in animationLibraryKeys:
+			var animationLibrary = animationPlayer.get_animation_library(animLibKey) as AnimationLibrary;
+			var animationKeys = animationLibrary.get_animation_list();
+			var numSaved = 0;
+			for animKey in animationKeys:
+				var animation = animationLibrary.get_animation(animKey) as Animation;
+				if(interpolation_change(animation)):
+					ResourceSaver.save(animation);
+					numSaved += 1;
+					print(animKey);
+			ResourceSaver.save(animationLibrary);
+			print("-------------------------------");
+			print("Fixed and saved %s animations!" % [numSaved]);	
+			
 
-func interpolation_change(selection,strnum):
-	var anim_track : Animation = selection[0].get_animation(strnum) # get the Animation that you are interested in (change "default" to your Animation's name)
-	var count  = anim_track.get_track_count() # get number of tracks (bones in your case)
-	print("fixed "+strnum)
-	for i in count:
-		anim_track.track_set_interpolation_type(i, 0) # change interpolation mode for every track
-		anim_track.track_set_interpolation_loop_wrap(i, false)
+func interpolation_change(animation : Animation) -> bool:
+	var trackCount = animation.get_track_count() # get number of tracks (bones in your case)
+	var animationAdjusted = false;
+	for i in trackCount:
+		if(animation.track_get_interpolation_type(i) != 0 || animation.track_get_interpolation_loop_wrap(i) != false):
+			animationAdjusted = true;
+			animation.track_set_interpolation_type(i, 0) # change interpolation mode for every track
+			animation.track_set_interpolation_loop_wrap(i, false)
+	return animationAdjusted;

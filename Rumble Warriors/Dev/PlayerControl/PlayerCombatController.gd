@@ -7,6 +7,7 @@ var state_machine: StateMachine;
 var input_buffer: InputBuffer;
 
 var currentAttack : R_Attack;
+var currentVictimState : R_VictimState;
 
 var attackDirection : Vector3;
 var attackDirectionSideways : Vector3;
@@ -22,7 +23,7 @@ func _init(playerController : PlayerController) -> void:
 	input_buffer = player.input_buffer as InputBuffer;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func update(delta: float) -> void:
+func updateAttack(delta: float) -> void:
 	if(state_machine.time_in_state > currentAttack.total_time()):
 		if(player.grounded):
 			state_machine.transition_to(Enums.STATE.Idle);
@@ -54,12 +55,16 @@ func update(delta: float) -> void:
 	
 	pass
 
+func updateVictim(delta: float) -> void:
+	
+	pass;
+
 func startAttack(attack : Enums.ATTACK):
 	if(attack == Enums.ATTACK.None):
 		return;
 		
 	state_machine.transition_to(Enums.STATE.Attack);
-	currentAttack = CombatManager.inst.get_attack(attack);
+	currentAttack = InteractionsManager.inst.get_attack(attack);
 	animator.setAnimation(currentAttack.attackAnimation);
 	player.requested_move_direction = Vector3.ZERO;
 	player.velocity = Vector3.ZERO;

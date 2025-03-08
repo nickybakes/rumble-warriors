@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b33ledva3almy"]
+[gd_scene load_steps=15 format=3 uid="uid://b33ledva3almy"]
 
 [ext_resource type="Script" uid="uid://d2do4ushsknrg" path="res://Dev/PlayerStates/StateMachine.gd" id="1_m6w0o"]
 [ext_resource type="Script" uid="uid://cp2qy6dfwxiss" path="res://Dev/PlayerStates/Idle.gd" id="2_4cfl0"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://drb6v6sq2aajg" path="res://Dev/PlayerStates/Attack.gd" id="11_rwh64"]
 [ext_resource type="Script" uid="uid://s833vv1ls5lc" path="res://Dev/PlayerStates/ElbowDrop.gd" id="12_vjndh"]
 [ext_resource type="Script" uid="uid://bl2e3jhigopi7" path="res://Dev/PlayerStates/ElbowDropRecovery.gd" id="13_j0wcj"]
+[ext_resource type="Script" uid="uid://c06d4jw385fgt" path="res://Dev/PlayerStates/Victim.gd" id="14_ijtcj"]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource("1_m6w0o")
@@ -53,3 +54,6 @@ script = ExtResource("12_vjndh")
 
 [node name="ElbowDropRecovery" type="Node" parent="."]
 script = ExtResource("13_j0wcj")
+
+[node name="Victim" type="Node" parent="."]
+script = ExtResource("14_ijtcj")

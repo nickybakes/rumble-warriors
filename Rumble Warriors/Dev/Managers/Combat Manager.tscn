@@ -1,9 +1,0 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccvmhyllupxbe"]
-
-[ext_resource type="Script" uid="uid://dj7virtulbpto" path="res://Dev/Managers/CombatManager.gd" id="1_w466a"]
-[ext_resource type="Resource" uid="uid://xrq634j1yg40" path="res://Dev/PlayerStates/Attacks/BasicStrike_01.tres" id="2_d0omi"]
-[ext_resource type="Script" uid="uid://dc7mpefwy78ln" path="res://Dev/Resources/R_Attack.gd" id="2_eq1w4"]
-
-[node name="Combat Manager" type="Node"]
-script = ExtResource("1_w466a")
-attacks = Array[ExtResource("2_eq1w4")]([ExtResource("2_d0omi")])

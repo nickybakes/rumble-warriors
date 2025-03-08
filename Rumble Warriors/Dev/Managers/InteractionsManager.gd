@@ -1,12 +1,12 @@
 extends Node
-class_name CombatManager
+class_name InteractionsManager
 
 ## All Attack resources to be loaded into the game.
 @export var attacks : Array[R_Attack];
 
 # This script is for managing networked combat interactions.
 
-static var inst : CombatManager;
+static var inst : InteractionsManager;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
