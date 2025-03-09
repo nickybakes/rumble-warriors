@@ -3,6 +3,6 @@
 [ext_resource type="Script" uid="uid://q4vcnx3nlpt7" path="res://Dev/Managers/GameManager.gd" id="1_oam53"]
 
 [node name="GameManager" type="MultiplayerSpawner"]
-_spawnable_scenes = PackedStringArray("res://Scenes/SCENE_Map_01.tscn", "res://Dev/PlayerControl/Player Status.tscn")
+_spawnable_scenes = PackedStringArray("uid://64lboxy63whs", "uid://csfpr5qeau533")
 spawn_path = NodePath(".")
 script = ExtResource("1_oam53")

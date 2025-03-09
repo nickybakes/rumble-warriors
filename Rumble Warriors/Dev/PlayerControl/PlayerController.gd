@@ -5,7 +5,7 @@ class_name PlayerController
 #It will control player's state, movement, etc.
 
 const botAttachmentPrefab = preload("res://Dev/PlayerControl/Bot Attachment.tscn");
-
+const hudPrefab = preload("res://Dev/PlayerControl/Player HUD.tscn");
 
 const GRAVITY = 45.0
 const SPEED = 11.0
@@ -48,6 +48,7 @@ var state_machine: StateMachine;
 var animator : PlayerAnimator;
 var camera_twist: Node3D;
 var camera_pitch: Node3D;
+var hud: PlayerHUD;
 
 var isBot := false;
 var id : int;
@@ -67,6 +68,9 @@ func setup(_bot : bool, _id : int):
 		add_child(attachment);
 	else:
 		input_buffer = InputBufferPlayer.new();
+		hud = hudPrefab.instantiate() as PlayerHUD;
+		add_child(hud, true);
+		
 		
 	camera_twist = $CameraTwist;
 	camera_pitch = $CameraTwist/CameraPitch;

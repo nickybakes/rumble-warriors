@@ -27,10 +27,14 @@ func _process(delta):
 		camera = get_viewport().get_camera_3d();
 	else:
 		var playerPos = player.global_position + Vector3(0, 2.2, 0);
-		position = Vector2(400, 400);
-		position = camera.unproject_position(playerPos)
-		var dot = camera.get_global_transform().basis.z.dot((playerPos - camera.global_position).normalized());
-		modulate.a = clamp((-2.0*dot) - 1.0, 0.0, 1.0);
+		if(!camera.is_position_behind(playerPos)):
+			if(!visible):
+				visible = true;
+			position = camera.unproject_position(playerPos)
+			var dot = camera.get_global_transform().basis.z.dot((playerPos - camera.global_position).normalized());
+			modulate.a = clamp((-2.0*dot) - 1.0, 0.0, 1.0);
+		elif visible:
+			visible = false;
 		#var scaleVal = clamp( camera.rotation.dot((dummyPos - camera.position).normalized()), 0.0, 1.0)
 		#scale = Vector2(scaleVal, scaleVal)
 		

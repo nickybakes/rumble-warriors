@@ -44,6 +44,8 @@ var lobby_id := -1
 
 var purposefulDisconnect := false;
 
+var timeManager : TimeManager;
+
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
@@ -169,6 +171,7 @@ func accept_player_connection(data : Dictionary):
 	var id = multiplayer.get_remote_sender_id()
 	setupMyCustomization(data.playerCount);
 	myDescription = createPlayerObject(multiplayer.get_unique_id(), Global.displayName, Global.steam_id, myCustomization);
+	setUpTime();
 	rpc_id(1, "update_player_description", myDescription);
 	connection_accepted.emit();
 	
@@ -203,6 +206,29 @@ func createPlayerObject(id : int, name : String, steam_id : int, customization :
 func setupMyCustomization(playerCount : int):
 	myCustomization.color = PLAYER_COLORS_DEFAULT[(playerCount - 1) % PLAYER_COLORS_DEFAULT.size()];
 	player_customization_updated.emit();
+	
+func setUpTime():
+	timeManager = TimeManager.new();
+	add_child(timeManager);
+	pass;
+
+@rpc("call_local", "any_peer")
+func fetchServerTime(clientTicksMsec : int):
+	var id = multiplayer.get_remote_sender_id();
+	rpc_id(id, "receiveServerTime", Time.get_ticks_msec(), clientTicksMsec);
+
+@rpc("call_local", "any_peer")
+func receiveServerTime(serverTicksMsec : int, clientTicksMsec : int):
+	timeManager.receiveServerTime(serverTicksMsec, clientTicksMsec);
+	
+@rpc("call_local", "any_peer")
+func determineLatency(clientTicksMsec : int):
+	var id = multiplayer.get_remote_sender_id();
+	rpc_id(id, "receiveLatency", clientTicksMsec);
+	
+@rpc("call_local", "any_peer")
+func receiveLatency(clientTicksMsec : int):
+	timeManager.receiveLatency(clientTicksMsec);
 
 #region Lobbies
 
@@ -320,6 +346,9 @@ func end_connection():
 	playerDescriptions.clear();
 	playerConnections.clear();
 	lobby_id = -1;
+	if(timeManager != null):
+		remove_child(timeManager);
+		timeManager.queue_free();
 	
 	#delete spawned gamemanager and any leftovers from the network connection
 	for n in get_children():
