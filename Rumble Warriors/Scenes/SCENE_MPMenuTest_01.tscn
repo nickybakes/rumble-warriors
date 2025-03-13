@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://jhdlqsokif5o"]
+[gd_scene load_steps=8 format=3 uid="uid://jhdlqsokif5o"]
 
 [ext_resource type="Script" uid="uid://bfwqbkp8pqnco" path="res://Dev/Managers/LobbyManager.gd" id="1"]
 [ext_resource type="Script" uid="uid://btmi43s7bt7bl" path="res://Dev/UI/PlayerList.gd" id="2_wih6l"]
 [ext_resource type="Script" uid="uid://bvb087n5yeyi7" path="res://Dev/UI/PlayerCustomizationPanel.gd" id="3_6dll3"]
-[ext_resource type="Script" uid="uid://bewi0bihp8yqx" path="res://Dev/Debug/DebugAutoStartGame.gd" id="4_x3ag4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tmcyg"]
 font_size = 32
@@ -30,7 +29,7 @@ expand_margin_bottom = 3.0
 [sub_resource type="LabelSettings" id="LabelSettings_7u8u0"]
 font_size = 32
 
-[node name="Lobby" type="Control" node_paths=PackedStringArray("player_name", "error_label", "host", "lobby_container", "inside_lobby_panel", "outside_lobby_panel", "windowInstanceLabel")]
+[node name="Lobby" type="Control" node_paths=PackedStringArray("player_name", "error_label", "host", "lobby_container", "inside_lobby_panel", "outside_lobby_panel", "windowInstanceLabel", "steamLobbyIdTextField")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +44,7 @@ lobby_container = NodePath("Outside Lobby Panel/ScrollContainer/LobbyContainer")
 inside_lobby_panel = NodePath("Inside Lobby Panel")
 outside_lobby_panel = NodePath("Outside Lobby Panel")
 windowInstanceLabel = NodePath("Window Instance ID")
+steamLobbyIdTextField = NodePath("Outside Lobby Panel/Steam/SteamLobbyIdTextField")
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
@@ -260,7 +260,7 @@ offset_right = 372.0
 offset_bottom = 507.0
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Outside Lobby Panel/Steam"]
+[node name="Steam Label" type="Label" parent="Outside Lobby Panel/Steam"]
 layout_mode = 2
 text = "Steam
 "
@@ -268,24 +268,30 @@ label_settings = SubResource("LabelSettings_7u8u0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IPLabel" type="Label" parent="Outside Lobby Panel/Steam"]
+[node name="Lobby ID Label" type="Label" parent="Outside Lobby Panel/Steam"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "Lobby id:"
 
-[node name="IPAddress" type="LineEdit" parent="Outside Lobby Panel/Steam"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 2
-placeholder_text = "Lobby Id Here"
-
 [node name="Host" type="Button" parent="Outside Lobby Panel/Steam"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 text = "Host"
+
+[node name="SteamLobbyIdTextField" type="LineEdit" parent="Outside Lobby Panel/Steam"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+placeholder_text = "Lobby Id Here"
+
+[node name="Join" type="Button" parent="Outside Lobby Panel/Steam"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+text = "Join"
 
 [node name="Refresh" type="Button" parent="Outside Lobby Panel/Steam"]
 layout_mode = 2
@@ -313,7 +319,6 @@ size_flags_horizontal = 3
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 
 [node name="DebugAutoStartGame" type="Node" parent="."]
-script = ExtResource("4_x3ag4")
 
 [connection signal="pressed" from="Inside Lobby Panel/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Inside Lobby Panel/Leave Lobby" to="." method="_on_leave_lobby_pressed"]
@@ -322,4 +327,5 @@ script = ExtResource("4_x3ag4")
 [connection signal="pressed" from="Outside Lobby Panel/Enet/Host" to="." method="_on_enet_host_pressed"]
 [connection signal="pressed" from="Outside Lobby Panel/Enet/Join" to="." method="_on_enet_join_pressed"]
 [connection signal="pressed" from="Outside Lobby Panel/Steam/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Outside Lobby Panel/Steam/Join" to="." method="_join_steam_lobby"]
 [connection signal="pressed" from="Outside Lobby Panel/Steam/Refresh" to="." method="_request_lobby_list"]

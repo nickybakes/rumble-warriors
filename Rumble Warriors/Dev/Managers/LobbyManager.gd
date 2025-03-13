@@ -10,6 +10,8 @@ class_name LobbyManager
 @export var outside_lobby_panel : Panel
 @export var windowInstanceLabel : Label
 
+@export var steamLobbyIdTextField : LineEdit
+
 @onready var playerList = $"Inside Lobby Panel/PlayerListScrollable/PlayerListContainer" as PlayerList
 @onready var customizationPanel = $"Inside Lobby Panel/Customization Panel" as PlayerCustomizationPanel
 
@@ -65,6 +67,10 @@ func _request_lobby_list():
 		child.queue_free()
 	
 	Steam.requestLobbyList()
+	
+func _join_steam_lobby():
+	var lobbyId = steamLobbyIdTextField.text;
+	Steam.joinLobby(int(lobbyId));
 
 func _on_host_pressed():
 	outside_lobby_panel.hide()

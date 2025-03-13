@@ -79,3 +79,19 @@ enum PRIORITY
 	Power,
 	Super
 }
+
+enum INTERACTION
+{
+	Attack,
+	Block,
+	DodgeRoll,
+	Pickup	
+}
+
+enum RESULT
+{
+	AttackSuccess,
+	AttackClashed,
+	AttackBlocked,
+	AttackDodged
+}

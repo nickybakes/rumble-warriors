@@ -15,7 +15,7 @@ const numBots = 0;
 
 static var inst : GameManager;
 
-@onready var interactionsManager = preload("res://Dev/Managers/Interactions Manager.tscn") as PackedScene;
+@onready var interactionsManagerPrefab = preload("res://Dev/Managers/Interactions Manager.tscn") as PackedScene;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,7 +23,7 @@ func _ready():
 	playerStatuses = {};
 	botStatuses = {};
 	get_tree().get_root().get_node("Lobby").hide()
-	var im = interactionsManager.instantiate();
+	var im = interactionsManagerPrefab.instantiate();
 	add_child(im, true);
 	print(Global.instanceId + " Game Manager Spawned with auth:" + str(is_multiplayer_authority()))
 
@@ -53,6 +53,18 @@ func spawn_players():
 		var bot : PlayerStatus = playerPrefab.instantiate()
 		add_child(bot, true);
 		bot.set_authority.rpc(1, i, description);
+
+@rpc("call_local", "any_peer")
+func sendInteractionToHost(interaction : R_Interaction):
+	## So the host receives the interaction
+	InteractionsManager.inst.hostReceivesInteraction(interaction);
+	pass;
+	
+@rpc("call_local", "any_peer")
+func sendResultToAllClients(interaction : R_Interaction):
+	## So the host receives the interaction
+	InteractionsManager.inst.hostReceivesInteraction(interaction);
+	pass;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
